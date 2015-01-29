@@ -7,6 +7,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
@@ -21,6 +22,7 @@ import javax.ws.rs.core.Response;
  * Created by jbeale on 1/28/15.
  */
 
+@Component
 @Path("/auth")
 public class SecurityResource {
     private Gson gson;
