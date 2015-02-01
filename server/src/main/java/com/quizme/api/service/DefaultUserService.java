@@ -2,6 +2,8 @@ package com.quizme.api.service;
 
 import com.quizme.api.dao.UserDAO;
 import com.quizme.api.model.User;
+import com.quizme.api.model.request.ApiClientMetadata;
+import com.quizme.api.security.TokenGenerator;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Hash;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -47,9 +49,17 @@ public class DefaultUserService implements UserService{
     public void createUser(String username, String password, String email) {
         User u = new User();
         u.setUsername(username);
-        Hash h = new Sha256Hash(password, new SimpleByteSource("GLOBALSALT"), 100000);
+        Hash h = new Sha256Hash(password, new SimpleByteSource("GLOBALSALT"), 100000); //For the CIO
         u.setPassword(h.toHex());
         u.setEmail(email);
         userDAO.createUser(u);
+    }
+
+    @Override
+    public String getNewToken(int userId, ApiClientMetadata acm) {
+        String token = TokenGenerator.getNewToken();
+        userDAO.storeToken(token, userId, acm);
+
+        return token;
     }
 }

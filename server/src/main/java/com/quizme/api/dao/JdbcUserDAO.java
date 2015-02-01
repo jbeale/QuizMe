@@ -1,6 +1,7 @@
 package com.quizme.api.dao;
 
 import com.quizme.api.model.User;
+import com.quizme.api.model.request.ApiClientMetadata;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -70,4 +71,19 @@ public class JdbcUserDAO implements UserDAO {
         params.put("email", u.getEmail());
         insert.execute(params);
     }
+
+    @Override
+    public void storeToken(String t, int userId, ApiClientMetadata clientMetadata) {
+        SimpleJdbcInsert insert = new SimpleJdbcInsert(dataSource).withTableName("tokens").usingGeneratedKeyColumns("id");
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("token", t);
+        params.put("userId", userId);
+        params.put("time", System.currentTimeMillis() / 1000L);
+        params.put("ip", clientMetadata.remoteIp);
+        params.put("host", clientMetadata.remoteHost);
+        params.put("uaString", clientMetadata.userAgent);
+        insert.execute(params);
+    }
+
+
 }

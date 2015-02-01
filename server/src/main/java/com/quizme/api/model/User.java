@@ -1,13 +1,21 @@
 package com.quizme.api.model;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Created by jbeale on 1/28/15.
  */
 public class User {
+
+    @Expose
     protected int id;
+    @Expose
     protected String username;
+    @Expose
     protected String firstname;
+    @Expose
     protected String lastname;
+    @Expose
     protected String email;
 
     protected String password;
