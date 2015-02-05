@@ -20,9 +20,9 @@
         android:layout_height="wrap_content"
         android:text="Join Session"
         android:id="@+id/buttonJoinSession"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/buttonMakeQuiz"
-        android:layout_toEndOf="@+id/buttonMakeQuiz" />
+        android:layout_above="@+id/listView"
+        android:layout_toRightOf="@+id/buttonCreateSession"
+        android:layout_toEndOf="@+id/buttonCreateSession" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -44,5 +44,14 @@
         android:layout_below="@+id/buttonJoinSession"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="44dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Session"
+        android:id="@+id/buttonCreateSession"
+        android:layout_alignBottom="@+id/buttonMakeQuiz"
+        android:layout_toRightOf="@+id/buttonMakeQuiz"
+        android:layout_toEndOf="@+id/buttonMakeQuiz" />
 
 </RelativeLayout>

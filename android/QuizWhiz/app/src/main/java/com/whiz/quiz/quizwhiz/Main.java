@@ -21,7 +21,7 @@ public class Main extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         editEmail = (EditText) findViewById(R.id.editEmail);
-        editPassword = (EditText) findViewById(R.id.editPassword);
+        editPassword = (EditText) findViewById(R.id.editPasswordReg);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +36,7 @@ public class Main extends ActionBarActivity {
                 // comments
                 if (authenticated){
                     Intent i = new Intent(v.getContext(), Home.class);
-                    i.putExtra("email", emailText); //TODO We will probably use their encrypted login name ASK JUSTIN
+                    i.putExtra("email", emailText); //TODO We will probably use encrypted login name ASK JUSTIN
                     i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     v.getContext().startActivity(i);
                 }

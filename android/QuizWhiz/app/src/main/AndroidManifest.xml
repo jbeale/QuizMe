@@ -24,6 +24,10 @@
             android:name=".MakeQuiz"
             android:label="@string/title_activity_make_quiz" >
         </activity>
+        <activity
+            android:name=".Registration"
+            android:label="@string/title_activity_registration" >
+        </activity>
     </application>
 
 </manifest>
