@@ -1,0 +1,27 @@
+html, body {
+  height:100%;
+  font-family:"Open Sans", sans-serif;
+  font-weight:300;
+}
+
+.header {
+  background-color:#00a6d4;
+  height:120px;
+  .container {
+    .brand {
+      padding-top:45px;
+    }
+  }
+}
+.titlebar {
+  height:68px;
+  border-bottom:5px solid #3F6184;
+  margin-bottom:10px;
+  .titlebar-text {
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-weight:200;
+    padding-top:20px;
+    font-size:1.3em;
+  }
+}

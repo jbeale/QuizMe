@@ -1,6 +1,7 @@
 package com.quizme.api.web;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.quizme.api.model.User;
 import com.quizme.api.model.request.ApiClientMetadata;
 import com.quizme.api.model.request.LoginRequest;
@@ -35,7 +36,7 @@ public class SecurityResource {
     //private LoginValidator loginValidator;
 
     public SecurityResource() {
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
 
     @Autowired

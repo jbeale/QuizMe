@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LandingController {
     @RequestMapping("/")
     public String home(Model model) {
-        return "noLayout:coming";
+        model.addAttribute("titlebar", "Welcome");
+        return "index";
     }
 }
