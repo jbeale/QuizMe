@@ -2,6 +2,7 @@ package com.quizme.api.service;
 
 import com.quizme.api.dao.UserDAO;
 import com.quizme.api.model.User;
+import com.quizme.api.model.exception.DuplicateUsernameException;
 import com.quizme.api.model.request.ApiClientMetadata;
 import com.quizme.api.security.TokenGenerator;
 import org.apache.shiro.SecurityUtils;
@@ -61,5 +62,18 @@ public class DefaultUserService implements UserService{
         userDAO.storeToken(token, userId, acm);
 
         return token;
+    }
+
+    @Override
+    public User addUser(User u, String plainTextPassword) throws DuplicateUsernameException {
+        //ensure username not taken
+        if (userDAO.findUser(u.getUsername()) != null) {
+            throw new DuplicateUsernameException("Username already exists", u.getUsername());
+        }
+        Hash h = new Sha256Hash(plainTextPassword, new SimpleByteSource("GLOBALSALT"), 100000);
+        u.setPassword(h.toHex());
+        userDAO.createUser(u);
+
+        return u;
     }
 }

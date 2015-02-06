@@ -1,6 +1,7 @@
 package com.quizme.api.service;
 
 import com.quizme.api.model.User;
+import com.quizme.api.model.exception.DuplicateUsernameException;
 import com.quizme.api.model.request.ApiClientMetadata;
 
 /**
@@ -11,4 +12,5 @@ public interface UserService {
     User getUser(int userId);
     void createUser(String username, String password, String email);
     String getNewToken(int userId, ApiClientMetadata acm);
+    User addUser(User u, String plainTextPassword) throws DuplicateUsernameException;
 }

@@ -3,6 +3,7 @@ package com.quizme.api.web;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.quizme.api.model.User;
+import com.quizme.api.model.exception.DuplicateUsernameException;
 import com.quizme.api.model.request.ApiClientMetadata;
 import com.quizme.api.model.request.LoginRequest;
 import com.quizme.api.model.response.RestResponse;
@@ -45,6 +46,14 @@ public class SecurityResource {
         this.userService = service;
     }
 
+    @POST
+    @Path("/login")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response loginPost(@FormParam("username") String username, @FormParam("password") String password, @Context HttpServletRequest request)
+    {
+        return this.login(username, password, request);
+    }
+
     @GET
     @Path("/login/{username}/{password}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -79,6 +88,34 @@ public class SecurityResource {
         response.put("user", u);
 
         return Response.ok(gson.toJson(new RestResponse(200, true, response))).build();
+    }
+
+    @POST
+    @Path("/create")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response newAccount(@FormParam("username") String username, @FormParam("password") String password,
+                               @FormParam("firstname") String firstname, @FormParam("lastname") String lastname,
+                               @FormParam("email") String email, @Context HttpServletRequest request) {
+
+        User u = new User();
+        u.setUsername(username);
+        u.setFirstname(firstname);
+        u.setLastname(lastname);
+        u.setEmail(email);
+
+        try {
+            userService.addUser(u, password);
+        } catch (DuplicateUsernameException e) {
+            return Response.status(Response.Status.CONFLICT).entity(gson.toJson(new RestResponse(409, false, "Username \""+e.username+"\" is not unique. Try a different one."))).build();
+        } catch (Exception e) {
+            return Response.serverError().entity(gson.toJson(new RestResponse(500, false, e.getMessage()))).build();
+        }
+
+        //If the account was successfully created, log it in and return auth info.
+        return this.login(username, password, request);
+        /*return Response.ok().entity(
+                gson.toJson(new RestResponse(200, true, response))
+        );*/
     }
 
     @GET
