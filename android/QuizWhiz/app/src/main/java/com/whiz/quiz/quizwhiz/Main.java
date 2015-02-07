@@ -8,11 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 public class Main extends ActionBarActivity {
-    EditText editEmail = null;
+    EditText editUsername = null;
     EditText editPassword = null;
     Button buttonLogin = null;
     @Override
@@ -20,29 +19,20 @@ public class Main extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editEmail = (EditText) findViewById(R.id.editEmail);
+        editUsername = (EditText) findViewById(R.id.editUsername);
         editPassword = (EditText) findViewById(R.id.editPasswordReg);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailText = editEmail.getText().toString();
+                String usernameText = editUsername.getText().toString();
                 String passwordText = editPassword.getText().toString();
 
-                Boolean authenticated = false;
-                //TODO send login to Justin's server. IDK HOW TO DO THAT
-                //authenticateMe(emailText, passwordText);
-                // comments
-                if (authenticated){
-                    Intent i = new Intent(v.getContext(), Home.class);
-                    i.putExtra("email", emailText); //TODO We will probably use encrypted login name ASK JUSTIN
-                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    v.getContext().startActivity(i);
-                }
-                else
-                    Toast.makeText(v.getContext(), "Cannot authenticate", Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(v.getContext(), LoginService.class);
+                intent.putExtra("com.whiz.quiz.quizwhiz.USERNAME", usernameText); //Hopefully Identification is fine
+                intent.putExtra("com.whiz.quiz.quizwhiz.PASSWORD", passwordText);
+                startService(intent);
             }
         });
     }
@@ -68,5 +58,13 @@ public class Main extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goToHome(String username, String password) {
+        Intent intent = new Intent(this, Home.class);
+        intent.putExtra("com.whiz.quiz.quizwhiz.USERNAME", username);
+        intent.putExtra("com.whiz.quiz.quizwhiz.PASSWORD", password);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 }

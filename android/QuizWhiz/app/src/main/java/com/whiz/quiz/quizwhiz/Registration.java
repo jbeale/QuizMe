@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -25,7 +26,27 @@ public class Registration extends ActionBarActivity {
         editPassword = (EditText) findViewById(R.id.editPasswordReg);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
 
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO check to see if account already registered
+                Boolean registered = false;
+                if(registered){
+                    String firstName = editFirstName.getText().toString();
+                    String lastName = editLastName.getText().toString();
+                    String email = editEmail.getText().toString();
+                    String password = editPassword.getText().toString();
 
+                    //TODO give information to server
+                    //giveToServer(firstName, lastName, email, password)
+
+
+                }
+                else
+                    ;//TODO Toast
+
+            }
+        });
     }
 
 
