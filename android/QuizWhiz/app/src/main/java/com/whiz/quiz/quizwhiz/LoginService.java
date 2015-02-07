@@ -28,6 +28,11 @@ public class LoginService extends IntentService{
      *
      * @param name Used to name the worker thread, important only for debugging.
      */
+
+    public LoginService(){
+        super("LoginService");
+    }
+
     public LoginService(String name) {
         super(name);
     }
