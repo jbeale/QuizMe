@@ -10,12 +10,16 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 
 /**
  * Created by JohnMain on 2/6/2015.
@@ -42,17 +46,25 @@ public class LoginService extends IntentService{
         String username = intent.getStringExtra("com.whiz.quiz.quizwhiz.USERNAME");
         String password = intent.getStringExtra("com.whiz.quiz.quizwhiz.PASSWORD");
 
-        String query = "http://s-quizme.justinbeale.com/service/auth/login/" + username + "/"
-                + password;
+        JSONObject obj = new JSONObject();
+
+        try {
+            obj.put("username", username);
+            obj.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String jsonText = obj.toString();
 
         HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(query);
+        HttpPost httpPost = new HttpPost(jsonText);
         HttpResponse httpResponse;
         String jsonString = "";
         StringBuilder builder = new StringBuilder();
 
         try {
-            httpResponse = httpClient.execute(httpGet);
+            httpResponse = httpClient.execute(httpPost);
             StatusLine statusLine = httpResponse.getStatusLine();
             if (statusLine.getStatusCode() == 200){
                 HttpEntity entity = httpResponse.getEntity();
