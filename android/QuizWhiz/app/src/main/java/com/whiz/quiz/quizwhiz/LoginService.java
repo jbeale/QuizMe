@@ -84,6 +84,6 @@ public class LoginService extends IntentService{
         Intent i = new Intent("com.whiz.quiz.quizwhiz.AUTHENTICATED");
         i.putExtra("com.whiz.quiz.quizwhiz.USERNAME", username);
         i.putExtra("com.whiz.quiz.quizwhiz.PASSWORD", password);
-        sendBroadcast(i);
+        sendBroadcast(i); 
     }
 }
