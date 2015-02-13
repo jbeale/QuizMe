@@ -20,6 +20,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 /**
  * Created by JohnMain on 2/6/2015.
@@ -45,6 +49,20 @@ public class LoginService extends IntentService{
     protected void onHandleIntent(Intent intent) {
         String username = intent.getStringExtra("com.whiz.quiz.quizwhiz.USERNAME");
         String password = intent.getStringExtra("com.whiz.quiz.quizwhiz.PASSWORD");
+
+        String url = "http://s-quizme.justinbeale.com/service/auth/login";
+
+        URL obj1 = null;
+        try {
+            obj1 = new URL(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            HttpURLConnection con = (HttpURLConnection) obj1.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         JSONObject obj = new JSONObject();
 
