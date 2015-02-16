@@ -8,6 +8,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
+import com.whiz.quiz.quizwhiz.model.response.RestResponse;
+import com.whiz.quiz.quizwhiz.service.RestClient;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class Main extends ActionBarActivity {
@@ -29,13 +39,31 @@ public class Main extends ActionBarActivity {
                 String usernameText = editUsername.getText().toString();
                 String passwordText = editPassword.getText().toString();
 
-                Intent intent = new Intent(v.getContext(), LoginService.class);
+                login(usernameText, passwordText);
+
+                /*Intent intent = new Intent(v.getContext(), LoginService.class);
                 intent.putExtra("com.whiz.quiz.quizwhiz.USERNAME", usernameText); //Hopefully Identification is fine
                 intent.putExtra("com.whiz.quiz.quizwhiz.PASSWORD", passwordText);
-                startService(intent);
+                startService(intent);*/
             }
         });
     }
+
+    public void login(String username, String password) {
+        RestClient.get().login(username, password, new Callback<RestResponse<LoginResponseBody>>() {
+            @Override
+            public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
+                Toast.makeText(getApplicationContext(), "SUCCESS! Hi "+loginResponseBodyRestResponse.body.user.email, Toast.LENGTH_SHORT);
+                TextView text = (TextView)findViewById(R.id.textView);
+                text.setText(loginResponseBodyRestResponse.body.user.email);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), "err", Toast.LENGTH_SHORT);
+            }
+        });
+    };
 
 
     @Override
