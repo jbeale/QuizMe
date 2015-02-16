@@ -15,6 +15,6 @@ public class LandingController {
     @RequestMapping("/")
     public String home(Model model) {
         model.addAttribute("titlebar", "Welcome");
-        return "index";
+        return "noLayout:index";
     }
 }

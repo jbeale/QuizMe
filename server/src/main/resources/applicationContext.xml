@@ -11,6 +11,8 @@
 
     <import resource="Spring-Module.xml" />
 
+    <context:property-placeholder location="classpath*:default-config.properties"/>
+
     <context:component-scan base-package="com.quizme.api" />
 
     <import resource="Shiro.xml" />
@@ -32,6 +34,9 @@
         </property>
         <property name="suffix">
             <value>.jsp</value>
+        </property>
+        <property name="redirectContextRelative">
+            <value>false</value>
         </property>
     </bean>
 

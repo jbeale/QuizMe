@@ -65,6 +65,12 @@ public class DefaultUserService implements UserService{
     }
 
     @Override
+    public User validateToken(String token) {
+        User tokenUser = userDAO.getUserByToken(token, true);
+        return tokenUser;
+    }
+
+    @Override
     public User addUser(User u, String plainTextPassword) throws DuplicateUsernameException {
         //ensure username not taken
         if (userDAO.findUser(u.getUsername()) != null) {

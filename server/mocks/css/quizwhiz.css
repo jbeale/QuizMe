@@ -19,3 +19,64 @@ html, body {
     font-weight: 200;
     padding-top: 20px;
     font-size: 1.3em; }
+
+#homepage .home_header {
+  background: url(../headerbgblur.png) 0px -779px; }
+  #homepage .home_header .header_overlay {
+    background: rgba(0, 166, 212, 0.85);
+    height: 560px; }
+    #homepage .home_header .header_overlay .container {
+      position: relative; }
+      #homepage .home_header .header_overlay .container.navigation {
+        padding-top: 30px; }
+      #homepage .home_header .header_overlay .container.bannerarea .quote {
+        font-size: 26px;
+        font-weight: 200;
+        color: white;
+        position: absolute;
+        top: 200px; }
+      #homepage .home_header .header_overlay .container .useractions {
+        position: absolute;
+        right: 0px;
+        top: 40px; }
+        #homepage .home_header .header_overlay .container .useractions button {
+          text-transform: uppercase;
+          color: white;
+          font-size: 14px;
+          outline: none; }
+        #homepage .home_header .header_overlay .container .useractions #login-btn {
+          margin-right: 25px;
+          background: none;
+          border: none; }
+        #homepage .home_header .header_overlay .container .useractions #register-btn {
+          border-radius: 15px;
+          padding: 9px;
+          border: 2px solid white;
+          background: none; }
+#homepage section.availableon {
+  background-color: white;
+  height: 112px;
+  padding-top: 30px; }
+  #homepage section.availableon .textcenter {
+    text-align: center;
+    display: block;
+    font-weight: 20px;
+    text-transform: uppercase;
+    font-size: 20px; }
+#homepage section.quote {
+  background-color: #3F6184;
+  height: 248px; }
+  #homepage section.quote .container .pic {
+    background-image: url(../girlsonphones.png);
+    height: 248px; }
+  #homepage section.quote .container .text {
+    color: white;
+    padding-top: 87px; }
+    #homepage section.quote .container .text .maincap {
+      font-size: 22px; }
+    #homepage section.quote .container .text .subcap {
+      font-size: 12px; }
+#homepage section.features {
+  background-color: white; }
+
+/*# sourceMappingURL=quizwhiz.css.map */

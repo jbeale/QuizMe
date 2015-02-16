@@ -11,4 +11,5 @@ public interface UserDAO {
     public User findUser(String username);
     public void createUser(User u);
     public void storeToken(String t, int userId, ApiClientMetadata clientMetadata);
+    public User getUserByToken(String token, boolean onlyUnexpiredTokens);
 }

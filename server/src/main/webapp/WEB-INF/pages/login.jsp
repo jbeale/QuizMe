@@ -25,7 +25,7 @@
             </form>
         </div>
         <div class="col-lg-6">
-
+            Don't have an account?<br/><button type="button" onclick="location.href='create'" class="btn btn-info">Create One Now</button>
         </div>
     </div>
 </div>

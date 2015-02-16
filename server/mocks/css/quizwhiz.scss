@@ -25,3 +25,89 @@ html, body {
     font-size:1.3em;
   }
 }
+
+#homepage {
+  .home_header {
+    background: url(../headerbgblur.png) 0px -779px;
+    .header_overlay {
+      background:rgba(0,166,212,.85);
+
+      height:560px;
+      .container {
+        position: relative;
+        &.navigation {
+          padding-top:30px;
+        }
+        &.bannerarea {
+          .quote {
+            font-size:26px;
+            font-weight:200;
+            color:white;
+            position:absolute;
+            top:200px;
+          }
+        }
+
+        .useractions {
+          position:absolute;
+          right:0px;
+          top:40px;
+          button {
+            text-transform:uppercase;
+            color:white;
+            font-size:14px;
+            outline:none;
+          }
+          #login-btn {
+            margin-right:25px;
+            background:none;
+            border:none
+          }
+          #register-btn {
+            border-radius:15px;
+            padding:9px;
+            border:2px solid white;
+            background:none;
+          }
+        }
+      }
+    }
+  }
+  section {
+    &.availableon {
+      background-color:white;
+      height:112px;
+      padding-top:30px;
+      .textcenter {
+        text-align:center;
+        display:block;
+        font-weight:20px;
+        text-transform:uppercase;
+        font-size:20px;
+      }
+    }
+    &.quote {
+      background-color:#3F6184;
+      height:248px;
+      .container {
+        .pic {
+          background-image:url(../girlsonphones.png);
+          height:248px;
+        }
+        .text {
+          color:white;
+          padding-top:87px;
+          .maincap {
+            font-size:22px;
+          }
+          .subcap {
+            font-size:12px;
+          }
+        }
+      }
+    }
+    &.features {
+      background-color:white;
+    }
+  }
+}

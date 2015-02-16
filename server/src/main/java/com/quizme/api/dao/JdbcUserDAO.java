@@ -20,6 +20,9 @@ public class JdbcUserDAO implements UserDAO {
     private DataSource dataSource;
     private SimpleJdbcTemplate jdbcTemplate;
 
+    //TODO Move this
+    public static final int TOKEN_LIFE_SECONDS = 14400; //Tokens valid for 4 hrs
+
     public JdbcUserDAO(DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcTemplate = new SimpleJdbcTemplate(this.dataSource);
@@ -83,6 +86,19 @@ public class JdbcUserDAO implements UserDAO {
         params.put("host", clientMetadata.remoteHost);
         params.put("uaString", clientMetadata.userAgent);
         insert.execute(params);
+    }
+
+    @Override
+    public User getUserByToken(String token, boolean onlyNonexpiredTokens) {
+        try {
+            Long currentUnixTime = System.currentTimeMillis()/1000L;
+            Long tokenDifference = onlyNonexpiredTokens? currentUnixTime-TOKEN_LIFE_SECONDS : 0;
+
+            Integer userId = this.jdbcTemplate.queryForInt("SELECT userId FROM tokens WHERE token = ? AND time > ?", token, tokenDifference);
+            return this.getUser(userId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
 

@@ -12,5 +12,6 @@ public interface UserService {
     User getUser(int userId);
     void createUser(String username, String password, String email);
     String getNewToken(int userId, ApiClientMetadata acm);
+    User validateToken(String token);
     User addUser(User u, String plainTextPassword) throws DuplicateUsernameException;
 }

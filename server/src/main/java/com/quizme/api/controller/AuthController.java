@@ -1,5 +1,7 @@
 package com.quizme.api.controller;
 
+import com.quizme.api.model.User;
+import com.quizme.api.model.exception.DuplicateUsernameException;
 import com.quizme.api.model.request.LoginRequest;
 import com.quizme.api.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -66,6 +68,48 @@ public class AuthController {
         }
 
         return "redirect:/";
+    }
+
+    @RequestMapping(value="/create", method= RequestMethod.GET)
+    public String showRegisterForm(Model model) {
+        model.addAttribute("titlebar", "Create New Account");
+        return "register";
+    }
+    @RequestMapping(value="/create", method= RequestMethod.POST)
+    public String doRegister(@RequestParam("username") String username,
+                             @RequestParam("password") String plaintextPassword,
+                             @RequestParam("firstname") String firstname,
+                             @RequestParam("lastname") String lastname,
+                             @RequestParam("email") String email,
+                             Model model) {
+        User u = new User();
+        u.setUsername(username);
+        u.setFirstname(firstname);
+        u.setLastname(lastname);
+        u.setEmail(email);
+
+        try {
+            userService.addUser(u, plaintextPassword);
+        } catch (DuplicateUsernameException e) {
+             model.addAttribute("username_error", true);
+            model.addAttribute("titlebar", "Create New Account");
+            return "register";
+        } catch (Exception e) {
+             model.addAttribute("register_error", true);
+            model.addAttribute("titlebar", "Create New Account");
+            return "register";
+        }
+
+        //success. log user in and go to home
+        UsernamePasswordToken token = new UsernamePasswordToken(username, plaintextPassword, false);
+
+        try {
+            SecurityUtils.getSubject().login(token);
+        } catch (Exception e) {
+
+        }
+        return "redirect:/";
+
     }
 
     @RequestMapping("/logout")
