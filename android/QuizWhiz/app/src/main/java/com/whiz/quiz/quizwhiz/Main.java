@@ -53,14 +53,18 @@ public class Main extends ActionBarActivity {
         RestClient.get().login(username, password, new Callback<RestResponse<LoginResponseBody>>() {
             @Override
             public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
-                Toast.makeText(getApplicationContext(), "SUCCESS! Hi "+loginResponseBodyRestResponse.body.user.email, Toast.LENGTH_SHORT);
-                TextView text = (TextView)findViewById(R.id.textView);
-                text.setText(loginResponseBodyRestResponse.body.user.email);
+                //Toast.makeText(getApplicationContext(), "SUCCESS! Hi "+loginResponseBodyRestResponse.body.user.email, Toast.LENGTH_SHORT);
+                //TextView text = (TextView)findViewById(R.id.textView);
+                //text.setText(loginResponseBodyRestResponse.body.user.email);
+
+                Intent intent = new Intent(getApplicationContext(), Home.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "err", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "Incorrect credentials. Please register or try again.", Toast.LENGTH_SHORT);
             }
         });
     };

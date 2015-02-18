@@ -29,21 +29,7 @@ public class Registration extends ActionBarActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO check to see if account already registered
-                Boolean registered = false;
-                if(registered){
-                    String firstName = editFirstName.getText().toString();
-                    String lastName = editLastName.getText().toString();
-                    String email = editEmail.getText().toString();
-                    String password = editPassword.getText().toString();
 
-                    //TODO give information to server
-                    //giveToServer(firstName, lastName, email, password)
-
-
-                }
-                else
-                    ;//TODO Toast
 
             }
         });

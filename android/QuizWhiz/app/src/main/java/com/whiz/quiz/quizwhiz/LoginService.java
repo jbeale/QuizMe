@@ -52,14 +52,14 @@ public class LoginService extends IntentService{
 
         String url = "http://s-quizme.justinbeale.com/service/auth/login";
 
-        URL obj1 = null;
+        URL urlObj = null;
         try {
-            obj1 = new URL(url);
+            urlObj = new URL(url);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         try {
-            HttpURLConnection con = (HttpURLConnection) obj1.openConnection();
+            HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
         } catch (IOException e) {
             e.printStackTrace();
         }
