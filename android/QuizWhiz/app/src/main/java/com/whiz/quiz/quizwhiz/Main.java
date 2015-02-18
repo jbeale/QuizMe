@@ -57,6 +57,10 @@ public class Main extends ActionBarActivity {
                 //TextView text = (TextView)findViewById(R.id.textView);
                 //text.setText(loginResponseBodyRestResponse.body.user.email);
 
+                QuizWhiz quizWhiz = new QuizWhiz();
+                quizWhiz.setAuthToken(loginResponseBodyRestResponse.body.authToken);
+                quizWhiz.setUser(loginResponseBodyRestResponse.body.user);
+
                 Intent intent = new Intent(getApplicationContext(), Home.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
@@ -64,7 +68,7 @@ public class Main extends ActionBarActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "Incorrect credentials. Please register or try again.", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "Incorrect credentials. Please register or try again.", Toast.LENGTH_SHORT).show();
             }
         });
     };
