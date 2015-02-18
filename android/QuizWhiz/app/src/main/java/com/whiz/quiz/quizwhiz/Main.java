@@ -8,44 +8,84 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
+import com.whiz.quiz.quizwhiz.model.response.RestResponse;
+import com.whiz.quiz.quizwhiz.service.RestClient;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class Main extends ActionBarActivity {
-    EditText editEmail = null;
+    EditText editUsername = null;
     EditText editPassword = null;
     Button buttonLogin = null;
+    Button buttonSignUp = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editEmail = (EditText) findViewById(R.id.editEmail);
+        editUsername = (EditText) findViewById(R.id.editUsername);
         editPassword = (EditText) findViewById(R.id.editPasswordReg);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
+        buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
+
+        buttonSignUp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Registration.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                startActivity(intent);
+            }
+
+        });
+
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailText = editEmail.getText().toString();
+                String usernameText = editUsername.getText().toString();
                 String passwordText = editPassword.getText().toString();
 
-                Boolean authenticated = false;
-                //TODO send login to Justin's server. IDK HOW TO DO THAT
-                //authenticateMe(emailText, passwordText);
-                // comments
-                if (authenticated){
-                    Intent i = new Intent(v.getContext(), Home.class);
-                    i.putExtra("email", emailText); //TODO We will probably use encrypted login name ASK JUSTIN
-                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    v.getContext().startActivity(i);
-                }
-                else
-                    Toast.makeText(v.getContext(), "Cannot authenticate", Toast.LENGTH_SHORT).show();
+                login(usernameText, passwordText);
 
+                /*Intent intent = new Intent(v.getContext(), LoginService.class);
+                intent.putExtra("com.whiz.quiz.quizwhiz.USERNAME", usernameText); //Hopefully Identification is fine
+                intent.putExtra("com.whiz.quiz.quizwhiz.PASSWORD", passwordText);
+                startService(intent);*/
             }
         });
     }
+
+    public void login(String username, String password) {
+        RestClient.get().login(username, password, new Callback<RestResponse<LoginResponseBody>>() {
+
+            @Override
+            public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
+                //Toast.makeText(getApplicationContext(), "SUCCESS! Hi "+loginResponseBodyRestResponse.body.user.email, Toast.LENGTH_SHORT);
+                //TextView text = (TextView)findViewById(R.id.textView);
+                //text.setText(loginResponseBodyRestResponse.body.user.email);
+
+                QuizWhiz quizWhiz = new QuizWhiz();
+                quizWhiz.setAuthToken(loginResponseBodyRestResponse.body.authToken);
+                quizWhiz.setUser(loginResponseBodyRestResponse.body.user);
+
+                Intent intent = new Intent(getApplicationContext(), Home.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), "Incorrect credentials. Please register or try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    };
 
 
     @Override
@@ -68,5 +108,13 @@ public class Main extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goToHome(String username, String password) {
+        Intent intent = new Intent(this, Home.class);
+        intent.putExtra("com.whiz.quiz.quizwhiz.USERNAME", username);
+        intent.putExtra("com.whiz.quiz.quizwhiz.PASSWORD", password);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 }
