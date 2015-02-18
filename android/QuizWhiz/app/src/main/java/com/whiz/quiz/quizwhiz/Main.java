@@ -24,6 +24,7 @@ public class Main extends ActionBarActivity {
     EditText editUsername = null;
     EditText editPassword = null;
     Button buttonLogin = null;
+    Button buttonSignUp = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,16 @@ public class Main extends ActionBarActivity {
         editUsername = (EditText) findViewById(R.id.editUsername);
         editPassword = (EditText) findViewById(R.id.editPasswordReg);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
+        buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
+
+        buttonSignUp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.activity_registration);
+            }
+
+        });
+
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override

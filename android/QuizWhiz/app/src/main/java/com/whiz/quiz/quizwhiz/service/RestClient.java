@@ -21,6 +21,8 @@ public class RestClient {
 
     public static Api get() { return REST_CLIENT; };
 
+    public static Api set() { return REST_CLIENT; };
+
     public static void setupRestClient() {
         RestAdapter.Builder builder = new RestAdapter.Builder()
                 .setEndpoint(ROOT)

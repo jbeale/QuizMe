@@ -8,6 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
+import com.whiz.quiz.quizwhiz.model.response.RestResponse;
+import com.whiz.quiz.quizwhiz.service.RestClient;
+
+import retrofit.Callback;
+
 
 public class Registration extends ActionBarActivity {
     EditText editFirstName = null;
@@ -28,12 +34,24 @@ public class Registration extends ActionBarActivity {
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
 
+            public void onClick(View v) {
+                String firstNameText = editFirstName.getText().toString();
+                String lastNameText = editLastName.getText().toString();
+                String emailText = editEmail.getText().toString();
+                String passwordText = editPassword.getText().toString();
+
+                registration(firstNameText, lastNameText, emailText, passwordText);
 
             }
         });
     }
+
+    public void registration(String firstname, String lastname, String email, String password){
+        RestClient.set().register();
+    }
+
+
 
 
     @Override

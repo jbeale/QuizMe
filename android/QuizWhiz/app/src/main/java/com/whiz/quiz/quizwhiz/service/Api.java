@@ -15,7 +15,8 @@ import retrofit.http.POST;
 public interface Api {
     @FormUrlEncoded
     @POST("/auth/login")
-    void login(@Field("username") String username, @Field("password") String password, Callback<RestResponse<LoginResponseBody>> callback);
+    void login(@Field("username") String username,
+               @Field("password") String password, Callback<RestResponse<LoginResponseBody>> callback);
 
     @FormUrlEncoded
     @POST("/auth/create")
