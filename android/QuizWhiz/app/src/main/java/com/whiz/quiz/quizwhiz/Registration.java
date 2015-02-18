@@ -1,5 +1,6 @@
 package com.whiz.quiz.quizwhiz;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,12 +8,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
 import com.whiz.quiz.quizwhiz.model.response.RestResponse;
 import com.whiz.quiz.quizwhiz.service.RestClient;
 
 import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class Registration extends ActionBarActivity {
@@ -36,7 +40,6 @@ public class Registration extends ActionBarActivity {
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
                 String usernameText = editUsername.getText().toString();
                 String firstNameText = editFirstName.getText().toString();
@@ -44,15 +47,27 @@ public class Registration extends ActionBarActivity {
                 String emailText = editEmail.getText().toString();
                 String passwordText = editPassword.getText().toString();
 
-                registration(usernameText, firstNameText, lastNameText, emailText, passwordText);
-
+                register(usernameText, firstNameText, lastNameText, emailText, passwordText);
             }
         });
     }
 
-    public void registration(String username, String firstname, String lastname, String email, String password){
-        RestClient.set().register(username, firstname, lastname, email, password, new Callback<RestResponse<LoginResponseBody>>(){
-            
+    public void register(String username, String firstname, String lastname, String email, String password){
+        RestClient.get().register(username, password, firstname, lastname, email, new Callback<RestResponse<LoginResponseBody>>(){
+
+            @Override
+            public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
+
+                Toast.makeText(getApplicationContext(), "I did it, " + loginResponseBodyRestResponse.body.user.firstname + ".", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Main.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                startActivity(intent);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), "This account could not be registered", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

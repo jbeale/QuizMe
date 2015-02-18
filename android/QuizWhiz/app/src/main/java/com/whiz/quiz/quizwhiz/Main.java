@@ -38,7 +38,9 @@ public class Main extends ActionBarActivity {
         buttonSignUp.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.activity_registration);
+                Intent intent = new Intent(v.getContext(), Registration.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                startActivity(intent);
             }
 
         });
@@ -62,6 +64,7 @@ public class Main extends ActionBarActivity {
 
     public void login(String username, String password) {
         RestClient.get().login(username, password, new Callback<RestResponse<LoginResponseBody>>() {
+
             @Override
             public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
                 //Toast.makeText(getApplicationContext(), "SUCCESS! Hi "+loginResponseBodyRestResponse.body.user.email, Toast.LENGTH_SHORT);
@@ -75,7 +78,7 @@ public class Main extends ActionBarActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "Incorrect credentials. Please register or try again.", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "Incorrect credentials. Please register or try again.", Toast.LENGTH_SHORT).show();
             }
         });
     };
