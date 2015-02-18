@@ -16,6 +16,7 @@ import retrofit.Callback;
 
 
 public class Registration extends ActionBarActivity {
+    EditText editUsername = null;
     EditText editFirstName = null;
     EditText editLastName = null;
     EditText editEmail = null;
@@ -26,6 +27,7 @@ public class Registration extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        editUsername = (EditText) findViewById(R.id.editUsername);
         editFirstName = (EditText) findViewById(R.id.editFirstName);
         editLastName = (EditText) findViewById(R.id.editLastName);
         editEmail = (EditText) findViewById(R.id.editEmailReg);
@@ -36,19 +38,22 @@ public class Registration extends ActionBarActivity {
             @Override
 
             public void onClick(View v) {
+                String usernameText = editUsername.getText().toString();
                 String firstNameText = editFirstName.getText().toString();
                 String lastNameText = editLastName.getText().toString();
                 String emailText = editEmail.getText().toString();
                 String passwordText = editPassword.getText().toString();
 
-                registration(firstNameText, lastNameText, emailText, passwordText);
+                registration(usernameText, firstNameText, lastNameText, emailText, passwordText);
 
             }
         });
     }
 
-    public void registration(String firstname, String lastname, String email, String password){
-        RestClient.set().register();
+    public void registration(String username, String firstname, String lastname, String email, String password){
+        RestClient.set().register(username, firstname, lastname, email, password, new Callback<RestResponse<LoginResponseBody>>(){
+            
+        });
     }
 
 
