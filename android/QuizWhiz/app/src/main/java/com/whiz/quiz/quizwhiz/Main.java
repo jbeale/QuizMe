@@ -45,7 +45,6 @@ public class Main extends ActionBarActivity {
 
         });
 
-
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
