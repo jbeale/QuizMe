@@ -67,7 +67,7 @@ public class AuthController {
             return "login";
         }
 
-        return "redirect:/";
+        return "redirect:/dashboard";
     }
 
     @RequestMapping(value="/create", method= RequestMethod.GET)
@@ -108,7 +108,7 @@ public class AuthController {
         } catch (Exception e) {
 
         }
-        return "redirect:/";
+        return "redirect:/dashboard";
 
     }
 

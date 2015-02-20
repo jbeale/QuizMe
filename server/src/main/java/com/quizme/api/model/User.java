@@ -69,4 +69,10 @@ public class User {
     }
 
 
+    //specials
+    public String getFullname() {
+        return this.firstname+" "+this.lastname;
+    }
+
+
 }

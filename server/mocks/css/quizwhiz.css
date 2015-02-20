@@ -21,9 +21,9 @@ html, body {
     font-size: 1.3em; }
 
 #homepage .home_header {
-  background: url(../headerbgblur.png) 0px -779px; }
+  background: url(https://s3.amazonaws.com/quizwhiz/layout/img/headerbgblur.png) -30px -779px; }
   #homepage .home_header .header_overlay {
-    background: rgba(0, 166, 212, 0.85);
+    background: rgba(0, 166, 212, 0.6);
     height: 560px; }
     #homepage .home_header .header_overlay .container {
       position: relative; }
@@ -67,7 +67,7 @@ html, body {
   background-color: #3F6184;
   height: 248px; }
   #homepage section.quote .container .pic {
-    background-image: url(../girlsonphones.png);
+    background-image: url(https://s3.amazonaws.com/quizwhiz/layout/img/girlsonphones.png);
     height: 248px; }
   #homepage section.quote .container .text {
     color: white;

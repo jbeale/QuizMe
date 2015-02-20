@@ -28,9 +28,9 @@ html, body {
 
 #homepage {
   .home_header {
-    background: url(../headerbgblur.png) 0px -779px;
+    background: url(https://s3.amazonaws.com/quizwhiz/layout/img/headerbgblur.png) -30px -779px;
     .header_overlay {
-      background:rgba(0,166,212,.85);
+      background:rgba(0,166,212,.60);
 
       height:560px;
       .container {
@@ -91,7 +91,7 @@ html, body {
       height:248px;
       .container {
         .pic {
-          background-image:url(../girlsonphones.png);
+          background-image:url(https://s3.amazonaws.com/quizwhiz/layout/img/girlsonphones.png);
           height:248px;
         }
         .text {
