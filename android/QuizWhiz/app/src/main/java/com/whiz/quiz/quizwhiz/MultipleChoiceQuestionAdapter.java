@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 
@@ -47,13 +49,19 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
         }
 
         EditText question = (EditText) convertView.findViewById(R.id.editQuestion);
-        EditText[] answers = new EditText[4];
-        answers[0] = (EditText) convertView.findViewById(R.id.editAnswer1);
-        answers[1] = (EditText) convertView.findViewById(R.id.editAnswer2);
-        answers[2] = (EditText) convertView.findViewById(R.id.editAnswer3);
-        answers[3] = (EditText) convertView.findViewById(R.id.editAnswer4);
+        String[] answers = new String[4];
+        answers[0] = convertView.findViewById(R.id.editAnswer1).toString();
+        answers[1] = convertView.findViewById(R.id.editAnswer2).toString();
+        answers[2] = convertView.findViewById(R.id.editAnswer3).toString();
+        answers[3] = convertView.findViewById(R.id.editAnswer4).toString();
+        RadioGroup radioGroup = (RadioGroup) convertView.findViewById(R.id.radioGroup);
+        RadioButton btnCorrectAnswer = (RadioButton) convertView.findViewById(radioGroup.getCheckedRadioButtonId());
 
         MultipleChoiceQuestion multipleChoiceQuestion = multipleChoiceQuestions.get(position);
+
+        multipleChoiceQuestion.setQuestion(question.toString());
+        multipleChoiceQuestion.setPossibleAnswers(answers);
+        multipleChoiceQuestion.setCorrectAnswerPosition((Integer) btnCorrectAnswer.getTag());
 
         return convertView;
     }

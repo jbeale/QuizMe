@@ -25,25 +25,29 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:id="@+id/radioButton1"
-            android:checked="false" />
+            android:checked="false"
+            android:tag="0"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:id="@+id/radioButton2"
-            android:checked="false" />
+            android:checked="false"
+            android:tag="1"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:id="@+id/radioButton3"
-            android:checked="false" />
+            android:checked="false"
+            android:tag="2"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:id="@+id/radioButton4"
-            android:checked="false" />
+            android:checked="false"
+            android:tag="3"/>
     </RadioGroup>
 
     <EditText
