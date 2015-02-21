@@ -4,14 +4,39 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class MakeQuiz extends ActionBarActivity {
+    Button btnAddQuestion = null;
+    ListView listViewQuestions = null;
+    MultipleChoiceQuestionAdapter questionAdapter = null;
+    ArrayList<MultipleChoiceQuestion> multipleChoiceQuestions =
+            new ArrayList<MultipleChoiceQuestion>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_quiz);
+
+        btnAddQuestion = (Button) findViewById(R.id.buttonAddQuestion);
+        listViewQuestions = (ListView) findViewById(R.id.listViewQuestions);
+
+        questionAdapter = new MultipleChoiceQuestionAdapter(this, multipleChoiceQuestions, this);
+        listViewQuestions.setAdapter(questionAdapter);
+
+        btnAddQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                multipleChoiceQuestions.add(new MultipleChoiceQuestion());
+                questionAdapter.notifyDataSetChanged();
+            }
+        });
+
     }
 
 
