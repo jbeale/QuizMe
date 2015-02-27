@@ -11,12 +11,17 @@ import android.widget.Button;
 
 public class Home extends ActionBarActivity {
     Button btnMakeQuiz = null;
+
+    Button btnJoinSession = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         btnMakeQuiz = (Button) findViewById(R.id.buttonMakeQuiz);
+        btnJoinSession = (Button) findViewById(R.id.buttonJoinSession);
 
         btnMakeQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,7 +31,17 @@ public class Home extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        btnJoinSession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               new SessionKeyDialogBox().show(getFragmentManager(), "");
+            }
+        });
+
+
     }
+
 
 
     @Override

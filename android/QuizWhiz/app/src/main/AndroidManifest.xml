@@ -30,6 +30,7 @@
             android:name=".Registration"
             android:label="@string/title_activity_registration" >
         </activity>
+
         <service
             android:name=".LoginService"
             android:label="LoginService" >
