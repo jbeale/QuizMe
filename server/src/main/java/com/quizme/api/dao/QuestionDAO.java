@@ -9,7 +9,8 @@ import java.util.List;
  */
 public interface QuestionDAO {
     public Question getQuestion(int id);
-    public int saveQuestion(Question question);
+    public int updateQuestion(Question question);
+    public int insertQuestion(Question question);
     public void deleteQuestion(int id);
     public List<Question> getQuestionsByUser(int id);
 }

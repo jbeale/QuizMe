@@ -79,4 +79,7 @@ html, body {
 #homepage section.features {
   background-color: white; }
 
+#question-editor .input-group {
+  padding-bottom: 5px; }
+
 /*# sourceMappingURL=quizwhiz.css.map */

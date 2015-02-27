@@ -27,4 +27,24 @@ public class DefaultQuestionService implements QuestionService {
         List<Question> questions = questionDAO.getQuestionsByUser(userId);
         return questions;
     }
+
+    @Override
+    public Question getQuestion(int questionId) {
+        Question q = questionDAO.getQuestion(questionId);
+        return q;
+    }
+
+    @Override
+    public void save(Question q) {
+        if (q.getId() != 0) {
+            questionDAO.updateQuestion(q);
+        } else {
+            questionDAO.insertQuestion(q);
+        }
+    }
+
+    @Override
+    public void delete(int questionId) {
+        questionDAO.deleteQuestion(questionId);
+    }
 }

@@ -1,16 +1,31 @@
 package com.quizme.api.model;
 
+import com.google.gson.annotations.Expose;
+import org.springframework.beans.factory.parsing.Problem;
+
 /**
  * Created by jbeale on 2/19/15.
  */
 public class Question {
+
+    public static final String TYPE_MULTIPLE_CHOICE = "mc";
+    public static final String TYPE_FILLIN = "textentry";
+
+    @Expose
     private int id;
+    @Expose
     private int authorUserId;
-    private int created;
-    private int modified;
+    @Expose
+    private Long created;
+    @Expose
+    private Long modified;
+    @Expose
     private String name;
-    private String data;
+    @Expose
+    private ProblemTypeModel data;
+    @Expose
     private String type;
+
 
     public int getId() {
         return id;
@@ -28,19 +43,19 @@ public class Question {
         this.authorUserId = authorUserId;
     }
 
-    public int getCreated() {
+    public Long getCreated() {
         return created;
     }
 
-    public void setCreated(int created) {
+    public void setCreated(Long created) {
         this.created = created;
     }
 
-    public int getModified() {
+    public Long getModified() {
         return modified;
     }
 
-    public void setModified(int modified) {
+    public void setModified(Long modified) {
         this.modified = modified;
     }
 
@@ -52,11 +67,11 @@ public class Question {
         this.name = name;
     }
 
-    public String getData() {
+    public ProblemTypeModel getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(ProblemTypeModel data) {
         this.data = data;
     }
 

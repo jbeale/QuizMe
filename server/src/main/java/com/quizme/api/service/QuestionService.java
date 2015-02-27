@@ -9,4 +9,7 @@ import java.util.List;
  */
 public interface QuestionService {
     public List<Question> getQuestionsByUser(int userId);
+    public Question getQuestion(int questionId);
+    public void save(Question q);
+    public void delete(int questionId);
 }

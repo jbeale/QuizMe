@@ -2,6 +2,7 @@ package com.quizme.api.dao;
 
 import com.quizme.api.model.User;
 import com.quizme.api.model.request.ApiClientMetadata;
+import com.quizme.api.util.UnixTime;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -91,7 +92,7 @@ public class JdbcUserDAO implements UserDAO {
     @Override
     public User getUserByToken(String token, boolean onlyNonexpiredTokens) {
         try {
-            Long currentUnixTime = System.currentTimeMillis()/1000L;
+            Long currentUnixTime = UnixTime.get();
             Long tokenDifference = onlyNonexpiredTokens? currentUnixTime-TOKEN_LIFE_SECONDS : 0;
 
             Integer userId = this.jdbcTemplate.queryForInt("SELECT userId FROM tokens WHERE token = ? AND time > ?", token, tokenDifference);
