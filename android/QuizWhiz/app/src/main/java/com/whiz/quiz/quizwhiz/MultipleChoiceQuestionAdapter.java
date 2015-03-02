@@ -1,7 +1,9 @@
 package com.whiz.quiz.quizwhiz;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,25 +44,57 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, final ViewGroup parent) {
         if(convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.multiple_choice_list, null);
         }
 
         EditText question = (EditText) convertView.findViewById(R.id.editQuestion);
-        String[] answers = new String[4];
-        answers[0] = convertView.findViewById(R.id.editAnswer1).toString();
-        answers[1] = convertView.findViewById(R.id.editAnswer2).toString();
-        answers[2] = convertView.findViewById(R.id.editAnswer3).toString();
-        answers[3] = convertView.findViewById(R.id.editAnswer4).toString();
+        final int questionNumber = position + 1;
+        question.setHint("Question " + questionNumber);
+
+     //TODO On long click, open up a dialog box for edition or deletion
+        convertView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setTitle("Edit Question " + questionNumber + "?");
+                String[] boxValues = {"Edit", "Delete"};
+                builder.setItems(boxValues, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case 0:
+                                //TODO Edit
+                                break;
+                            case 1:
+                                //TODO Delete
+                        }
+
+                    }
+                });
+                builder.show();
+
+                return false;
+            }
+        });
+
+
         RadioGroup radioGroup = (RadioGroup) convertView.findViewById(R.id.radioGroup);
         RadioButton btnCorrectAnswer = (RadioButton) convertView.findViewById(radioGroup.getCheckedRadioButtonId());
+
+        String[] options = new String[4];
+        options[0] = convertView.findViewById(R.id.editAnswer1).toString();
+        options[1] = convertView.findViewById(R.id.editAnswer2).toString();
+        options[2] = convertView.findViewById(R.id.editAnswer3).toString();
+        options[3] = convertView.findViewById(R.id.editAnswer4).toString();
 
         MultipleChoiceQuestion multipleChoiceQuestion = multipleChoiceQuestions.get(position);
 
         multipleChoiceQuestion.setQuestion(question.toString());
-        multipleChoiceQuestion.setPossibleAnswers(answers);
+        multipleChoiceQuestion.setPossibleAnswers(options);
         multipleChoiceQuestion.setCorrectAnswerPosition((Integer) btnCorrectAnswer.getTag());
 
         return convertView;

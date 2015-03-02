@@ -89,18 +89,9 @@
         android:layout_toRightOf="@+id/radioGroup"
         android:layout_alignRight="@+id/editAnswer3"
         android:layout_alignEnd="@+id/editAnswer3"
-        android:hint="Answer 4" />
+        android:hint="Answer 4" /><![CDATA[
 
-    <ImageView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:src="@android:drawable/divider_horizontal_bright"
-        android:layout_width="fill_parent"
-        android:layout_height="15dp"
-        android:scaleType="fitXY"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="2dp"
-        android:paddingTop="2dp"
-        android:layout_below="@+id/editAnswer4"/> />
+    />
 
+]]>
 </RelativeLayout>

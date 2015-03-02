@@ -20,5 +20,7 @@
         android:id="@+id/listViewQuestions"
         android:layout_below="@+id/buttonAddQuestion"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"/>
 </RelativeLayout>

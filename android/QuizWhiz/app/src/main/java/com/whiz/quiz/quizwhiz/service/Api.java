@@ -8,6 +8,7 @@ import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 
 /**
  * Created by jbeale on 2/16/15.
@@ -25,4 +26,24 @@ public interface Api {
                   @Field("firstname") String firstname,
                   @Field("lastname") String lastname,
                   @Field("email") String email, Callback<RestResponse<LoginResponseBody>> callback);
+
+    @FormUrlEncoded
+    @PUT("/question/new")
+    void sendQuestion(@Field("questionName") String questionName,
+                  @Field("questionType") String questionType, //like mc for multiple choice
+                  @Field("promptText") String promptText,
+                  @Field("optionTexts") String[] optionTexts,
+                  @Field("correctOptionIndex") int correctOptionIndex
+                  );
+
+    @FormUrlEncoded
+    @POST("/question/") //TODO get id of the question
+    void editQuestion(@Field("questionName") String questionName,
+                  @Field("questionType") String questionType, //like mc for multiple choice
+                  @Field("promptText") String promptText,
+                  @Field("optionTexts") String[] optionTexts,
+                  @Field("correctOptionIndex") int correctOptionIndex
+
+
+    );
 }

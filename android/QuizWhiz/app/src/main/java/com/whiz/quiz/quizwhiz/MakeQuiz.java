@@ -5,14 +5,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
 public class MakeQuiz extends ActionBarActivity {
     Button btnAddQuestion = null;
+    Button btnSaveQuiz = null;
     ListView listViewQuestions = null;
     MultipleChoiceQuestionAdapter questionAdapter = null;
     ArrayList<MultipleChoiceQuestion> multipleChoiceQuestions =
@@ -27,18 +31,32 @@ public class MakeQuiz extends ActionBarActivity {
         listViewQuestions = (ListView) findViewById(R.id.listViewQuestions);
 
         questionAdapter = new MultipleChoiceQuestionAdapter(this, multipleChoiceQuestions, this);
+
         listViewQuestions.setAdapter(questionAdapter);
 
         btnAddQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                multipleChoiceQuestions.add(new MultipleChoiceQuestion());
+                MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion();
+                multipleChoiceQuestions.add(multipleChoiceQuestion);
                 questionAdapter.notifyDataSetChanged();
             }
         });
 
-    }
 
+        //TODO Make this an actual button
+        btnSaveQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(MultipleChoiceQuestion question : multipleChoiceQuestions){
+
+
+                }
+                //TODO send this thing to Server
+            }
+        });
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

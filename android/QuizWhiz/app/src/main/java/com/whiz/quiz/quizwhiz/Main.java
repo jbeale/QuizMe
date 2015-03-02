@@ -1,6 +1,8 @@
 package com.whiz.quiz.quizwhiz;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -70,9 +72,10 @@ public class Main extends ActionBarActivity {
                 //TextView text = (TextView)findViewById(R.id.textView);
                 //text.setText(loginResponseBodyRestResponse.body.user.email);
 
-                QuizWhiz quizWhiz = new QuizWhiz();
-                quizWhiz.setAuthToken(loginResponseBodyRestResponse.body.authToken);
-                quizWhiz.setUser(loginResponseBodyRestResponse.body.user);
+                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt("authToken", Integer.parseInt(loginResponseBodyRestResponse.body.authToken));
+                editor.commit();
 
                 Intent intent = new Intent(getApplicationContext(), Home.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
