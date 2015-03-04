@@ -1,5 +1,7 @@
 package com.whiz.quiz.quizwhiz;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,7 +13,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.whiz.quiz.quizwhiz.service.RestClient;
+
 import java.util.ArrayList;
+
+import retrofit.RequestInterceptor;
+import retrofit.RestAdapter;
 
 
 public class MakeQuiz extends ActionBarActivity {
@@ -42,19 +49,22 @@ public class MakeQuiz extends ActionBarActivity {
                 questionAdapter.notifyDataSetChanged();
             }
         });
-
-
+/*
         //TODO Make this an actual button
         btnSaveQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for(MultipleChoiceQuestion question : multipleChoiceQuestions){
 
-
                 }
                 //TODO send this thing to Server
             }
         });
+    }
+*/
+    public void sendQuestion(String questionName, String questionType, String promptText,
+                             String[] optionTexts, int correctOptionIndex){
+
 
     }
 

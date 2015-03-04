@@ -53,7 +53,7 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
         EditText question = (EditText) convertView.findViewById(R.id.editQuestion);
         final int questionNumber = position + 1;
         question.setHint("Question " + questionNumber);
-
+/*
      //TODO On long click, open up a dialog box for edition or deletion
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -61,16 +61,14 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setTitle("Edit Question " + questionNumber + "?");
-                String[] boxValues = {"Edit", "Delete"};
+                String[] boxValues = {"Delete"};
                 builder.setItems(boxValues, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case 0:
-                                //TODO Edit
-                                break;
-                            case 1:
                                 //TODO Delete
+                                break;
                         }
 
                     }
@@ -96,7 +94,7 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
         multipleChoiceQuestion.setQuestion(question.toString());
         multipleChoiceQuestion.setPossibleAnswers(options);
         multipleChoiceQuestion.setCorrectAnswerPosition((Integer) btnCorrectAnswer.getTag());
-
+*/
         return convertView;
     }
 }

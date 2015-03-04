@@ -7,8 +7,10 @@ import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.PUT;
+import retrofit.http.Path;
 
 /**
  * Created by jbeale on 2/16/15.
@@ -29,16 +31,19 @@ public interface Api {
 
     @FormUrlEncoded
     @PUT("/question/new")
-    void sendQuestion(@Field("questionName") String questionName,
+    void sendQuestion( //TODO how do I do this?
+                  @Field("questionName") String questionName,
                   @Field("questionType") String questionType, //like mc for multiple choice
                   @Field("promptText") String promptText,
                   @Field("optionTexts") String[] optionTexts,
-                  @Field("correctOptionIndex") int correctOptionIndex
+                  @Field("correctOptionIndex") int correctOptionIndex,
+                  Callback<RestResponse<LoginResponseBody>> callback
                   );
 
     @FormUrlEncoded
-    @POST("/question/") //TODO get id of the question
-    void editQuestion(@Field("questionName") String questionName,
+    @POST("/question/{id}")//TODO get id of the question
+    void editQuestion(@Path("id") int id,
+                  @Field("questionName") String questionName,
                   @Field("questionType") String questionType, //like mc for multiple choice
                   @Field("promptText") String promptText,
                   @Field("optionTexts") String[] optionTexts,

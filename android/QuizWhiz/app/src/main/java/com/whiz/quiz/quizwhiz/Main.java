@@ -64,6 +64,7 @@ public class Main extends ActionBarActivity {
     }
 
     public void login(String username, String password) {
+        new RestClient(getApplicationContext());
         RestClient.get().login(username, password, new Callback<RestResponse<LoginResponseBody>>() {
 
             @Override
@@ -74,7 +75,7 @@ public class Main extends ActionBarActivity {
 
                 SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putInt("authToken", Integer.parseInt(loginResponseBodyRestResponse.body.authToken));
+                editor.putString("authToken", loginResponseBodyRestResponse.body.authToken);
                 editor.commit();
 
                 Intent intent = new Intent(getApplicationContext(), Home.class);

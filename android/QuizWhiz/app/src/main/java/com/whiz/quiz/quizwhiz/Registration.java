@@ -53,7 +53,7 @@ public class Registration extends ActionBarActivity {
     }
 
     public void register(String username, String firstname, String lastname, String email, String password){
-        RestClient.get().register(username, password, firstname, lastname, email, new Callback<RestResponse<LoginResponseBody>>(){
+        new RestClient(getApplicationContext()).get().register(username, password, firstname, lastname, email, new Callback<RestResponse<LoginResponseBody>>() {
 
             @Override
             public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
