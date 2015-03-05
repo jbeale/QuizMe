@@ -16,6 +16,11 @@
 </script>
 <div class="container">
     <button class="btn btn-info" onclick="location.href='/questions/new'" style="float:right;margin-top:-62px;">Create Question</button>
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/dashboard">Sessions</a></li>
+        <li role="presentation"><a href="/activities/list">Activity Builder</a></li>
+        <li role="presentation" class="active"><a href="/questions/list">Question Builder</a></li>
+    </ul>
     <table class="table table-hover">
         <thead>
             <th>ID</th>

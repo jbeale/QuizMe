@@ -13,6 +13,20 @@
 <div class="header">
     <div class="container">
         <div class="brand"><img src="https://s3.amazonaws.com/quizwhiz/layout/img/quizwhizwhiteh.png" width="187"></div>
+        <c:if test="${not empty layout_currentUser}">
+        <div id="user-nav" class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <img src="${layout_currentUser.getProfilePictureThumbnail()}">
+                ${layout_currentUser.getFullname()}<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/account">My Account</a></li>
+                <li class="divider"></li>
+                <li><a href="/auth/logout">Sign Out</a></li>
+            </ul>
+        </div>
+        </c:if>
     </div>
 </div>
 <div class="titlebar">

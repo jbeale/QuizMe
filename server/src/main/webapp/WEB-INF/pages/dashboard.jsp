@@ -4,7 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8">
-            <p>Welcome, ${currentUser.getFullname()}</p>
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="/dashboard">Sessions</a></li>
+                <li role="presentation"><a href="/activities/list">Activity Builder</a></li>
+                <li role="presentation"><a href="/questions/list">Question Builder</a></li>
+            </ul>
 
             <ul>
                 <li><a href="/questions/list">My Questions</a></li>

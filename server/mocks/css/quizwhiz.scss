@@ -8,8 +8,24 @@ html, body {
   background-color:#00a6d4;
   height:120px;
   .container {
+    position:relative;
     .brand {
       padding-top:45px;
+    }
+    #user-nav {
+      position:absolute;
+      top:45px;
+      right:15px;
+      img {
+        border-radius:5px;
+        margin-right:6px;
+        height:25px;
+      }
+      button {
+        border:2px solid white;
+        color:white;
+        background:none;
+      }
     }
   }
 }

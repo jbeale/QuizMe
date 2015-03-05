@@ -1,6 +1,7 @@
 package com.quizme.api.model;
 
 import com.google.gson.annotations.Expose;
+import com.quizme.api.util.GravatarUtility;
 
 /**
  * Created by jbeale on 1/28/15.
@@ -74,5 +75,7 @@ public class User {
         return this.firstname+" "+this.lastname;
     }
 
+    public String getProfilePictureThumbnail() { return GravatarUtility.getGravatarURI(email, true); }
+    public String getProfilePicture() { return GravatarUtility.getGravatarURI(email, false); }
 
 }
