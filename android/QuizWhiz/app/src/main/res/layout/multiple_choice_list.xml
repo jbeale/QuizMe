@@ -5,18 +5,19 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editQuestion"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:hint="Question"/>
+        android:id="@+id/textQuestion"
+        android:hint="Question"
+        android:layout_below="@+id/textQuestionName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editQuestion"
+        android:layout_below="@+id/textQuestion"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/radioGroup">
@@ -24,74 +25,79 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:id="@+id/radioButton1"
+            android:id="@+id/radioButton5"
             android:checked="false"
             android:tag="0"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioButton6"
             android:checked="false"
             android:tag="1"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:id="@+id/radioButton3"
+            android:id="@+id/radioButton7"
             android:checked="false"
             android:tag="2"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:id="@+id/radioButton4"
+            android:id="@+id/radioButton8"
             android:checked="false"
             android:tag="3"/>
     </RadioGroup>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:id="@+id/editAnswer1"
+        android:id="@+id/textAnswer1"
         android:layout_alignTop="@+id/radioGroup"
         android:layout_toRightOf="@+id/radioGroup"
-        android:layout_alignRight="@+id/editQuestion"
-        android:layout_alignEnd="@+id/editQuestion"
+        android:layout_alignRight="@+id/textQuestion"
+        android:layout_alignEnd="@+id/textQuestion"
         android:hint="Answer 1" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:id="@+id/editAnswer2"
-        android:layout_below="@+id/editAnswer1"
+        android:id="@+id/textAnswer2"
+        android:layout_below="@+id/textAnswer1"
         android:layout_toRightOf="@+id/radioGroup"
-        android:layout_alignRight="@+id/editAnswer1"
-        android:layout_alignEnd="@+id/editAnswer1"
+        android:layout_alignRight="@+id/textAnswer1"
+        android:layout_alignEnd="@+id/textAnswer1"
         android:elegantTextHeight="true"
         android:hint="Answer 2" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:id="@+id/editAnswer3"
-        android:layout_below="@+id/editAnswer2"
+        android:id="@+id/textAnswer3"
+        android:layout_below="@+id/textAnswer2"
         android:layout_toRightOf="@+id/radioGroup"
-        android:layout_alignRight="@+id/editAnswer2"
-        android:layout_alignEnd="@+id/editAnswer2"
+        android:layout_alignRight="@+id/textAnswer2"
+        android:layout_alignEnd="@+id/textAnswer2"
         android:hint="Answer 3" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:id="@+id/editAnswer4"
-        android:layout_below="@+id/editAnswer3"
+        android:id="@+id/textAnswer4"
+        android:layout_below="@+id/textAnswer3"
         android:layout_toRightOf="@+id/radioGroup"
-        android:layout_alignRight="@+id/editAnswer3"
-        android:layout_alignEnd="@+id/editAnswer3"
-        android:hint="Answer 4" /><![CDATA[
+        android:layout_alignRight="@+id/textAnswer3"
+        android:layout_alignEnd="@+id/textAnswer3"
+        android:hint="Answer 4" />
 
-    />
-
-]]>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textQuestionName"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:hint="Question Name"/>
 </RelativeLayout>

@@ -5,6 +5,7 @@ package com.whiz.quiz.quizwhiz;
  */
 public abstract class QuizQuestion {
     private String question;
+    private String questionName;
 
     public String getQuestion() {
         return question;
@@ -12,5 +13,13 @@ public abstract class QuizQuestion {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public String getQuestionName() {
+        return questionName;
+    }
+
+    public void setQuestionName(String questionName) {
+        this.questionName = questionName;
     }
 }

@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -50,9 +51,47 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.multiple_choice_list, null);
         }
 
-        EditText question = (EditText) convertView.findViewById(R.id.editQuestion);
-        final int questionNumber = position + 1;
-        question.setHint("Question " + questionNumber);
+        TextView questionName = (TextView) convertView.findViewById(R.id.textQuestionName);
+        TextView question = (TextView) convertView.findViewById(R.id.textQuestion);
+        TextView[] options = new TextView[4];
+        options[0] = (TextView) convertView.findViewById(R.id.textAnswer1);
+        options[1] = (TextView) convertView.findViewById(R.id.textAnswer2);
+        options[2] = (TextView) convertView.findViewById(R.id.textAnswer3);
+        options[3] = (TextView) convertView.findViewById(R.id.textAnswer4);
+        RadioGroup radioGroup = (RadioGroup) convertView.findViewById(R.id.radioGroup);
+        RadioButton radioButton1 = (RadioButton) convertView.findViewById(R.id.radioButton5);
+        RadioButton radioButton2 = (RadioButton) convertView.findViewById(R.id.radioButton6);
+        RadioButton radioButton3 = (RadioButton) convertView.findViewById(R.id.radioButton7);
+        RadioButton radioButton4 = (RadioButton) convertView.findViewById(R.id.radioButton8);
+
+        MultipleChoiceQuestion multipleChoiceQuestion = multipleChoiceQuestions.get(position);
+        questionName.setText(multipleChoiceQuestion.getQuestionName());
+        question.setText(multipleChoiceQuestion.getQuestion());
+        for(int i=0; i<4; i++){
+            options[i].setText(multipleChoiceQuestion.getPossibleAnswers()[i]);
+        }
+
+        switch (multipleChoiceQuestion.getCorrectAnswerPosition()){
+            case 0:
+                radioGroup.check(radioButton1.getId());
+                break;
+            case 1:
+                radioGroup.check(radioButton2.getId());
+                break;
+            case 2:
+                radioGroup.check(radioButton3.getId());
+                break;
+            case 3:
+                radioGroup.check(radioButton4.getId());
+                break;
+        }
+        radioGroup.setEnabled(false);
+        radioButton1.setEnabled(false);
+        radioButton2.setEnabled(false);
+        radioButton3.setEnabled(false);
+        radioButton4.setEnabled(false);
+
+
 /*
      //TODO On long click, open up a dialog box for edition or deletion
         convertView.setOnLongClickListener(new View.OnLongClickListener() {

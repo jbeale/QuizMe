@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.whiz.quiz.quizwhiz" >
-    <uses-permission android:name="android.permission.INTERNET" />
-    <application
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
         android:name=".QuizWhiz"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -30,10 +31,16 @@
             android:name=".Registration"
             android:label="@string/title_activity_registration" >
         </activity>
+
         <service
             android:name=".LoginService"
             android:label="LoginService" >
         </service>
+
+        <activity
+            android:name=".InputQuestion"
+            android:label="@string/title_activity_input_question" >
+        </activity>
     </application>
 
 </manifest>

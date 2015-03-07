@@ -7,5 +7,6 @@
     <string name="title_activity_home">Home</string>
     <string name="title_activity_make_quiz">MakeQuiz</string>
     <string name="title_activity_registration">Registration</string>
+    <string name="title_activity_input_question">InputQuestion</string>
 
 </resources>
