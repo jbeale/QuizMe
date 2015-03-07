@@ -3,6 +3,7 @@ package com.whiz.quiz.quizwhiz;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,6 +28,7 @@ public class Main extends ActionBarActivity {
     EditText editPassword = null;
     Button buttonLogin = null;
     Button buttonSignUp = null;
+    SharedPreferences sharedPreferences = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +63,13 @@ public class Main extends ActionBarActivity {
                 startService(intent);*/
             }
         });
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     public void login(String username, String password) {
-        new RestClient(getApplicationContext());
-        RestClient.get().login(username, password, new Callback<RestResponse<LoginResponseBody>>() {
+        RestClient restClient = new RestClient(getApplicationContext());
+        restClient.get().login(username, password, new Callback<RestResponse<LoginResponseBody>>() {
 
             @Override
             public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
@@ -73,10 +77,11 @@ public class Main extends ActionBarActivity {
                 //TextView text = (TextView)findViewById(R.id.textView);
                 //text.setText(loginResponseBodyRestResponse.body.user.email);
 
-                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("authToken", loginResponseBodyRestResponse.body.authToken);
-                editor.commit();
+
+                savePreferences("authToken", loginResponseBodyRestResponse.body.authToken);
+
+                //QuizWhiz quizWhiz = (QuizWhiz) getApplication();
+                //quizWhiz.setAuthToken(loginResponseBodyRestResponse.body.authToken);
 
                 Intent intent = new Intent(getApplicationContext(), Home.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -89,6 +94,12 @@ public class Main extends ActionBarActivity {
             }
         });
     };
+
+    private void savePreferences(String key, String value){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
 
 
     @Override

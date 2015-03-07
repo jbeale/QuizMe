@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.squareup.okhttp.OkHttpClient;
+import com.whiz.quiz.quizwhiz.QuizWhiz;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -17,14 +18,18 @@ public class RestClient {
     private static Api REST_CLIENT;
     private static String ROOT =
             "http://s-quizme.justinbeale.com/service";
-    private static Context context;
+    private Context context;
+    private static SharedPreferences sharedPreferences;
 
     static {
         setupRestClient();
     }
 
-    public RestClient(Context applicationContext) {
-        context = applicationContext;
+    public RestClient(){}
+
+    public RestClient(Context context) {
+        this.context = context;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public static Api get() { return REST_CLIENT; };
@@ -33,9 +38,8 @@ public class RestClient {
         RequestInterceptor requestInterceptor = new RequestInterceptor() {
             @Override
             public void intercept(RequestFacade request) {
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 String authToken = sharedPreferences.getString("authToken", "");
-                request.addHeader("authToken", authToken);
+                request.addHeader("token", authToken);
             }
         };
 

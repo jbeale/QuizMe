@@ -92,19 +92,25 @@ public class MakeQuiz extends ActionBarActivity {
                 multipleChoiceQuestion.setPossibleAnswers(options);
                 multipleChoiceQuestion.setCorrectAnswerPosition(bundle.getInt("index"));
 
-                multipleChoiceQuestions.add(multipleChoiceQuestion);
-                questionAdapter.notifyDataSetChanged();
+                sendQuestion(multipleChoiceQuestion);
             }
         }
     }
 
-    public void sendQuestion(String questionName, String questionType, String promptText,
-                             String[] optionTexts, int correctOptionIndex){
-        new RestClient(getApplicationContext()).get().sendQuestion(questionName, questionType,
+    public void sendQuestion(final MultipleChoiceQuestion question){
+        String questionName = question.getQuestionName();
+        String questionType = MultipleChoiceQuestion.TYPE;
+        String promptText = question.getQuestion();
+        String[] optionTexts = question.getPossibleAnswers();
+        int correctOptionIndex = question.getCorrectAnswerPosition();
+        RestClient restClient = new RestClient(getApplicationContext());
+        restClient.get().sendQuestion(questionName, questionType,
                 promptText, optionTexts, correctOptionIndex, new Callback<RestResponse<LoginResponseBody>>() {
+
                     @Override
                     public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
-
+                        multipleChoiceQuestions.add(question);
+                        questionAdapter.notifyDataSetChanged();
                     }
 
                     @Override
