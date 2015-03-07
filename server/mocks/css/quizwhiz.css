@@ -6,8 +6,22 @@ html, body {
 .header {
   background-color: #00a6d4;
   height: 120px; }
-  .header .container .brand {
-    padding-top: 45px; }
+  .header .container {
+    position: relative; }
+    .header .container .brand {
+      padding-top: 45px; }
+    .header .container #user-nav {
+      position: absolute;
+      top: 45px;
+      right: 1px; }
+      .header .container #user-nav img {
+        border-radius: 5px;
+        margin-right: 6px;
+        height: 25px; }
+      .header .container #user-nav button {
+        border: 2px solid white;
+        color: white;
+        background: none; }
 
 .titlebar {
   height: 68px;
@@ -21,9 +35,9 @@ html, body {
     font-size: 1.3em; }
 
 #homepage .home_header {
-  background: url(../headerbgblur.png) 0px -779px; }
+  background: url(https://s3.amazonaws.com/quizwhiz/layout/img/headerbgblur.png) -30px -779px; }
   #homepage .home_header .header_overlay {
-    background: rgba(0, 166, 212, 0.85);
+    background: rgba(0, 166, 212, 0.6);
     height: 560px; }
     #homepage .home_header .header_overlay .container {
       position: relative; }
@@ -67,7 +81,7 @@ html, body {
   background-color: #3F6184;
   height: 248px; }
   #homepage section.quote .container .pic {
-    background-image: url(../girlsonphones.png);
+    background-image: url(https://s3.amazonaws.com/quizwhiz/layout/img/girlsonphones.png);
     height: 248px; }
   #homepage section.quote .container .text {
     color: white;
@@ -78,5 +92,8 @@ html, body {
       font-size: 12px; }
 #homepage section.features {
   background-color: white; }
+
+#question-editor .input-group {
+  padding-bottom: 5px; }
 
 /*# sourceMappingURL=quizwhiz.css.map */

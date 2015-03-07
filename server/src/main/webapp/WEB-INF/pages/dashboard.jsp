@@ -3,29 +3,21 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-6">
-            <c:if test="${login_error == true}">
-                <div class="alert alert-danger">Invalid username or password. Please try again.</div>
-            </c:if>
-            <form class="login-form" method="POST" name="login-form">
-                <div class="form-group">
-                    <label for="usernameInput">Username</label>
-                    <input type="text" class="form-control" id="usernameInput" name="username" placeholder="Enter username"/>
-                </div>
-                <div class="form-group">
-                    <label for="passwordInput">Password</label>
-                    <input type="password" class="form-control" id="passwordInput" name="password" placeholder="Password"/>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Keep me signed in
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-default">Sign In</button>
-            </form>
+        <div class="col-lg-8">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="/dashboard">Sessions</a></li>
+                <li role="presentation"><a href="/activities/list">Activity Builder</a></li>
+                <li role="presentation"><a href="/questions/list">Question Builder</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="/questions/list">My Questions</a></li>
+                <li><a href="/quiz/list">My Quizzes</a></li>
+                <li><a href="/sessions/new">Start New Session</a></li>
+            </ul>
         </div>
-        <div class="col-lg-6">
-            Don't have an account?<br/><button type="button" onclick="location.href='create'" class="btn btn-info">Create One Now</button>
+        <div class="col-lg-4">
+
         </div>
     </div>
 </div>
