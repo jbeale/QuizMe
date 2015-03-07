@@ -11,8 +11,6 @@
             </ul>
 
             <ul>
-                <li><a href="/questions/list">My Questions</a></li>
-                <li><a href="/quiz/list">My Quizzes</a></li>
                 <li><a href="/sessions/new">Start New Session</a></li>
             </ul>
         </div>

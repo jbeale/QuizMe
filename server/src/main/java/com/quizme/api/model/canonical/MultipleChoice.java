@@ -2,6 +2,7 @@ package com.quizme.api.model.canonical;
 
 import com.google.gson.annotations.Expose;
 import com.quizme.api.model.ProblemTypeModel;
+import com.quizme.api.util.WordUtils;
 
 import java.util.List;
 
@@ -20,5 +21,10 @@ public class MultipleChoice extends ProblemTypeModel {
 
     public List<Option> getChoices() {
         return choices;
+    }
+
+    @Override
+    public String getPromptTextExcerpt() {
+       return WordUtils.getFirstNWords(getPrompt(), 20);
     }
 }

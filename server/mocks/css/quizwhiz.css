@@ -13,7 +13,7 @@ html, body {
     .header .container #user-nav {
       position: absolute;
       top: 45px;
-      right: 1px; }
+      right: 15px; }
       .header .container #user-nav img {
         border-radius: 5px;
         margin-right: 6px;
@@ -95,5 +95,36 @@ html, body {
 
 #question-editor .input-group {
   padding-bottom: 5px; }
+
+#activity-editor .question-selector ul {
+  padding: 0; }
+  #activity-editor .question-selector ul .sortable-placeholder {
+    border: 1px dashed #CCC;
+    height: 45px;
+    margin: 5px 5px 5px 0px;
+    list-style: none; }
+  #activity-editor .question-selector ul .question-list-item {
+    list-style: none;
+    margin: 5px 5px 5px 0px;
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    position: relative;
+    cursor: move; }
+    #activity-editor .question-selector ul .question-list-item .qi-name {
+      font-weight: bold; }
+    #activity-editor .question-selector ul .question-list-item .qi-prompt {
+      font-style: italic;
+      color: #AAA;
+      display: block; }
+    #activity-editor .question-selector ul .question-list-item .qi-options {
+      position: absolute;
+      right: 5px;
+      top: 5px; }
+
+#addQuestionModal .add-question-list .ns-question-item .prompt-sample {
+  display: block;
+  font-style: italic;
+  font-size: 10px; }
 
 /*# sourceMappingURL=quizwhiz.css.map */

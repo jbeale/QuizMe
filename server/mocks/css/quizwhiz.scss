@@ -133,3 +133,52 @@ html, body {
     padding-bottom:5px;
   }
 }
+#activity-editor {
+  .question-selector {
+    ul {
+      padding:0;
+      .sortable-placeholder {
+        border:1px dashed #CCC;
+        height:45px;
+        margin:5px 5px 5px 0px;
+        list-style:none;
+      }
+      .question-list-item {
+        list-style:none;
+        margin: 5px 5px 5px 0px;
+        padding: 5px;
+        border: 1px solid lightgray;
+        border-radius:5px;
+        position:relative;
+        cursor:move;
+        .qi-name {
+          font-weight:bold;
+        }
+        .qi-prompt {
+          font-style:italic;
+          color:#AAA;
+          display:block;
+        }
+        .qi-options {
+          position:absolute;
+          right:5px;
+          top:5px;
+        }
+      }
+    }
+  }
+}
+#addQuestionModal {
+  .add-question-list {
+    .ns-question-item {
+      .question-name {
+
+      }
+      .prompt-sample {
+        display:block;
+        font-style:italic;
+        font-size:10px;
+      }
+    }
+  }
+}
