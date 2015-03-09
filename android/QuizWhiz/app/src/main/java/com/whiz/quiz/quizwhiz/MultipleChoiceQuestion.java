@@ -6,7 +6,7 @@ package com.whiz.quiz.quizwhiz;
 public class MultipleChoiceQuestion extends QuizQuestion {
     private String[] possibleAnswers = new String[4];
     private int correctAnswerPosition = -1;
-    private int id = -1;
+
     final static String TYPE = "mc";
 
     public String[] getPossibleAnswers() {
@@ -23,13 +23,5 @@ public class MultipleChoiceQuestion extends QuizQuestion {
 
     public void setCorrectAnswerPosition(int correctAnswerPosition) {
         this.correctAnswerPosition = correctAnswerPosition;
-    }
-
-    public int getId(){
-        return id;
-    }
-
-    public void setId(int id){
-        this.id = id;
     }
 }

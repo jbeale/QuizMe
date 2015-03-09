@@ -73,15 +73,7 @@ public class Main extends ActionBarActivity {
 
             @Override
             public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
-                //Toast.makeText(getApplicationContext(), "SUCCESS! Hi "+loginResponseBodyRestResponse.body.user.email, Toast.LENGTH_SHORT);
-                //TextView text = (TextView)findViewById(R.id.textView);
-                //text.setText(loginResponseBodyRestResponse.body.user.email);
-
-
                 savePreferences("authToken", loginResponseBodyRestResponse.body.authToken);
-
-                //QuizWhiz quizWhiz = (QuizWhiz) getApplication();
-                //quizWhiz.setAuthToken(loginResponseBodyRestResponse.body.authToken);
 
                 Intent intent = new Intent(getApplicationContext(), Home.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -90,7 +82,7 @@ public class Main extends ActionBarActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "Incorrect credentials. Please register or try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.getResponse().getReason().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     };

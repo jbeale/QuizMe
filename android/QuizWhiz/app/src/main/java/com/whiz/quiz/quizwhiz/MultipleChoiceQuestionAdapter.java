@@ -20,10 +20,10 @@ import java.util.ArrayList;
  */
 public class MultipleChoiceQuestionAdapter extends BaseAdapter {
     Context context = null;
-    ArrayList<MultipleChoiceQuestion> multipleChoiceQuestions = null;
+    ArrayList<QuizQuestion> multipleChoiceQuestions = null;
     Activity activity;
 
-    public MultipleChoiceQuestionAdapter(Context _context, ArrayList<MultipleChoiceQuestion> _multipleChoiceQuestions, Activity _activity){
+    public MultipleChoiceQuestionAdapter(Context _context, ArrayList<QuizQuestion> _multipleChoiceQuestions, Activity _activity){
         context = _context;
         multipleChoiceQuestions = _multipleChoiceQuestions;
         activity = _activity;
@@ -64,7 +64,7 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
         RadioButton radioButton3 = (RadioButton) convertView.findViewById(R.id.radioButton7);
         RadioButton radioButton4 = (RadioButton) convertView.findViewById(R.id.radioButton8);
 
-        MultipleChoiceQuestion multipleChoiceQuestion = multipleChoiceQuestions.get(position);
+        MultipleChoiceQuestion multipleChoiceQuestion = (MultipleChoiceQuestion) multipleChoiceQuestions.get(position);
         questionName.setText(multipleChoiceQuestion.getQuestionName());
         question.setText(multipleChoiceQuestion.getQuestion());
         for(int i=0; i<4; i++){
@@ -128,7 +128,7 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
         options[2] = convertView.findViewById(R.id.editAnswer3).toString();
         options[3] = convertView.findViewById(R.id.editAnswer4).toString();
 
-        MultipleChoiceQuestion multipleChoiceQuestion = multipleChoiceQuestions.get(position);
+        MultipleChoiceQuestion multipleChoiceQuestion = questions.get(position);
 
         multipleChoiceQuestion.setQuestion(question.toString());
         multipleChoiceQuestion.setPossibleAnswers(options);

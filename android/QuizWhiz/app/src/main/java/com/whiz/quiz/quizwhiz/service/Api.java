@@ -1,7 +1,12 @@
 package com.whiz.quiz.quizwhiz.service;
 
+import com.whiz.quiz.quizwhiz.QuizQuestion;
+import com.whiz.quiz.quizwhiz.model.User;
 import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
 import com.whiz.quiz.quizwhiz.model.response.RestResponse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.http.Field;
@@ -31,24 +36,26 @@ public interface Api {
 
     @FormUrlEncoded
     @PUT("/question/new")
-    void sendQuestion( //TODO how do I do this?
-                  @Field("questionName") String questionName,
-                  @Field("questionType") String questionType, //like mc for multiple choice
-                  @Field("promptText") String promptText,
-                  @Field("optionTexts") String[] optionTexts,
-                  @Field("correctOptionIndex") int correctOptionIndex,
-                  Callback<RestResponse<LoginResponseBody>> callback
-                  );
+    void sendQuestion(
+        @Field("questionName") String questionName,
+        @Field("questionType") String questionType, //like mc for multiple choice
+        @Field("promptText") String promptText,
+        @Field("optionTexts") String[] optionTexts,
+        @Field("correctOptionIndex") int correctOptionIndex,
+        Callback<RestResponse<LoginResponseBody>> callback
+     );
+
+    @GET("/question/list") //TODO Not doing this right :(
+    void getQuestions(Callback<List<QuizQuestion>> callback);
 
     @FormUrlEncoded
     @POST("/question/{id}")//TODO get id of the question
-    void editQuestion(@Path("id") int id,
-                  @Field("questionName") String questionName,
-                  @Field("questionType") String questionType, //like mc for multiple choice
-                  @Field("promptText") String promptText,
-                  @Field("optionTexts") String[] optionTexts,
-                  @Field("correctOptionIndex") int correctOptionIndex
-
-
+    void editQuestion(
+            @Path("id") int id,
+            @Field("questionName") String questionName,
+            @Field("questionType") String questionType, //like mc for multiple choice
+            @Field("promptText") String promptText,
+            @Field("optionTexts") String[] optionTexts,
+            @Field("correctOptionIndex") int correctOptionIndex
     );
 }

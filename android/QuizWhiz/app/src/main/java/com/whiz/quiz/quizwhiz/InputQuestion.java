@@ -19,7 +19,7 @@ public class InputQuestion extends ActionBarActivity {
     EditText[] editOptions = new EditText[4];
     RadioGroup radioGroup = null;
     Button btnSave = null;
-    Button btnCancel = null;//TODO make cancel button
+    Button btnCancel = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +33,7 @@ public class InputQuestion extends ActionBarActivity {
         editOptions[3] = (EditText) findViewById(R.id.editAnswer4);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup2);
         btnSave = (Button) findViewById(R.id.buttonSave);
+        btnCancel = (Button) findViewById(R.id.buttonCancel);
 
 
 
@@ -64,8 +65,6 @@ public class InputQuestion extends ActionBarActivity {
             }
         });
 
-        //TODO Cancel button
-        /*
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +72,7 @@ public class InputQuestion extends ActionBarActivity {
                 finish();
             }
         });
-*/
+
     }
 
 
