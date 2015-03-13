@@ -25,7 +25,6 @@
         <thead>
             <th>ID</th>
             <th>Name</th>
-            <th>Type</th>
             <th>Action</th>
         </thead>
         <tbody>
