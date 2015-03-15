@@ -14,11 +14,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.whiz.quiz.quizwhiz.model.MultipleChoiceQuestionModel;
 import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
 import com.whiz.quiz.quizwhiz.model.response.RestResponse;
+import com.whiz.quiz.quizwhiz.service.ObjectConverter;
 import com.whiz.quiz.quizwhiz.service.RestClient;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RequestInterceptor;
@@ -74,6 +77,28 @@ public class MakeQuiz extends ActionBarActivity {
             }
         });
         */
+
+        fillInList();
+    }
+
+    private void fillInList() {
+        RestClient restClient = new RestClient(getApplicationContext());
+        restClient.get().getQuestions(new Callback<RestResponse<List<MultipleChoiceQuestionModel>>>() {
+            @Override
+            public void success(RestResponse<List<MultipleChoiceQuestionModel>> listRestResponse, Response response) {
+                ArrayList<MultipleChoiceQuestionModel> arrayList = new ArrayList<MultipleChoiceQuestionModel>(listRestResponse.body);
+                for(int i = 0; i < arrayList.size(); i++) {
+                    MultipleChoiceQuestion question = ObjectConverter.mcConverter(arrayList.get(i));
+                    multipleChoiceQuestions.add(question);
+                }
+                questionAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), "Refresh the page or try again later", Toast.LENGTH_SHORT);
+            }
+        });
     }
 
     @Override

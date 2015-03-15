@@ -50,7 +50,7 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.multiple_choice_list, null);
         }
-
+        //Get the views
         TextView questionName = (TextView) convertView.findViewById(R.id.textQuestionName);
         TextView question = (TextView) convertView.findViewById(R.id.textQuestion);
         TextView[] options = new TextView[4];
@@ -63,8 +63,9 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
         RadioButton radioButton2 = (RadioButton) convertView.findViewById(R.id.radioButton6);
         RadioButton radioButton3 = (RadioButton) convertView.findViewById(R.id.radioButton7);
         RadioButton radioButton4 = (RadioButton) convertView.findViewById(R.id.radioButton8);
-
+        //Get a question
         MultipleChoiceQuestion multipleChoiceQuestion = multipleChoiceQuestions.get(position);
+        //Set the values of the question
         questionName.setText(multipleChoiceQuestion.getQuestionName());
         question.setText(multipleChoiceQuestion.getQuestion());
         for(int i=0; i<4; i++){
@@ -85,12 +86,12 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
                 radioGroup.check(radioButton4.getId());
                 break;
         }
+        //No one better click on the radio buttons here
         radioGroup.setEnabled(false);
         radioButton1.setEnabled(false);
         radioButton2.setEnabled(false);
         radioButton3.setEnabled(false);
         radioButton4.setEnabled(false);
-
 
 /*
      //TODO On long click, open up a dialog box for edition or deletion

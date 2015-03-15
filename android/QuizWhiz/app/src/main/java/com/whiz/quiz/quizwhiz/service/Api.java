@@ -1,7 +1,10 @@
 package com.whiz.quiz.quizwhiz.service;
 
+import com.whiz.quiz.quizwhiz.model.MultipleChoiceQuestionModel;
 import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
 import com.whiz.quiz.quizwhiz.model.response.RestResponse;
+
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.http.Field;
@@ -39,6 +42,10 @@ public interface Api {
                   @Field("correctOptionIndex") int correctOptionIndex,
                   Callback<RestResponse<LoginResponseBody>> callback
                   );
+    @GET("/question/list")
+    void getQuestions(
+            Callback<RestResponse<List<MultipleChoiceQuestionModel>>> callback
+    );
 
     @FormUrlEncoded
     @POST("/question/{id}")//TODO get id of the question
