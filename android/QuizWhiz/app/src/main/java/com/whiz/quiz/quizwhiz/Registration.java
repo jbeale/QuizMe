@@ -67,7 +67,7 @@ public class Registration extends ActionBarActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "This account could not be registered", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.getResponse().getReason().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

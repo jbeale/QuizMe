@@ -1,15 +1,11 @@
 package com.whiz.quiz.quizwhiz;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -24,20 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
 public class MakeQuiz extends ActionBarActivity {
     Button btnAddQuestion = null;
-    Button btnSaveQuiz = null;
     ListView listViewQuestions = null;
     MultipleChoiceQuestionAdapter questionAdapter = null;
-    ArrayList<MultipleChoiceQuestion> multipleChoiceQuestions =
-            new ArrayList<MultipleChoiceQuestion>();
+    ArrayList<QuizQuestion> questions =
+            new ArrayList<QuizQuestion>();
     final static int REQUEST_CODE = 1;
+    RestClient restClient = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +41,7 @@ public class MakeQuiz extends ActionBarActivity {
         btnAddQuestion = (Button) findViewById(R.id.buttonAddQuestion);
         listViewQuestions = (ListView) findViewById(R.id.listViewQuestions);
 
-        questionAdapter = new MultipleChoiceQuestionAdapter(this, multipleChoiceQuestions, this);
+        questionAdapter = new MultipleChoiceQuestionAdapter(this, questions, this);
 
         listViewQuestions.setAdapter(questionAdapter);
 
@@ -57,27 +51,8 @@ public class MakeQuiz extends ActionBarActivity {
                 Intent intent = new Intent(v.getContext(), InputQuestion.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE);
-
-                /*
-                MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion();
-                multipleChoiceQuestions.add(multipleChoiceQuestion);
-                questionAdapter.notifyDataSetChanged();
-                */
             }
         });
-/*
-        //TODO Make this an actual button
-        btnSaveQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for(MultipleChoiceQuestion question : multipleChoiceQuestions){
-
-                }
-                //TODO send this thing to Server
-            }
-        });
-        */
-
         fillInList();
     }
 
@@ -89,7 +64,7 @@ public class MakeQuiz extends ActionBarActivity {
                 ArrayList<MultipleChoiceQuestionModel> arrayList = new ArrayList<MultipleChoiceQuestionModel>(listRestResponse.body);
                 for(int i = 0; i < arrayList.size(); i++) {
                     MultipleChoiceQuestion question = ObjectConverter.mcConverter(arrayList.get(i));
-                    multipleChoiceQuestions.add(question);
+                    questions.add(question);
                 }
                 questionAdapter.notifyDataSetChanged();
             }
@@ -128,19 +103,19 @@ public class MakeQuiz extends ActionBarActivity {
         String promptText = question.getQuestion();
         String[] optionTexts = question.getPossibleAnswers();
         int correctOptionIndex = question.getCorrectAnswerPosition();
-        RestClient restClient = new RestClient(getApplicationContext());
+        restClient = new RestClient(getApplicationContext());
         restClient.get().sendQuestion(questionName, questionType,
                 promptText, optionTexts, correctOptionIndex, new Callback<RestResponse<LoginResponseBody>>() {
 
                     @Override
                     public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
-                        multipleChoiceQuestions.add(question);
+                        questions.add(question);
                         questionAdapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-
+                        Toast.makeText(getApplicationContext(), error.getResponse().getReason().toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
