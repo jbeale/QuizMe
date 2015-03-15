@@ -13,12 +13,12 @@ public class ObjectConverter {
         question.setId(model.getId()); //getting the *question* ID
         question.setQuestion(model.getData().getPrompt());
         question.setQuestionName(model.getName());
-        int choiceListLength = model.getData().getChoices().length; //Accounts for additional choices for future
+        int choiceListLength = model.getData().getChoices().size(); //Accounts for additional choices for future
         String[] choices = new String[choiceListLength];
         for(int i = 0; i < choiceListLength; i++){
-            choices[i] = model.getData().getChoices()[i].getText();
+            choices[i] = model.getData().getChoices().get(i).getText();
 
-            if (model.getData().getChoices()[i].getCorrect() == true){
+            if (model.getData().getChoices().get(i).getCorrect() == true){
                 question.setCorrectAnswerPosition(i);
             }
         }
