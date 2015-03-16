@@ -24,7 +24,7 @@
             android:label="@string/title_activity_home" >
         </activity>
         <activity
-            android:name=".MakeQuiz"
+            android:name=".MakeQuestions"
             android:label="@string/title_activity_make_quiz" >
         </activity>
         <activity
@@ -40,6 +40,10 @@
         <activity
             android:name=".InputQuestion"
             android:label="@string/title_activity_input_question" >
+        </activity>
+        <activity
+            android:name=".MakeQuiz"
+            android:label="@string/title_activity_make_quiz" >
         </activity>
     </application>
 

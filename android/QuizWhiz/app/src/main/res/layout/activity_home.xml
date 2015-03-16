@@ -10,8 +10,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Make a Quiz"
-        android:id="@+id/buttonMakeQuiz"
+        android:text="Make Questions"
+        android:id="@+id/buttonMakeQuestions"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -30,8 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/buttonMakeQuiz"
-        android:layout_toEndOf="@+id/buttonMakeQuiz"
+        android:layout_below="@+id/buttonMakeQuestions"
+        android:layout_toEndOf="@+id/buttonMakeQuestions"
         android:layout_marginTop="73dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -52,8 +52,17 @@
         android:layout_height="wrap_content"
         android:text="Create Session"
         android:id="@+id/buttonCreateSession"
-        android:layout_alignBottom="@+id/buttonMakeQuiz"
-        android:layout_toRightOf="@+id/buttonMakeQuiz"
-        android:layout_toEndOf="@+id/buttonMakeQuiz" />
+        android:layout_alignBottom="@+id/buttonMakeQuestions"
+        android:layout_toRightOf="@+id/buttonMakeQuestions"
+        android:layout_toEndOf="@+id/buttonMakeQuestions" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make Quiz"
+        android:id="@+id/buttonMakeQuiz"
+        android:layout_below="@+id/buttonMakeQuestions"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

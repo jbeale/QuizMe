@@ -10,14 +10,24 @@ import android.widget.Button;
 
 
 public class Home extends ActionBarActivity {
+    Button btnMakeQuestions = null;
     Button btnMakeQuiz = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        btnMakeQuestions = (Button) findViewById(R.id.buttonMakeQuestions);
         btnMakeQuiz = (Button) findViewById(R.id.buttonMakeQuiz);
 
+        btnMakeQuestions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MakeQuestions.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
         btnMakeQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

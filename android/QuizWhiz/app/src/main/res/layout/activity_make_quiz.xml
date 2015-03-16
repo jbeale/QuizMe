@@ -6,32 +6,21 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.whiz.quiz.quizwhiz.MakeQuiz">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add a Question"
-        android:id="@+id/buttonAddQuestion"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewQuestions"
-        android:layout_below="@+id/buttonAddQuestion"
+        android:id="@+id/listChooseQuestions"
+        android:layout_above="@+id/buttonSendQuiz"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll"/>
+        android:choiceMode="multipleChoice" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DELETE ME"
-        android:id="@+id/testView"
-        android:layout_alignBottom="@+id/buttonAddQuestion"
-        android:layout_toRightOf="@+id/buttonAddQuestion"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/listViewQuestions"
-        android:layout_alignEnd="@+id/listViewQuestions" />
+        android:text="Send Quiz"
+        android:id="@+id/buttonSendQuiz"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

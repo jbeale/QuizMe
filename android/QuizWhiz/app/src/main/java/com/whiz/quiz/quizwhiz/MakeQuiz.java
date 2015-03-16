@@ -1,124 +1,53 @@
 package com.whiz.quiz.quizwhiz;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import com.whiz.quiz.quizwhiz.model.MultipleChoiceQuestionModel;
-import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
-import com.whiz.quiz.quizwhiz.model.response.RestResponse;
-import com.whiz.quiz.quizwhiz.service.ObjectConverter;
-import com.whiz.quiz.quizwhiz.service.RestClient;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 
 public class MakeQuiz extends ActionBarActivity {
-    Button btnAddQuestion = null;
-    ListView listViewQuestions = null;
-    MultipleChoiceQuestionAdapter questionAdapter = null;
-    ArrayList<QuizQuestion> questions =
-            new ArrayList<QuizQuestion>();
-    final static int REQUEST_CODE = 1;
-    RestClient restClient = null;
 
+    ListView listChooseQuestions = null;
+    ArrayList<String> questionNames = null;
+    ArrayAdapter<String> adapter = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_quiz);
 
-        btnAddQuestion = (Button) findViewById(R.id.buttonAddQuestion);
-        listViewQuestions = (ListView) findViewById(R.id.listViewQuestions);
+        listChooseQuestions = (ListView) findViewById(R.id.listChooseQuestions);
 
-        questionAdapter = new MultipleChoiceQuestionAdapter(this, questions, this);
+        questionNames = new ArrayList<>();
 
-        listViewQuestions.setAdapter(questionAdapter);
+        //Test values
+        String question1 = "Sample 1";
+        String question2 = "Sample 2";
+        String question3 = "It works!";
 
-        btnAddQuestion.setOnClickListener(new View.OnClickListener() {
+        questionNames.add(question1);
+        questionNames.add(question2);
+        questionNames.add(question3);
+
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, questionNames);
+
+        listChooseQuestions.setAdapter(adapter);
+        listChooseQuestions.setItemsCanFocus(false);
+        listChooseQuestions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), InputQuestion.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
-        fillInList();
-    }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-    private void fillInList() {
-        RestClient restClient = new RestClient(getApplicationContext());
-        restClient.get().getQuestions(new Callback<RestResponse<List<MultipleChoiceQuestionModel>>>() {
-            @Override
-            public void success(RestResponse<List<MultipleChoiceQuestionModel>> listRestResponse, Response response) {
-                ArrayList<MultipleChoiceQuestionModel> arrayList = new ArrayList<MultipleChoiceQuestionModel>(listRestResponse.body);
-                for(int i = 0; i < arrayList.size(); i++) {
-                    MultipleChoiceQuestion question = ObjectConverter.mcConverter(arrayList.get(i));
-                    questions.add(question);
-                }
-                questionAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "Refresh the page or try again later", Toast.LENGTH_SHORT);
             }
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE){
-            if(resultCode == RESULT_OK){
-                Bundle bundle = data.getBundleExtra("multipleChoiceBundle");
-                MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion();
-                multipleChoiceQuestion.setQuestionName(bundle.getString("questionName"));
-                multipleChoiceQuestion.setQuestion(bundle.getString("question"));
-                String[] options = new String[4];
-                for(int i=0; i<4; i++){
-                    options[i] = bundle.getString("option"+i);
-                }
-                multipleChoiceQuestion.setPossibleAnswers(options);
-                multipleChoiceQuestion.setCorrectAnswerPosition(bundle.getInt("index"));
-
-                sendQuestion(multipleChoiceQuestion);
-            }
-        }
-    }
-
-    public void sendQuestion(final MultipleChoiceQuestion question){
-        String questionName = question.getQuestionName();
-        String questionType = MultipleChoiceQuestion.TYPE;
-        String promptText = question.getQuestion();
-        String[] optionTexts = question.getPossibleAnswers();
-        int correctOptionIndex = question.getCorrectAnswerPosition();
-        restClient = new RestClient(getApplicationContext());
-        restClient.get().sendQuestion(questionName, questionType,
-                promptText, optionTexts, correctOptionIndex, new Callback<RestResponse<LoginResponseBody>>() {
-
-                    @Override
-                    public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
-                        questions.add(question);
-                        questionAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Toast.makeText(getApplicationContext(), error.getResponse().getReason().toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
