@@ -11,6 +11,8 @@ public class Session {
     private int ownerUserId;
     private Activity activity;
     private int activityId;
+    private Long created;
+    private Long closed;
 
     public int getId() {
         return id;
@@ -66,5 +68,21 @@ public class Session {
 
     public void setActivityId(int activityId) {
         this.activityId = activityId;
+    }
+
+    public Long getCreated() {
+        return created;
+    }
+
+    public void setCreated(Long created) {
+        this.created = created;
+    }
+
+    public Long getClosed() {
+        return closed;
+    }
+
+    public void setClosed(Long closed) {
+        this.closed = closed;
     }
 }
