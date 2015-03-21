@@ -6,12 +6,16 @@ import android.app.Dialog;
 import android.app.AlertDialog.Builder;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.view.View;
+import android.widget.Toast;
 
 
 /**
@@ -21,32 +25,50 @@ import android.view.View;
 
 public class SessionKeyDialogBox extends DialogFragment{
 
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            final EditText editSessionKey = null;
+    EditText editSessionKey = null;
+
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.session_key_dialog, null);
+        builder.setView(view);
+
+        editSessionKey = (EditText) view.findViewById(R.id.editSessionKey);
+        editSessionKey.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                String sessionKey = editSessionKey.getText().toString();
+                //TODO authenticateSessionKey(sessionKey)
+                if(isKeyAuthenticated(sessionKey)){ //TODO change fake authenticator
+                    Intent intent = new Intent(getActivity().getApplicationContext(), WaitQuiz.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    intent.putExtra("sessionKey", sessionKey);
+                    startActivity(intent);
+                }
+                else
+                    Toast.makeText(getActivity().getApplicationContext(), "Key could not be found", Toast.LENGTH_SHORT).show();
 
 
 
-            LayoutInflater inflater = getActivity().getLayoutInflater();
 
-            builder.setView(inflater.inflate(R.layout.session_key_dialog, null));
-                   builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            editSessionKey = (EditText) findViewById(R.id.editSessionKey);
-                            String sessionKey = editSessionKey.getText().toString();
+            }
 
-
-
-
-                        }
-                    });
-                  builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                              @Override
-                              public void onClick(DialogInterface dialog, int id) {
-                                setCancelable(true);
-                              }
-                          }
-                  );
+            private boolean isKeyAuthenticated(String sessionKey) {
+                if (sessionKey.equals("aa")){
+                    return true;
+                }
+                else
+                    return false;
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick(DialogInterface dialog, int id) {
+                    setCancelable(true);
+                  }
+              }
+        );
 
         return builder.create();}}

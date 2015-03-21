@@ -30,6 +30,10 @@
             android:name=".Registration"
             android:label="@string/title_activity_registration" >
         </activity>
+        <activity
+            android:name=".WaitQuiz"
+            android:label="Wait Quiz">
+        </activity>
 
         <service
             android:name=".LoginService"
