@@ -6,8 +6,22 @@ html, body {
 .header {
   background-color: #00a6d4;
   height: 120px; }
-  .header .container .brand {
-    padding-top: 45px; }
+  .header .container {
+    position: relative; }
+    .header .container .brand {
+      padding-top: 45px; }
+    .header .container #user-nav {
+      position: absolute;
+      top: 45px;
+      right: 15px; }
+      .header .container #user-nav img {
+        border-radius: 5px;
+        margin-right: 6px;
+        height: 25px; }
+      .header .container #user-nav button {
+        border: 2px solid white;
+        color: white;
+        background: none; }
 
 .titlebar {
   height: 68px;
@@ -21,9 +35,9 @@ html, body {
     font-size: 1.3em; }
 
 #homepage .home_header {
-  background: url(../headerbgblur.png) 0px -779px; }
+  background: url(https://s3.amazonaws.com/quizwhiz/layout/img/headerbgblur.png) -30px -779px; }
   #homepage .home_header .header_overlay {
-    background: rgba(0, 166, 212, 0.85);
+    background: rgba(0, 166, 212, 0.6);
     height: 560px; }
     #homepage .home_header .header_overlay .container {
       position: relative; }
@@ -67,7 +81,7 @@ html, body {
   background-color: #3F6184;
   height: 248px; }
   #homepage section.quote .container .pic {
-    background-image: url(../girlsonphones.png);
+    background-image: url(https://s3.amazonaws.com/quizwhiz/layout/img/girlsonphones.png);
     height: 248px; }
   #homepage section.quote .container .text {
     color: white;
@@ -78,5 +92,39 @@ html, body {
       font-size: 12px; }
 #homepage section.features {
   background-color: white; }
+
+#question-editor .input-group {
+  padding-bottom: 5px; }
+
+#activity-editor .question-selector ul {
+  padding: 0; }
+  #activity-editor .question-selector ul .sortable-placeholder {
+    border: 1px dashed #CCC;
+    height: 45px;
+    margin: 5px 5px 5px 0px;
+    list-style: none; }
+  #activity-editor .question-selector ul .question-list-item {
+    list-style: none;
+    margin: 5px 5px 5px 0px;
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    position: relative;
+    cursor: move; }
+    #activity-editor .question-selector ul .question-list-item .qi-name {
+      font-weight: bold; }
+    #activity-editor .question-selector ul .question-list-item .qi-prompt {
+      font-style: italic;
+      color: #AAA;
+      display: block; }
+    #activity-editor .question-selector ul .question-list-item .qi-options {
+      position: absolute;
+      right: 5px;
+      top: 5px; }
+
+#addQuestionModal .add-question-list .ns-question-item .prompt-sample {
+  display: block;
+  font-style: italic;
+  font-size: 10px; }
 
 /*# sourceMappingURL=quizwhiz.css.map */

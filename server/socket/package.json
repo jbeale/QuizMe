@@ -1,0 +1,18 @@
+{
+  "name": "QuizWhizInteractive",
+  "version": "0.5.0",
+  "description": "Socket server for the interactive component of QuizWhiz",
+  "main": "quizServer.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Justin Beale",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.0.3",
+    "cors": "^2.5.3",
+    "express": "^4.10.2",
+    "node-rest-client": "^1.4.4",
+    "socket.io": "^1.3.5"
+  }
+}

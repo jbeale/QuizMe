@@ -50,7 +50,7 @@ public class DefaultUserService implements UserService{
     public void createUser(String username, String password, String email) {
         User u = new User();
         u.setUsername(username);
-        Hash h = new Sha256Hash(password, new SimpleByteSource("GLOBALSALT"), 100000); //For the CIO
+        Hash h = new Sha256Hash(password, new SimpleByteSource("GLOBALSALT"), 100000);
         u.setPassword(h.toHex());
         u.setEmail(email);
         userDAO.createUser(u);

@@ -8,5 +8,14 @@
             <ref bean="dataSource" />
         </constructor-arg>
     </bean>
-
+    <bean id="questionDao" class="com.quizme.api.dao.JdbcQuestionDAO">
+        <constructor-arg index="0">
+            <ref bean="dataSource" />
+        </constructor-arg>
+    </bean>
+    <bean id="activityDao" class="com.quizme.api.dao.JdbcActivityDAO">
+        <constructor-arg index="0">
+            <ref bean="dataSource" />
+        </constructor-arg>
+    </bean>
 </beans>
