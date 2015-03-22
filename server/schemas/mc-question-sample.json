@@ -1,0 +1,21 @@
+{
+    "prompt":"If you have a pumping lemma, and it grows legs and starts gnawing on food in Kroger, what do you do?",
+    "choices": [
+        {
+            "text":"Burn it with fire",
+            "correct":false
+        },
+        {
+            "text":"Give it a snickers",
+            "correct":false
+        },
+        {
+            "text":"Trip to Cayman Islands",
+            "correct":false
+        },
+        {
+            "text":"Explain to it that it must lessen its pumping length as to not be greater than |xy|",
+            "correct":true
+        }
+    ]
+}

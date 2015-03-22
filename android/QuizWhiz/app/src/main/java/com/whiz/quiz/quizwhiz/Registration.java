@@ -53,12 +53,13 @@ public class Registration extends ActionBarActivity {
     }
 
     public void register(String username, String firstname, String lastname, String email, String password){
-        RestClient.get().register(username, password, firstname, lastname, email, new Callback<RestResponse<LoginResponseBody>>(){
+        RestClient restClient = new RestClient(getApplicationContext());
+        restClient.get().register(username, password, firstname, lastname, email, new Callback<RestResponse<LoginResponseBody>>() {
 
             @Override
             public void success(RestResponse<LoginResponseBody> loginResponseBodyRestResponse, Response response) {
 
-                Toast.makeText(getApplicationContext(), "I did it, " + loginResponseBodyRestResponse.body.user.firstname + ".", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "I did it, " + loginResponseBodyRestResponse.body.user.firstname + ".", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Main.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 startActivity(intent);
@@ -66,7 +67,7 @@ public class Registration extends ActionBarActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "This account could not be registered", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.getResponse().getReason().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

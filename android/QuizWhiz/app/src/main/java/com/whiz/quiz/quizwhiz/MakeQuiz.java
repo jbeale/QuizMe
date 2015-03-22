@@ -5,38 +5,47 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 
 public class MakeQuiz extends ActionBarActivity {
-    Button btnAddQuestion = null;
-    ListView listViewQuestions = null;
-    MultipleChoiceQuestionAdapter questionAdapter = null;
-    ArrayList<MultipleChoiceQuestion> multipleChoiceQuestions =
-            new ArrayList<MultipleChoiceQuestion>();
 
+    ListView listChooseQuestions = null;
+    ArrayList<String> questionNames = null;
+    ArrayAdapter<String> adapter = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_quiz);
 
-        btnAddQuestion = (Button) findViewById(R.id.buttonAddQuestion);
-        listViewQuestions = (ListView) findViewById(R.id.listViewQuestions);
+        listChooseQuestions = (ListView) findViewById(R.id.listChooseQuestions);
 
-        questionAdapter = new MultipleChoiceQuestionAdapter(this, multipleChoiceQuestions, this);
-        listViewQuestions.setAdapter(questionAdapter);
+        questionNames = new ArrayList<>();
 
-        btnAddQuestion.setOnClickListener(new View.OnClickListener() {
+        //Test values
+        String question1 = "Sample 1";
+        String question2 = "Sample 2";
+        String question3 = "It works!";
+
+        questionNames.add(question1);
+        questionNames.add(question2);
+        questionNames.add(question3);
+
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, questionNames);
+
+        listChooseQuestions.setAdapter(adapter);
+        listChooseQuestions.setItemsCanFocus(false);
+        listChooseQuestions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                multipleChoiceQuestions.add(new MultipleChoiceQuestion());
-                questionAdapter.notifyDataSetChanged();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             }
         });
-
     }
 
 
