@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.squareup.okhttp.OkHttpClient;
-import com.whiz.quiz.quizwhiz.QuizWhiz;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
