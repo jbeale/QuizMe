@@ -30,12 +30,10 @@
             android:name=".activity.Registration"
             android:label="@string/title_activity_registration" >
         </activity>
-
         <activity
             android:name=".activity.WaitQuiz"
-            android:label="Wait Quiz">
+            android:label="Wait Quiz" >
         </activity>
-
         <activity
             android:name=".activity.InputQuestion"
             android:label="@string/title_activity_input_question" >
@@ -45,8 +43,8 @@
             android:label="@string/title_activity_make_quiz" >
         </activity>
         <activity
-            android:name=".activity.TakeQuiz"
-            android:label="Take Quiz">
+            android:name=".activity.host"
+            android:label="Host" >
         </activity>
     </application>
 

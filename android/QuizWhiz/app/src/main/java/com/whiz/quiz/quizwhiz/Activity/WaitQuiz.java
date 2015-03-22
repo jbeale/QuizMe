@@ -13,6 +13,7 @@ import com.whiz.quiz.quizwhiz.R;
  */
 public class WaitQuiz extends ActionBarActivity {
     Button testButton = null; //TODO delete
+    Button testHost = null; //TODO delete this later too!!
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,18 @@ public class WaitQuiz extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        testHost = (Button) findViewById(R.id.button_host);
+        testHost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), host.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+
+        });
+
 
 
 
