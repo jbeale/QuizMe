@@ -16,6 +16,7 @@ public class TakeQuiz extends ActionBarActivity {
         setContentView(R.layout.activity_take_quiz);
 
         setupDummyList();
+        
 
     }
 
@@ -23,6 +24,23 @@ public class TakeQuiz extends ActionBarActivity {
         MultipleChoiceQuestion question1 = new MultipleChoiceQuestion();
         question1.setCorrectAnswerPosition(1);
         question1.setPossibleAnswers(new String[]{"Hello", "Goodbye", "Test", "More test"});
-        
+        question1.setQuestionName("I am a question");
+        question1.setQuestion("How are you");
+        questions.add(question1);
+
+        MultipleChoiceQuestion question2 = new MultipleChoiceQuestion();
+        question2.setCorrectAnswerPosition(0);
+        question2.setPossibleAnswers(new String[]{"Hellooooooo", "Gooooooodbye", "Test!!!!!", "More test:)))))"});
+        question2.setQuestionName("I am a");
+        question2.setQuestion("are you good");
+        questions.add(question2);
+
+        MultipleChoiceQuestion question3 = new MultipleChoiceQuestion();
+        question3.setCorrectAnswerPosition(3);
+        question3.setPossibleAnswers(new String[]{"Hellllllllllo", "Goodbyeeeee", "Teeeeest", "Mooooooore test"});
+        question3.setQuestionName("I am");
+        question3.setQuestion("Hows my hair");
+        questions.add(question3);
+
     }
 }
