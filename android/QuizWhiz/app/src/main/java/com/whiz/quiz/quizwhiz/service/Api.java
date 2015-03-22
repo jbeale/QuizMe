@@ -1,24 +1,17 @@
 package com.whiz.quiz.quizwhiz.service;
 
 
-import com.whiz.quiz.quizwhiz.model.MultipleChoiceQuestionModel;
+import com.whiz.quiz.quizwhiz.model.server_model.MultipleChoiceQuestionModel;
 import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
 import com.whiz.quiz.quizwhiz.model.response.RestResponse;
 
 
-import com.whiz.quiz.quizwhiz.QuizQuestion;
-import com.whiz.quiz.quizwhiz.model.User;
-import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
-import com.whiz.quiz.quizwhiz.model.response.RestResponse;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
-import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;

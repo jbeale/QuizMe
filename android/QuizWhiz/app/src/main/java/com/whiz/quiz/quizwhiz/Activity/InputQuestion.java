@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz;
+package com.whiz.quiz.quizwhiz.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.whiz.quiz.quizwhiz.R;
 
 
 public class InputQuestion extends ActionBarActivity {

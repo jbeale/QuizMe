@@ -5,7 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:theme="@style/Base.Theme.AppCompat.Light"
-    tools:context="com.whiz.quiz.quizwhiz.Home">
+    tools:context="com.whiz.quiz.quizwhiz.Activity.Home">
 
     <Button
         android:layout_width="wrap_content"

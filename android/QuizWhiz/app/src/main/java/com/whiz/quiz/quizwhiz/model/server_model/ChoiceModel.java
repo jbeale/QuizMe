@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz.model;
+package com.whiz.quiz.quizwhiz.model.server_model;
 
 /**
  * Created by JohnMain on 3/14/2015.

@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz.model;
+package com.whiz.quiz.quizwhiz.model.server_model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,5 @@
-package com.whiz.quiz.quizwhiz;
+package com.whiz.quiz.quizwhiz.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -11,9 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.whiz.quiz.quizwhiz.R;
 import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
 import com.whiz.quiz.quizwhiz.model.response.RestResponse;
 import com.whiz.quiz.quizwhiz.service.RestClient;

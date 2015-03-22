@@ -1,17 +1,18 @@
-package com.whiz.quiz.quizwhiz;
+package com.whiz.quiz.quizwhiz.service;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.whiz.quiz.quizwhiz.R;
+import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
+import com.whiz.quiz.quizwhiz.model.client_model.QuizQuestion;
 
 import java.util.ArrayList;
 

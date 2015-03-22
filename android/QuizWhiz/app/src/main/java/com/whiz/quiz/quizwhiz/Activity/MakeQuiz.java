@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz;
+package com.whiz.quiz.quizwhiz.Activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.whiz.quiz.quizwhiz.R;
 
 import java.util.ArrayList;
 
@@ -36,7 +38,7 @@ public class MakeQuiz extends ActionBarActivity {
         questionNames.add(question3);
 
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, questionNames);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, questionNames);
 
         listChooseQuestions.setAdapter(adapter);
         listChooseQuestions.setItemsCanFocus(false);

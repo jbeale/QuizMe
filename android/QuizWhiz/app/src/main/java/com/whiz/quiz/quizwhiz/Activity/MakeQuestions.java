@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz;
+package com.whiz.quiz.quizwhiz.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -10,7 +10,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.whiz.quiz.quizwhiz.model.MultipleChoiceQuestionModel;
+import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
+import com.whiz.quiz.quizwhiz.service.MultipleChoiceQuestionAdapter;
+import com.whiz.quiz.quizwhiz.model.client_model.QuizQuestion;
+import com.whiz.quiz.quizwhiz.R;
+import com.whiz.quiz.quizwhiz.model.server_model.MultipleChoiceQuestionModel;
 import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
 import com.whiz.quiz.quizwhiz.model.response.RestResponse;
 import com.whiz.quiz.quizwhiz.service.ObjectConverter;
@@ -61,7 +65,7 @@ public class MakeQuestions extends ActionBarActivity {
         restClient.get().getQuestions(new Callback<RestResponse<List<MultipleChoiceQuestionModel>>>() {
             @Override
             public void success(RestResponse<List<MultipleChoiceQuestionModel>> listRestResponse, Response response) {
-                ArrayList<MultipleChoiceQuestionModel> arrayList = new ArrayList<MultipleChoiceQuestionModel>(listRestResponse.body);
+                ArrayList<MultipleChoiceQuestionModel> arrayList = new ArrayList<>(listRestResponse.body);
                 for(int i = 0; i < arrayList.size(); i++) {
                     MultipleChoiceQuestion question = ObjectConverter.mcConverter(arrayList.get(i));
                     questions.add(question);

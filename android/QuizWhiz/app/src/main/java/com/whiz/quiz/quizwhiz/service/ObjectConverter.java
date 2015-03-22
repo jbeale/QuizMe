@@ -1,7 +1,7 @@
 package com.whiz.quiz.quizwhiz.service;
 
-import com.whiz.quiz.quizwhiz.MultipleChoiceQuestion;
-import com.whiz.quiz.quizwhiz.model.MultipleChoiceQuestionModel;
+import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
+import com.whiz.quiz.quizwhiz.model.server_model.MultipleChoiceQuestionModel;
 
 /**
  * Created by JohnMain on 3/14/2015.

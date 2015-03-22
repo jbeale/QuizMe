@@ -1,4 +1,6 @@
-package com.whiz.quiz.quizwhiz.model;
+package com.whiz.quiz.quizwhiz.model.server_model;
+
+import com.whiz.quiz.quizwhiz.model.server_model.ChoiceDataModel;
 
 /**
  * Created by JohnMain on 3/14/2015.

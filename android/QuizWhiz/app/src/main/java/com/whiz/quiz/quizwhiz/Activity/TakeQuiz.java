@@ -1,7 +1,10 @@
-package com.whiz.quiz.quizwhiz;
+package com.whiz.quiz.quizwhiz.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+
+import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
+import com.whiz.quiz.quizwhiz.R;
 
 import java.util.ArrayList;
 
@@ -16,7 +19,7 @@ public class TakeQuiz extends ActionBarActivity {
         setContentView(R.layout.activity_take_quiz);
 
         setupDummyList();
-        
+
 
     }
 

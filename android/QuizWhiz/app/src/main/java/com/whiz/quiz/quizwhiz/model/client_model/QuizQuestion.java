@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz;
+package com.whiz.quiz.quizwhiz.model.client_model;
 
 /**
  * Created by JohnMain on 2/21/2015.
