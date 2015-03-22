@@ -10,6 +10,8 @@ import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
 import com.whiz.quiz.quizwhiz.R;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by JohnMain on 3/22/2015.
@@ -22,6 +24,7 @@ public class TakeQuiz extends ActionBarActivity {
     TextView[] options = new TextView[4];
     int questionCounter = 0;
     Boolean answerSelected = false;
+    TextView currentlySelectedAnswer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +44,31 @@ public class TakeQuiz extends ActionBarActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextQuestion(questions.get(questionCounter));
+                int tag = Integer.parseInt(currentlySelectedAnswer.getTag().toString());
+                int correctAnswer = questions.get(questionCounter-1).getCorrectAnswerPosition(); //TODO make the questionCounter-1 more readable
+
+                if (tag == correctAnswer) {
+                    currentlySelectedAnswer.setBackgroundColor(0xFF5CFF58);
+                } else
+                    currentlySelectedAnswer.setBackgroundColor(0xFFFF3B36);
+
+                makeOptionsNotClickable();
+                btnSubmit.setClickable(false);
+
+
             }
         });
+
         TextSelectedListener listener = new TextSelectedListener();
         for(int i = 0; i < options.length; i++){
             options[i].setOnClickListener(listener);
         }
+    }
 
+    private void makeOptionsNotClickable() {
+        for (TextView option : options) {
+            option.setClickable(false);
+        }
     }
 
     class TextSelectedListener implements View.OnClickListener{
@@ -56,14 +76,17 @@ public class TakeQuiz extends ActionBarActivity {
         @Override
         public void onClick(View v) {
             if(answerSelected == false) {
-                int tag = Integer.parseInt(v.getTag().toString());
-                int correctAnswer = questions.get(questionCounter-1).getCorrectAnswerPosition(); //TODO make the questionCounter-1 more readable
-                if (tag == correctAnswer) {
-                    v.setBackgroundColor(0xFF5CFF58);
-                } else
-                    v.setBackgroundColor(0xFFFF3B36);
+                v.setBackgroundColor(0xff4b8cff);
                 answerSelected = true;
+                currentlySelectedAnswer = (TextView) v;
+
             }
+            else{
+                resetViews();
+                v.setBackgroundColor(0xff4b8cff);
+                currentlySelectedAnswer = (TextView) v;
+            }
+
         }
     }
 
@@ -81,7 +104,9 @@ public class TakeQuiz extends ActionBarActivity {
     private void resetViews() {
         for(int i = 0; i < options.length; i++){
             options[i].setBackgroundColor(0xffccd4ff);
+            options[i].setClickable(true);
         }
+        btnSubmit.setClickable(true);
     }
 
     private void setupDummyList() { //TODO delete
