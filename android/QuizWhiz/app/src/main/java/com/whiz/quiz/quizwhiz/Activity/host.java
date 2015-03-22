@@ -4,19 +4,32 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import com.whiz.quiz.quizwhiz.R;
 
 public class host extends ActionBarActivity {
 
-    Button btnHost = null;
-
+    Button btnReveal = null;
+    Button btnNextQuestion = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host);
+
+        btnReveal = (Button) findViewById(R.id.button_reveal);
+        btnNextQuestion = (Button) findViewById(R.id.button_nextQuestion);
+            btnReveal.setVisibility(View.VISIBLE);
+            btnNextQuestion.setVisibility(View.INVISIBLE);
+            btnReveal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    btnReveal.setVisibility(View.GONE);
+                    btnNextQuestion.setVisibility(View.VISIBLE);
+                }
+            });
     }
 
 
