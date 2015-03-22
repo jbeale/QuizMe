@@ -23,6 +23,6 @@ public class TakeQuiz extends ActionBarActivity {
         MultipleChoiceQuestion question1 = new MultipleChoiceQuestion();
         question1.setCorrectAnswerPosition(1);
         question1.setPossibleAnswers(new String[]{"Hello", "Goodbye", "Test", "More test"});
-        question1.set
+        
     }
 }
