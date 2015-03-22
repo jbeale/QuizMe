@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class ChoiceDataModel {
     private String prompt;
-    private List<ChoiceModel> choices = new ArrayList<>();
+    private List<ChoiceModel> choices = new ArrayList<>(); //TODO something wrong with this
 
     public String getPrompt() {
         return prompt;

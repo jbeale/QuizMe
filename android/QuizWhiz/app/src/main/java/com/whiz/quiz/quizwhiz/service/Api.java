@@ -52,11 +52,11 @@ public interface Api {
         Callback<RestResponse<LoginResponseBody>> callback
      );
 
-    @GET("/question/list") //TODO Not doing this right :(
+    @GET("/question/list") //TODO Not doing this right
     void getQuestions(Callback<RestResponse<List<MultipleChoiceQuestionModel>>> callback);
 
     @FormUrlEncoded
-    @POST("/question/{id}")//TODO get id of the question
+    @POST("/question/{id}")//TODO get id of the question in Activity
     void editQuestion(
             @Path("id") int id,
             @Field("questionName") String questionName,
