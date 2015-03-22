@@ -19,8 +19,9 @@ public class TakeQuiz extends ActionBarActivity {
 
     Button btnSubmit = null;
     TextView textQuestion = null;
-    TextView[] options = null;
+    TextView[] options = new TextView[4];
     int questionCounter = 0;
+    Boolean answerSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +45,44 @@ public class TakeQuiz extends ActionBarActivity {
                 nextQuestion(questions.get(questionCounter));
             }
         });
+        TextSelectedListener listener = new TextSelectedListener();
+        for(int i = 0; i < options.length; i++){
+            options[i].setOnClickListener(listener);
+        }
+
+    }
+
+    class TextSelectedListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            if(answerSelected == false) {
+                int tag = Integer.parseInt(v.getTag().toString());
+                int correctAnswer = questions.get(questionCounter).getCorrectAnswerPosition();
+                if (tag == correctAnswer) {
+                    v.setBackgroundColor(0xFF5CFF58);
+                } else
+                    v.setBackgroundColor(0xFFFF3B36);
+                answerSelected = true;
+            }
+        }
     }
 
     private void nextQuestion(MultipleChoiceQuestion question) {
+        //TODO make this stop when all questions are answered and go to -> home or another screen
         textQuestion.setText(question.getQuestion());
         for (int i = 0; i < question.getPossibleAnswers().length; i++){
             options[i].setText(question.getPossibleAnswers()[i]);
         }
         questionCounter++;
+        answerSelected = false;
+        resetViews();
+    }
+
+    private void resetViews() {
+        for(int i = 0; i < options.length; i++){
+            options[i].setBackgroundColor(0xffccd4ff);
+        }
     }
 
     private void setupDummyList() {

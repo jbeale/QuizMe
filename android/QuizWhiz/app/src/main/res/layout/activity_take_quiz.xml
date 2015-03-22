@@ -30,7 +30,9 @@
         android:layout_alignParentStart="true"
         android:textAlignment="center"
         android:background="#ffccd4ff"
-        android:textColor="#ff000000" />
+        android:textColor="#ff000000"
+        android:clickable="true"
+        android:tag="0"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,7 +48,9 @@
         android:layout_alignParentStart="true"
         android:textAlignment="center"
         android:background="#ffccd4ff"
-        android:textColor="#ff000000" />
+        android:textColor="#ff000000"
+        android:clickable="true"
+        android:tag="1"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,7 +66,9 @@
         android:layout_alignParentStart="true"
         android:textAlignment="center"
         android:background="#ffccd4ff"
-        android:textColor="#ff000000" />
+        android:textColor="#ff000000"
+        android:clickable="true"
+        android:tag="2"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,7 +84,9 @@
         android:layout_alignParentStart="true"
         android:textAlignment="center"
         android:background="#ffccd4ff"
-        android:textColor="#ff000000" />
+        android:textColor="#ff000000"
+        android:clickable="true"
+        android:tag="3"/>
 
     <Button
         android:layout_width="wrap_content"

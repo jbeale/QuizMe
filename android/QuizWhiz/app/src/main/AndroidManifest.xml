@@ -44,6 +44,10 @@
             android:name=".activity.MakeQuiz"
             android:label="@string/title_activity_make_quiz" >
         </activity>
+        <activity
+            android:name=".activity.TakeQuiz"
+            android:label="Take Quiz">
+        </activity>
     </application>
 
 </manifest>
