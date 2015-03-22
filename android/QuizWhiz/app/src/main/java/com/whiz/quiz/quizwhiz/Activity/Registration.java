@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz.Activity;
+package com.whiz.quiz.quizwhiz.activity;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.whiz.quiz.quizwhiz.Activity.Main;
 import com.whiz.quiz.quizwhiz.R;
 import com.whiz.quiz.quizwhiz.model.response.LoginResponseBody;
 import com.whiz.quiz.quizwhiz.model.response.RestResponse;

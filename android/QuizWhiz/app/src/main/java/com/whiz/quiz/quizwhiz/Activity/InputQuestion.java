@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz.Activity;
+package com.whiz.quiz.quizwhiz.activity;
 
 import android.app.Activity;
 import android.content.Intent;

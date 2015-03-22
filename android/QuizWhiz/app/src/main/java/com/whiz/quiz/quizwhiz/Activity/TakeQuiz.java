@@ -1,7 +1,10 @@
-package com.whiz.quiz.quizwhiz.Activity;
+package com.whiz.quiz.quizwhiz.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
 import com.whiz.quiz.quizwhiz.R;
@@ -13,14 +16,42 @@ import java.util.ArrayList;
  */
 public class TakeQuiz extends ActionBarActivity {
     ArrayList<MultipleChoiceQuestion> questions = new ArrayList<>();
+
+    Button btnSubmit = null;
+    TextView textQuestion = null;
+    TextView[] options = null;
+    int questionCounter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_quiz);
 
+        btnSubmit = (Button) findViewById(R.id.button_submit);
+        textQuestion = (TextView) findViewById(R.id.textViewQuestion);
+        options[0] = (TextView) findViewById(R.id.textOption1);
+        options[1] = (TextView) findViewById(R.id.textOption2);
+        options[2] = (TextView) findViewById(R.id.textOption3);
+        options[3] = (TextView) findViewById(R.id.textOption4);
+
+
         setupDummyList();
+        nextQuestion(questions.get(questionCounter));
 
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextQuestion(questions.get(questionCounter));
+            }
+        });
+    }
 
+    private void nextQuestion(MultipleChoiceQuestion question) {
+        textQuestion.setText(question.getQuestion());
+        for (int i = 0; i < question.getPossibleAnswers().length; i++){
+            options[i].setText(question.getPossibleAnswers()[i]);
+        }
+        questionCounter++;
     }
 
     private void setupDummyList() {

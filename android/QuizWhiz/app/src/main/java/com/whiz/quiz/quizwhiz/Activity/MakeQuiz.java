@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz.Activity;
+package com.whiz.quiz.quizwhiz.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
