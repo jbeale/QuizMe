@@ -35,8 +35,7 @@ public class TakeQuiz extends ActionBarActivity {
         options[2] = (TextView) findViewById(R.id.textOption3);
         options[3] = (TextView) findViewById(R.id.textOption4);
 
-
-        setupDummyList();
+        setupDummyList(); //TODO delete
         nextQuestion(questions.get(questionCounter));
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +57,7 @@ public class TakeQuiz extends ActionBarActivity {
         public void onClick(View v) {
             if(answerSelected == false) {
                 int tag = Integer.parseInt(v.getTag().toString());
-                int correctAnswer = questions.get(questionCounter).getCorrectAnswerPosition();
+                int correctAnswer = questions.get(questionCounter-1).getCorrectAnswerPosition(); //TODO make the questionCounter-1 more readable
                 if (tag == correctAnswer) {
                     v.setBackgroundColor(0xFF5CFF58);
                 } else
@@ -85,7 +84,7 @@ public class TakeQuiz extends ActionBarActivity {
         }
     }
 
-    private void setupDummyList() {
+    private void setupDummyList() { //TODO delete
         MultipleChoiceQuestion question1 = new MultipleChoiceQuestion();
         question1.setCorrectAnswerPosition(1);
         question1.setPossibleAnswers(new String[]{"Hello", "Goodbye", "Test", "More test"});
