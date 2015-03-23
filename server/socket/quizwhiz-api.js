@@ -1,11 +1,11 @@
 
 var Client = require('node-rest-client').Client;
+var APIResponse = require('./model/APIResponse.js');
 
 client = new Client();
 
 var QuizWhiz = {};
 
-QuizWhiz.APIResponse = function() {};
 
 
 QuizWhiz.REST = {
@@ -16,13 +16,19 @@ QuizWhiz.REST = {
             headers:{"token":authToken}
         };
         client.get(this.ROOT+"/session/join/"+sessionCode, args, function (data, response) {
-            callback(new APIResponse(true, null));
-            return;
-            if (response.statusCode != 200) {
-                callback(new APIResponse(false, null));
-                return;
-            }
-            callback(new APIResponse(true, JSON.parse(data)));
+
+            //if (response.statusCode != 200)
+
+            callback(new APIResponse(data));
+        });
+    },
+    getUser: function (authToken, callback) {
+        var args = {
+            data:{},
+            headers:{}
+        };
+        client.get(this.ROOT+"/auth/token/"+authToken, args, function(data, response) {
+            callback(new APIResponse(data));
         });
     }
 };

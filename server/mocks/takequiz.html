@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Whiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/quizwhiz.css" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="brand"><img src="../src/main/webapp/resources/quizwhizwhiteh.png" width="187"></div>
+            <div id="user-nav" class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="http://www.gravatar.com/avatar/5fa31356fd3d2df92cd9b86e753feaa7">
+                    Justin Beale <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/account">My Account</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/auth/logout">Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+
+        <div id="quizTool">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3" id="sessionMetaCol">
+                        <span class="sessionName">Test Session Name</span>
+                        <span class="sessionHost">Host: Will Smith</span>
+                        <span class="separator"></span>
+                        <span class="status">Waiting to start</span>
+                    </div>
+                    <div class="col-md-9" id="questionArea">
+                        <div class="statescreen" id="waitingScreen" style="display:none;">
+                            Waiting for host to start the session...
+                            Participants: <span class="numParticipants">0</span>
+                        </div>
+                        <div class="statescreen" id="questionDisplay" style="display:none;">
+                            <div class="questionLabel">QUESTION 2</div>
+                            <div class="question" id="questionTarget">
+                                <p class="prompt">Put question text here</p>
+                                <div class="choice radio">
+                                    <label><input type="radio" name="studentSelection" id="choice0">Answer A</label>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 2%">
+                                            2
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choice radio markedIncorrect">
+                                    <label><input type="radio" name="studentSelection" id="choice1">Answer B</label>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 12%">
+                                            12
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choice radio markedCorrect">
+                                    <label><input type="radio" name="studentSelection" id="choice2">Answer C</label>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 56%">
+                                            56
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choice radio">
+                                    <label><input type="radio" name="studentSelection" id="choice3">Answer D</label>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            20
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choice radio">
+                                    <label><input type="radio" name="studentSelection" id="choice4">Answer E</label>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                                            10
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+
+    </div>
+    <script type="text/javascript">
+        var socket = io('http://localhost:3001');
+        var user;
+        var session;
+        var token = "afca3484a7d7ae99d8c";
+        var currentRoom = null;
+        var numQuestions = 0;
+        socket.connect('http://localhost:3001');
+        function joinSession(sessionKey) {
+            socket.emit('join session', sessionKey, token);
+        };
+
+        function setStatusText(text) {
+            $('.status').html(text);
+        };
+
+        function setQuestionLabel(text) {
+            $('.questionLabel').html(text);
+        }
+
+        function showStatePage(id) {
+            $('.statescreen').hide();
+            $(id).show();
+        }
+
+        function setRoom(roomInfo) {
+            currentRoom = roomInfo;
+            $('.sessionName').html(roomInfo.sessionName);
+            $('.sessionHost').html(roomInfo.ownerUser.firstname+" "+roomInfo.ownerUser.lastname);
+            numQuestions = roomInfo.numQuestions;
+            setStatusText('Waiting to start.');
+            showStatePage('#waitingScreen');
+        }
+
+        function getQuestionHtml(promptText, choiceArray) {
+            var str = '';
+            str += '<p class="prompt">'+promptText+'</p>';
+            for(var i = 0; i<choiceArray.length; i++) {
+                str += getAnswerHtml(choiceArray[i].text);
+            }
+            return str;
+        }
+
+        function getAnswerHtml(answerText) {
+            return '<div class="choice radio">'+
+                    '<label><input type="radio" name="studentSelection" id="choice0">'+answerText+'</label>'+
+                   '<div class="progress"></div></div>';
+        }
+
+        function renderQuestion(questionData) {
+            var questionHtml = getQuestionHtml(questionData.prompt, questionData.choices);
+            $('#questionTarget').html(questionHtml);
+        }
+
+        socket.on('join result', function(success, roomInfo) {
+            if (!success) {
+                alert ("Invalid Session Code. Please Try Again.");
+                return;
+            }
+            //we are now in waiting room
+            setRoom(roomInfo);
+        });
+
+        socket.on('start session', function(firstQuestion) {
+
+            renderQuestion(firstQuestion);
+        });
+
+        socket.on('display question', function (question, index) {
+            console.log(question);
+            setStatusText('Question '+(Number(index)+1)+'/'+numQuestions);
+            setQuestionLabel('QUESTION '+(Number(index)+1));
+            renderQuestion(question);
+            showStatePage('#questionDisplay');
+        });
+
+    </script>
+
+
+</body>
+</html>

@@ -1,16 +1,29 @@
 package com.quizme.api.model;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Created by jbeale on 3/9/15.
  */
 public class Session {
+    @Expose
     private int id;
+    @Expose
     private int sessionCode;
+    @Expose
     private String sessionName;
+    @Expose
     private User ownerUser;
+    @Expose
     private int ownerUserId;
+    @Expose
     private Activity activity;
+    @Expose
     private int activityId;
+    @Expose
+    private Long created;
+    @Expose
+    private Long closed;
 
     public int getId() {
         return id;
@@ -66,5 +79,21 @@ public class Session {
 
     public void setActivityId(int activityId) {
         this.activityId = activityId;
+    }
+
+    public Long getCreated() {
+        return created;
+    }
+
+    public void setCreated(Long created) {
+        this.created = created;
+    }
+
+    public Long getClosed() {
+        return closed;
+    }
+
+    public void setClosed(Long closed) {
+        this.closed = closed;
     }
 }
