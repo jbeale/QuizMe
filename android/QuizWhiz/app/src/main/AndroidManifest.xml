@@ -43,7 +43,7 @@
             android:label="@string/title_activity_make_quiz" >
         </activity>
         <activity
-            android:name=".activity.host"
+            android:name=".activity.Host"
             android:label="Host" >
         </activity>
     </application>

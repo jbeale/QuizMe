@@ -34,7 +34,7 @@ public class WaitQuiz extends ActionBarActivity {
         testHost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), host.class);
+                Intent intent = new Intent(getApplicationContext(), Host.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
