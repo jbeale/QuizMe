@@ -47,9 +47,6 @@ public class SessionKeyDialogBox extends DialogFragment{
                 else
                     Toast.makeText(getActivity().getApplicationContext(), "Key could not be found", Toast.LENGTH_SHORT).show();
 
-
-
-
             }
 
             private boolean isKeyAuthenticated(String sessionKey) {
