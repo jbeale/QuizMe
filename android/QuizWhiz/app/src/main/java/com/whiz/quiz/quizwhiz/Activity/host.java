@@ -13,7 +13,7 @@ import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
 
 import java.util.ArrayList;
 
-public class host extends ActionBarActivity {
+public class Host extends ActionBarActivity {
     ArrayList<MultipleChoiceQuestion> questions = new ArrayList<>();
 
     Button btnReveal = null;
@@ -103,7 +103,7 @@ public class host extends ActionBarActivity {
         }
         questionCounter++;
         answerSelected = false;
-        resetViews();
+
     }
 
     private void setupDummyList() { //TODO delete
