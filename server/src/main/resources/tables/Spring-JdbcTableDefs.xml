@@ -18,4 +18,9 @@
             <ref bean="dataSource" />
         </constructor-arg>
     </bean>
+    <bean id="sessionDao" class="com.quizme.api.dao.JdbcSessionDAO">
+        <constructor-arg index="0">
+            <ref bean="dataSource" />
+        </constructor-arg>
+    </bean>
 </beans>

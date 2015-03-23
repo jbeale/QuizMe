@@ -72,4 +72,12 @@ public class JdbcSessionDAO implements SessionDAO {
             return null;
         }
     }
+
+    @Override
+    public int newSessionCode() {
+        String sql = "SELECT FLOOR(100000000 + RAND() * 899999999) AS random_number FROM sessions WHERE \"random_number\" NOT IN (SELECT code FROM sessions) LIMIT 1";
+        return jdbcTemplate.queryForInt(sql);
+    }
+
+
 }

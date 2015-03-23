@@ -1,0 +1,59 @@
+#quizTool {
+  .container {
+    padding-top:10px;
+    .row {
+      #sessionMetaCol {
+        span {display:block;}
+        .sessionName {
+          font-size:17px;
+          font-weight:bold;
+        }
+        .sessionHost {
+
+        }
+        .separator {
+          height:15px;
+        }
+        .status {
+
+        }
+        .currentScore {
+
+        }
+        .classAvg {
+
+        }
+      }
+      #questionArea {
+        .statescreen {
+
+        }
+        #waitingScreen {
+
+        }
+        #questionDisplay {
+          .questionLabel {
+            font-size:20px;
+            font-weight:bold;
+          }
+          .question {
+            .prompt {
+
+            }
+            .choice {
+              input {
+
+              }
+              label {
+
+              }
+              .progress {
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

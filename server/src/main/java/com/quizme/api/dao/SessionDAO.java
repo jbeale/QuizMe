@@ -9,4 +9,5 @@ public interface SessionDAO {
     public int createSession(Session session);
     public Session getSession(int sessionId);
     public Session getSessionByCode(int sessionCode);
+    public int newSessionCode();
 }

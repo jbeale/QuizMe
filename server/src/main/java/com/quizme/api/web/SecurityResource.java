@@ -136,4 +136,15 @@ public class SecurityResource {
 
         return Response.ok("SUBJECT LOGGED OUT").build();
     }
+
+    @GET
+    @Path("/token/{authToken}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserByToken(@PathParam("authToken") String token) {
+        User u = userService.validateToken(token);
+        if (u == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity(gson.toJson(new RestResponse(404, false, "Token expired, invalid, or null."))).build();
+        }
+        return Response.ok(gson.toJson(new RestResponse(200, true, u))).build();
+    }
 }
