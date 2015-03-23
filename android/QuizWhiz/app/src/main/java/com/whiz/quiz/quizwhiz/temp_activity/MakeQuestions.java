@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz.activity;
+package com.whiz.quiz.quizwhiz.temp_activity;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;

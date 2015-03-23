@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activity.Main"
+            android:name=".temp_activity.Main"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,31 +19,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.Home"
+            android:name=".temp_activity.Home"
             android:label="@string/title_activity_home" >
         </activity>
         <activity
-            android:name=".activity.MakeQuestions"
+            android:name=".temp_activity.MakeQuestions"
             android:label="@string/title_activity_make_quiz" >
         </activity>
         <activity
-            android:name=".activity.Registration"
+            android:name=".temp_activity.Registration"
             android:label="@string/title_activity_registration" >
         </activity>
         <activity
-            android:name=".activity.WaitQuiz"
+            android:name=".temp_activity.WaitQuiz"
             android:label="Wait Quiz" >
         </activity>
         <activity
-            android:name=".activity.InputQuestion"
+            android:name=".temp_activity.InputQuestion"
             android:label="@string/title_activity_input_question" >
         </activity>
         <activity
-            android:name=".activity.MakeQuiz"
+            android:name=".temp_activity.MakeQuiz"
             android:label="@string/title_activity_make_quiz" >
         </activity>
         <activity
-            android:name=".activity.Host"
+            android:name=".temp_activity.Host"
             android:label="Host" >
         </activity>
     </application>
