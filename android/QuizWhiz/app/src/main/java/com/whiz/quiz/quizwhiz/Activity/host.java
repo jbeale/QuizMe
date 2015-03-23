@@ -13,6 +13,10 @@ import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 371c94d5b7eada669140c8b0381c68251d9ffa27
 public class Host extends ActionBarActivity {
     ArrayList<MultipleChoiceQuestion> questions = new ArrayList<>();
 
@@ -70,6 +74,13 @@ public class Host extends ActionBarActivity {
         for (TextView option : options) {
             option.setClickable(false);
         }
+        btnReveal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnReveal.setVisibility(View.GONE);
+                btnNextQuestion.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
 
@@ -103,7 +114,11 @@ public class Host extends ActionBarActivity {
         }
         questionCounter++;
         answerSelected = false;
+<<<<<<< HEAD
 
+=======
+        //resetViews();
+>>>>>>> 371c94d5b7eada669140c8b0381c68251d9ffa27
     }
 
     private void setupDummyList() { //TODO delete
