@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.view.View;
 import android.widget.Toast;
 
-import com.whiz.quiz.quizwhiz.temp_activity.WaitQuiz;
+import com.whiz.quiz.quizwhiz.activity.WaitQuiz;
 
 
 /**

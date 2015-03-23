@@ -1,4 +1,4 @@
-package com.whiz.quiz.quizwhiz.temp_activity;
+package com.whiz.quiz.quizwhiz.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
