@@ -1,11 +1,13 @@
-package com.whiz.quiz.quizwhiz;
+package com.whiz.quiz.quizwhiz.model.client_model;
 
 /**
  * Created by JohnMain on 2/21/2015.
  */
 public class MultipleChoiceQuestion extends QuizQuestion {
     private String[] possibleAnswers = new String[4];
-    int correctAnswerPosition = -1;
+    private int correctAnswerPosition = -1;
+
+    public final static String TYPE = "mc";
 
     public String[] getPossibleAnswers() {
         return possibleAnswers;

@@ -5,55 +5,51 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:theme="@style/Base.Theme.AppCompat.Light"
-    tools:context="com.whiz.quiz.quizwhiz.Home">
+    tools:context="com.whiz.quiz.quizwhiz.activity.Home">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Make a Quiz"
-        android:id="@+id/buttonMakeQuiz"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Make Questions"
+        android:id="@+id/buttonMakeQuestions"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="12dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Join Session"
         android:id="@+id/buttonJoinSession"
-        android:layout_above="@+id/listView"
-        android:layout_toRightOf="@+id/buttonCreateSession"
-        android:layout_toEndOf="@+id/buttonCreateSession"
-        android:textSize="12dp" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_below="@+id/buttonMakeQuiz"
-        android:layout_toEndOf="@+id/buttonMakeQuiz"
-        android:layout_marginTop="73dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="My Grades"
-        android:id="@+id/textGrades"
-        android:layout_below="@+id/buttonJoinSession"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp" />
+        android:textSize="12dp"
+        android:layout_marginTop="47dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/buttonCreateSession"
+        android:layout_alignStart="@+id/buttonCreateSession"
+        android:layout_alignRight="@+id/buttonCreateSession"
+        android:layout_alignEnd="@+id/buttonCreateSession" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Session"
         android:id="@+id/buttonCreateSession"
-        android:layout_alignBottom="@+id/buttonMakeQuiz"
-        android:layout_toRightOf="@+id/buttonMakeQuiz"
-        android:layout_toEndOf="@+id/buttonMakeQuiz" />
+        android:layout_below="@+id/buttonJoinSession"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:textSize="12dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make Quiz"
+        android:id="@+id/buttonMakeQuiz"
+        android:layout_marginBottom="139dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/buttonCreateSession"
+        android:layout_alignStart="@+id/buttonCreateSession"
+        android:layout_alignRight="@+id/buttonCreateSession"
+        android:layout_alignEnd="@+id/buttonCreateSession"
+        android:textSize="12dp" />
 
 </RelativeLayout>

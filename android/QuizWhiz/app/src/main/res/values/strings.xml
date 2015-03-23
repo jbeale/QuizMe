@@ -7,5 +7,9 @@
     <string name="title_activity_home">Home</string>
     <string name="title_activity_make_quiz">MakeQuiz</string>
     <string name="title_activity_registration">Registration</string>
+    <string name="waiting">Please wait for host to start quiz.</string>
+    <string name="title_activity_input_question">InputQuestion</string>
+    <string name="title_activity_activity_host">activity_host</string>
+    <string name="title_activity_host">host</string>
 
 </resources>
