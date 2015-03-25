@@ -1,3 +1,26 @@
+#quizTool .container {
+  padding-top: 10px; }
+  #quizTool .container .row #sessionMetaCol span {
+    display: block; }
+  #quizTool .container .row #sessionMetaCol .sessionName {
+    font-size: 17px;
+    font-weight: bold; }
+  #quizTool .container .row #sessionMetaCol .separator {
+    height: 15px; }
+  #quizTool .container .row #questionArea #questionDisplay .questionLabel {
+    font-size: 20px;
+    font-weight: bold; }
+  #quizTool .container .row #questionArea #questionDisplay .correctnessLabel {
+    height: 20px; }
+    #quizTool .container .row #questionArea #questionDisplay .correctnessLabel.correct {
+      color: darkgreen; }
+    #quizTool .container .row #questionArea #questionDisplay .correctnessLabel.incorrect {
+      color: darkred; }
+  #quizTool .container .row #questionArea #questionDisplay .question .choice.markedCorrect {
+    color: darkgreen; }
+  #quizTool .container .row #questionArea #questionDisplay .question .choice.markedIncorrect {
+    color: darkred; }
+
 html, body {
   height: 100%;
   font-family: "Open Sans", sans-serif;

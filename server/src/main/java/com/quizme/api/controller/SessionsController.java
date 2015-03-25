@@ -1,6 +1,7 @@
 package com.quizme.api.controller;
 
 import com.quizme.api.model.Activity;
+import com.quizme.api.model.Session;
 import com.quizme.api.model.User;
 import com.quizme.api.service.ActivityService;
 import com.quizme.api.service.SessionService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -43,7 +45,10 @@ public class SessionsController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
-
+    @Autowired
+    public void setSessionService(SessionService sessionService) {
+        this.sessionService = sessionService;
+    }
 
     @RequestMapping(value="/new", method= RequestMethod.GET)
     public String newSessionForm(Model model) {
@@ -57,8 +62,10 @@ public class SessionsController {
     }
 
     @RequestMapping(value="/new", method=RequestMethod.POST)
-    public String startNewSession(Model model) {
-        String sessionCode = "370-410-239";
-        return "redirect:/"+sessionCode;
+    public String startNewSession(@RequestParam("sessionName") String sessionName, @RequestParam("activitySelect") int activityId, Model model) {
+        if (!checkAuth()) return redirect();
+
+        Session newSession = sessionService.createSession(sessionName, userService.getCurrentUser().getId(), activityId);
+        return "redirect:/"+newSession.getSessionCode();
     }
 }

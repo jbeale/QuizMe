@@ -29,7 +29,7 @@
                                     <span class="qi-name">${question.getName()}</span>
                                     <span class="qi-prompt">&ldquo; ${question.getData().getPromptTextExcerpt()} &rdquo;</span>
                                     <span class="qi-options">
-                                        <button class="btn-sm btn-danger">&cross;</button>
+                                        <button class="btn-sm btn-danger" style="width:20px; height:20px; line-height:1;padding:5px 5px;" type="button" onclick="$(this).parents('.question-list-item').remove(); applyQuestionListChanges()">X</button>
                                     </span>
                                 </li>
                             </c:forEach>
@@ -103,7 +103,7 @@
                 '<span class="qi-name">'+questionName+'</span>'+
         '<span class="qi-prompt">&ldquo; '+promptText+' &rdquo;</span>'+
         '<span class="qi-options">'+
-                '<button class="btn-sm btn-danger">D</button>'+
+                '<button class="btn-sm btn-danger" style="width:20px; height:20px; line-height:1;padding:5px 5px;" type="button" onclick="$(this).parents(\'.question-list-item\').remove(); applyQuestionListChanges();">X</button>'+
         '</span>'+
         '</li>';
         $('.sortable').sortable('destroy');
