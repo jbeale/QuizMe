@@ -38,9 +38,11 @@ public class DefaultActivityService implements ActivityService {
         String questionIds = a.getQuestionIds();
         String[] itemArray = questionIds.split(",");
         List<Question> items = new ArrayList<Question>();
-        for (int i = 0; i < itemArray.length; i++) {
-            Question q = questionDAO.getQuestion(Integer.parseInt(itemArray[i]));
-            if (q != null) items.add(q);
+        if (!questionIds.equals("")) {
+            for (int i = 0; i < itemArray.length; i++) {
+                Question q = questionDAO.getQuestion(Integer.parseInt(itemArray[i]));
+                if (q != null) items.add(q);
+            }
         }
         a.setQuestions(items);
         return a;

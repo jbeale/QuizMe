@@ -29,9 +29,11 @@
         </c:if>
     </div>
 </div>
+<c:if test="${empty disableTitlebar}">
 <div class="titlebar">
     <div class="container titlebar-text">${titlebar}</div>
 </div>
+</c:if>
 <div class="content">
     <jsp:include page="/WEB-INF/pages/${view}.jsp"></jsp:include>
 </div>

@@ -7,6 +7,13 @@
     font-weight: bold; }
   #quizTool .container .row #sessionMetaCol .separator {
     height: 15px; }
+  #quizTool .container .row #sessionMetaCol .instructorInfo .participants span {
+    display: inline-block; }
+  #quizTool .container .row #questionArea #waitingScreenInstructor .sessionKey {
+    font-size: 24px;
+    padding: 5px 15px;
+    border: 2px solid gray;
+    border-radius: 6px; }
   #quizTool .container .row #questionArea #questionDisplay .questionLabel {
     font-size: 20px;
     font-weight: bold; }

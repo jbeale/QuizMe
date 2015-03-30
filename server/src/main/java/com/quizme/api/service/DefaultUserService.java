@@ -40,9 +40,6 @@ public class DefaultUserService implements UserService{
     @Override
     public User getUser(int userId) {
         User u = userDAO.getUser(userId);
-        if (u == null) {
-            return null;
-        }
         return u;
     }
 

@@ -3,6 +3,7 @@ package com.quizme.api.controller;
 import com.quizme.api.model.request.ApiClientMetadata;
 import com.quizme.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 @RequestMapping("/")
 public class LandingController {
+
+    @Value("${interactionServer.baseUrl}")
+    private String baseUrl;
 
     UserService userService;
 
@@ -44,6 +48,10 @@ public class LandingController {
         }
         model.addAttribute("authToken", authToken);
         model.addAttribute("sessionCode", sessionCode);
+       // model.addAttribute("serverUri", "http://take.justinbeale.com");
+        model.addAttribute("serverUri", "http://localhost:3001");
+        model.addAttribute("disableTitlebar", true);
+        model.addAttribute("titlebar", "QuizMe Session");
         return "quiztool";
     }
 }

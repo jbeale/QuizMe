@@ -37,9 +37,9 @@ function registerSession(sessionData) {
 }
 
 io.on('connection', function(socket) {
-    var socketId = socket.id
+    var socketId = socket.id;
     var connection = socket.request.connection;
-    console.log("New connection from " + connection.remoteAddress+" / "+connection.hostname);
+    console.log("New connection from " + connection.remoteAddress+" / "+socketId);
     var user = null;
     var isSessionOwner = false;
     var currentSession = null;
@@ -115,16 +115,15 @@ io.on('connection', function(socket) {
         }
     });
 
-    var responses = [0,0,0,0];
-    var respCount = 0;
     //Used by students to submit answer to question
     socket.on('select answer', function(choiceIndex) {
-        console.log("Received answer "+choiceIndex)
-        //TODO don't send to all users, and actually keep track of individual responses.
-        responses[choiceIndex]++;
-        respCount++;
+        if (choiceIndex < 0) return;
+        session.addResponse(socketId, choiceIndex);
+        //TODO don't send to all users
+        var responses = session.getResponseTallies();
+        var respCount = session.getResponseTotal();
         io.sockets.in(roomId).emit("update response counts", responses, respCount);
-        console.log(responses);
+        console.log(responses+" / "+respCount);
     });
 
     //Used by instructors to close a question

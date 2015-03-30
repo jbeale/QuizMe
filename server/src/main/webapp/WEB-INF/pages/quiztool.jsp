@@ -4,6 +4,7 @@
 <script type="text/javascript">
     var token = "${authToken}";
     var sessionCode = "${sessionCode}";
+    var serverUri = "${serverUri}";
 </script>
 
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
@@ -16,17 +17,25 @@
                 <span class="sessionHost">Host: Will Smith</span>
                 <span class="separator"></span>
                 <span class="status">Waiting to start</span>
+                        <span class="instructorInfo" style="display:none;">
+                            <span class="participants"><span class="numParticipants"></span> Participants</span>
+                        </span>
                         <span class="actions">
                             <button class="btn btn-info" type="button" id="action-startSession" onClick="startSession()">Start Session</button>
                             <button class="btn btn-info" type="button" id="action-endQuestion" onClick="endQuestion()">Close Question</button>
                             <button class="btn btn-info" type="button" id="action-revealCorrectness" onClick="revealCorrectness()">Reveal Correctness</button>
                             <button class="btn btn-info" type="button" id="action-nextQuestion" onClick="nextQuestion()">Next Question</button>
                         </span>
+
             </div>
             <div class="col-sm-9" id="questionArea">
                 <div class="statescreen" id="waitingScreen" style="display:none;">
                     Waiting for host to start the session...
                     Participants: <span class="numParticipants">0</span>
+                </div>
+                <div class="statescreen" id="waitingScreenInstructor" style="display:none">
+                    <p>Give students unique session key:</p>
+                    <span class="sessionKey"></span>
                 </div>
                 <div class="statescreen" id="questionDisplay" style="display:none;">
                     <div class="questionLabel">QUESTION 2</div>
@@ -81,14 +90,14 @@
 </div>
 
 <script type="text/javascript">
-var socket = io('http://localhost:3001');
+var socket = io(serverUri);
 var user;
 var session;
 var currentRoom = null;
 var numQuestions = 0;
 var lastSentSelection = null;
 var isHost = false;
-socket.connect('http://localhost:3001');
+socket.connect(serverUri);
 function joinSession(token, sessionKey) {
     socket.emit('join session', token, sessionKey);
 };
@@ -110,6 +119,15 @@ function roundToTenth(num) {
     return Math.round(num*10)/10;
 }
 
+function addDashes(num) {
+    num = num.toString(); //lol types in JS
+    return num.slice(0,3)+"-"+num.slice(3,6)+"-"+num.slice(6,15);
+}
+
+function disableInput() {
+    $('input[name=studentSelection]').prop('disabled', true);
+}
+
 function setCorrectnessLabel(isCorrect) {
     if (isHost) return;
     if (isCorrect == null)  {
@@ -125,10 +143,16 @@ function setRoom(roomInfo) {
     currentRoom = roomInfo;
     $('.sessionName').html(roomInfo.sessionName);
     $('.sessionHost').html(roomInfo.ownerUser.firstname+" "+roomInfo.ownerUser.lastname);
+    $('.sessionKey').html(addDashes(roomInfo.sessionCode));
     numQuestions = roomInfo.numQuestions;
     isHost = roomInfo.isHost;
     setStatusText('Waiting to start.');
-    showStatePage('#waitingScreen');
+    if (isHost) {
+        showStatePage('#waitingScreenInstructor');
+        $('.instructorInfo').show();
+    } else {
+        showStatePage('#waitingScreen');
+    }
 }
 
 function getQuestionHtml(promptText, choiceArray) {
@@ -159,6 +183,7 @@ function renderQuestion(questionData) {
     var questionHtml = getQuestionHtml(questionData.prompt, questionData.choices);
     $('#questionTarget').html(questionHtml);
     lastSentSelection = null;
+    if (isHost) disableInput();
 }
 
 function getSelectedAnswerIndex() {
@@ -232,6 +257,7 @@ socket.on('display question', function (question, index) {
 
 socket.on('question closed', function() {
     setHostButtonVisibility(false, false, true, true);
+    disableInput();
 });
 var respCounts = [0,0,0,0];
 var respTotal = 0;
@@ -244,6 +270,11 @@ socket.on('update response counts', function(countArray, total) {
     }
     respCounts = countArray;
     respTotal = total;
+});
+
+var participantCount = 0;
+socket.on('participant count', function (count) {
+    $('.numParticipants').html(count);
 });
 
 socket.on('reveal correct ans', function (answerIndex) {
@@ -291,7 +322,6 @@ socket.on('set owner', function() {
     isHost = true;
 
 });
-
 </script>
 
 <script type="text/javascript">

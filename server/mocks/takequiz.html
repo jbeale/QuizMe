@@ -151,6 +151,11 @@
             $('input[name=studentSelection]').prop('disabled', true);
         }
 
+        function addDashes(num) {
+            num = num.toString(); //lol types in JS
+           return num.slice(0,3)+"-"+num.slice(3,6)+"-"+num.slice(6,15);
+        }
+
         function setCorrectnessLabel(isCorrect) {
             if (isHost) return;
             if (isCorrect == null)  {
@@ -166,7 +171,7 @@
             currentRoom = roomInfo;
             $('.sessionName').html(roomInfo.sessionName);
             $('.sessionHost').html(roomInfo.ownerUser.firstname+" "+roomInfo.ownerUser.lastname);
-            $('.sessionKey').html(roomInfo.sessionCode);
+            $('.sessionKey').html(addDashes(roomInfo.sessionCode));
             numQuestions = roomInfo.numQuestions;
             isHost = roomInfo.isHost;
             setStatusText('Waiting to start.');
