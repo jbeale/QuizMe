@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8108F0481AC8A98A00E4E199 /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108F0471AC8A98A00E4E199 /* InitViewController.swift */; };
 		8108F04A1AC90EC600E4E199 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108F0491AC90EC600E4E199 /* LoginViewController.swift */; };
+		813966361AC99DE700DF1950 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813966351AC99DE700DF1950 /* User.swift */; };
 		815C65671AC5E0FA00762B1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C65661AC5E0FA00762B1A /* AppDelegate.swift */; };
 		815C65691AC5E0FA00762B1A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C65681AC5E0FA00762B1A /* FirstViewController.swift */; };
 		815C656B1AC5E0FA00762B1A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C656A1AC5E0FA00762B1A /* SecondViewController.swift */; };
@@ -16,6 +17,8 @@
 		815C65701AC5E0FA00762B1A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815C656F1AC5E0FA00762B1A /* Images.xcassets */; };
 		815C65731AC5E0FA00762B1A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 815C65711AC5E0FA00762B1A /* LaunchScreen.xib */; };
 		815C657F1AC5E0FA00762B1A /* qwiosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C657E1AC5E0FA00762B1A /* qwiosTests.swift */; };
+		81F793D51ACA2985004A1DD1 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F793D41ACA2985004A1DD1 /* MyAccountViewController.swift */; };
+		8E093F835735E435CEF91AEB /* Pods_qwios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B860DE3B48C303163A36FB3 /* Pods_qwios.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,8 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6796F373B822D61AA9C69075 /* Pods-qwios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qwios.release.xcconfig"; path = "Pods/Target Support Files/Pods-qwios/Pods-qwios.release.xcconfig"; sourceTree = "<group>"; };
+		6B860DE3B48C303163A36FB3 /* Pods_qwios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_qwios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8108F0471AC8A98A00E4E199 /* InitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitViewController.swift; sourceTree = "<group>"; };
 		8108F0491AC90EC600E4E199 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		813966351AC99DE700DF1950 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		815C65611AC5E0FA00762B1A /* qwios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qwios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		815C65651AC5E0FA00762B1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		815C65661AC5E0FA00762B1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +48,8 @@
 		815C65781AC5E0FA00762B1A /* qwiosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = qwiosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		815C657D1AC5E0FA00762B1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		815C657E1AC5E0FA00762B1A /* qwiosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qwiosTests.swift; sourceTree = "<group>"; };
+		81F793D41ACA2985004A1DD1 /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
+		835C3B82D379039729905DBA /* Pods-qwios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qwios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-qwios/Pods-qwios.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E093F835735E435CEF91AEB /* Pods_qwios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,12 +71,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55D249F93D2359539A0B0825 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B860DE3B48C303163A36FB3 /* Pods_qwios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		813966341AC99DB200DF1950 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				813966351AC99DE700DF1950 /* User.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		815C65581AC5E0FA00762B1A = {
 			isa = PBXGroup;
 			children = (
 				815C65631AC5E0FA00762B1A /* qwios */,
 				815C657B1AC5E0FA00762B1A /* qwiosTests */,
 				815C65621AC5E0FA00762B1A /* Products */,
+				99A6903699E7265469615708 /* Pods */,
+				55D249F93D2359539A0B0825 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +110,7 @@
 		815C65631AC5E0FA00762B1A /* qwios */ = {
 			isa = PBXGroup;
 			children = (
+				813966341AC99DB200DF1950 /* model */,
 				8108F0471AC8A98A00E4E199 /* InitViewController.swift */,
 				815C65661AC5E0FA00762B1A /* AppDelegate.swift */,
 				815C65681AC5E0FA00762B1A /* FirstViewController.swift */,
@@ -92,6 +120,7 @@
 				815C65711AC5E0FA00762B1A /* LaunchScreen.xib */,
 				815C65641AC5E0FA00762B1A /* Supporting Files */,
 				8108F0491AC90EC600E4E199 /* LoginViewController.swift */,
+				81F793D41ACA2985004A1DD1 /* MyAccountViewController.swift */,
 			);
 			path = qwios;
 			sourceTree = "<group>";
@@ -121,6 +150,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		99A6903699E7265469615708 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				835C3B82D379039729905DBA /* Pods-qwios.debug.xcconfig */,
+				6796F373B822D61AA9C69075 /* Pods-qwios.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,9 +166,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 815C65821AC5E0FA00762B1A /* Build configuration list for PBXNativeTarget "qwios" */;
 			buildPhases = (
+				A61B80B535DBD7871E8D7972 /* Check Pods Manifest.lock */,
 				815C655D1AC5E0FA00762B1A /* Sources */,
 				815C655E1AC5E0FA00762B1A /* Frameworks */,
 				815C655F1AC5E0FA00762B1A /* Resources */,
+				7F4ADCC1866EDEEC61E2C3CB /* Embed Pods Frameworks */,
+				F1CD3B6200648FDCE69D1548 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -216,6 +257,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7F4ADCC1866EDEEC61E2C3CB /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-qwios/Pods-qwios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A61B80B535DBD7871E8D7972 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F1CD3B6200648FDCE69D1548 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-qwios/Pods-qwios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		815C655D1AC5E0FA00762B1A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -223,6 +312,8 @@
 			files = (
 				815C656B1AC5E0FA00762B1A /* SecondViewController.swift in Sources */,
 				815C65671AC5E0FA00762B1A /* AppDelegate.swift in Sources */,
+				813966361AC99DE700DF1950 /* User.swift in Sources */,
+				81F793D51ACA2985004A1DD1 /* MyAccountViewController.swift in Sources */,
 				8108F0481AC8A98A00E4E199 /* InitViewController.swift in Sources */,
 				8108F04A1AC90EC600E4E199 /* LoginViewController.swift in Sources */,
 				815C65691AC5E0FA00762B1A /* FirstViewController.swift in Sources */,
@@ -348,6 +439,7 @@
 		};
 		815C65831AC5E0FA00762B1A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 835C3B82D379039729905DBA /* Pods-qwios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = qwios/Info.plist;
@@ -358,6 +450,7 @@
 		};
 		815C65841AC5E0FA00762B1A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6796F373B822D61AA9C69075 /* Pods-qwios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = qwios/Info.plist;

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class LoginViewController: UIViewController {
 
@@ -23,6 +24,12 @@ class LoginViewController: UIViewController {
         
         usernameInput.text = username;
         
+        var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        self.view.addGestureRecognizer(tap);
+    }
+    
+    func dismissKeyboard() {
+        self.view.endEditing(true);
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,28 +74,53 @@ class LoginViewController: UIViewController {
             let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
             println("responseString = \(responseString)")
             
-            var err: NSError?
-            var myJSON = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error:&err) as? NSDictionary
-            
-            if let parseJSON = myJSON {
-                var success = parseJSON["success"] as? String
-          
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.updateUI(parseJSON);
-                }
+            var jsonStr : String! = "";
+            if (responseString != nil) {
+                jsonStr = responseString;
             }
+            
+            var err: NSError?
+            //var myJSON = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error:&err) as? NSDictionary
+            
+            let json = JSON(data: data, options:nil, error:&err);
+            
+            
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.processLoginResponse(json);
+            }
+            
         }
         
         task.resume()
     }
     
-    func updateUI(data : NSDictionary) {
+    func processLoginResponse(data : JSON) -> Void {
         self.activityIndicator.stopAnimating();
-        if (String(data["success"] as String) == "true") {
-            alertMsg("SUCCESS!! Hi"+String(data["body"] as String));
+        let success = data["success"].boolValue;
+        if (success) {
+            let authToken = data["body"]["authToken"].stringValue;
+            let userId = data["body"]["user"]["id"].intValue;
+            let firstName = data["body"]["user"]["firstname"].stringValue;
+            let lastName = data["body"]["user"]["lastname"].stringValue;
+            let username = data["body"]["user"]["username"].stringValue;
+            let email = data["body"]["user"]["email"].stringValue;
+            let user = User(id: userId, firstName: firstName, lastName: lastName, username: username, email: email);
+            storeUserData(authToken, user: user);
+            
+            self.performSegueWithIdentifier("showMainApp", sender: self);
+            
         } else {
-            alertMsg("u fail");
+            alertMsg("Invalid username or password. Please try again.");
         }
+    }
+    
+    func storeUserData(authToken:String, user:User) -> Void
+    {
+        NSUserDefaults.standardUserDefaults().setObject(authToken, forKey: "authToken");
+        let data = NSKeyedArchiver.archivedDataWithRootObject(user);
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "user");
+        NSUserDefaults.standardUserDefaults().synchronize();
     }
     
     func alertMsg(someMessage:String) {
@@ -101,14 +133,14 @@ class LoginViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
+    
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
     }
-    */
+    
 
 }
