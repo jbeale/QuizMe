@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9CF397674322BE3E19670901"
-               BuildableName = "Pods_qwios.framework"
-               BlueprintName = "Pods-qwios"
+               BlueprintIdentifier = "49E80A88841EC67A44E6F9C2"
+               BuildableName = "Socket_IO_Client_Swift.framework"
+               BlueprintName = "Pods-qwios-Socket.IO-Client-Swift"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

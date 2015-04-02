@@ -3,6 +3,7 @@
 use_frameworks!
 target 'qwios' do
 pod "SwiftyJSON", ">= 2.1.3"
+pod 'Socket.IO-Client-Swift', '~> 1.3.2'
 end
 
 target 'qwiosTests' do

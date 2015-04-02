@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8108F0481AC8A98A00E4E199 /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108F0471AC8A98A00E4E199 /* InitViewController.swift */; };
 		8108F04A1AC90EC600E4E199 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108F0491AC90EC600E4E199 /* LoginViewController.swift */; };
+		81229F061ACCDA1E008874C1 /* TakeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81229F051ACCDA1E008874C1 /* TakeQuizViewController.swift */; };
+		81229F081ACCDB43008874C1 /* SocketSessionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81229F071ACCDB43008874C1 /* SocketSessionInfo.swift */; };
 		813966361AC99DE700DF1950 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813966351AC99DE700DF1950 /* User.swift */; };
 		815C65671AC5E0FA00762B1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C65661AC5E0FA00762B1A /* AppDelegate.swift */; };
 		815C65691AC5E0FA00762B1A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C65681AC5E0FA00762B1A /* FirstViewController.swift */; };
@@ -36,6 +38,8 @@
 		6B860DE3B48C303163A36FB3 /* Pods_qwios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_qwios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8108F0471AC8A98A00E4E199 /* InitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitViewController.swift; sourceTree = "<group>"; };
 		8108F0491AC90EC600E4E199 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		81229F051ACCDA1E008874C1 /* TakeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakeQuizViewController.swift; sourceTree = "<group>"; };
+		81229F071ACCDB43008874C1 /* SocketSessionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketSessionInfo.swift; sourceTree = "<group>"; };
 		813966351AC99DE700DF1950 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		815C65611AC5E0FA00762B1A /* qwios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qwios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		815C65651AC5E0FA00762B1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				813966351AC99DE700DF1950 /* User.swift */,
+				81229F071ACCDB43008874C1 /* SocketSessionInfo.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 				815C65641AC5E0FA00762B1A /* Supporting Files */,
 				8108F0491AC90EC600E4E199 /* LoginViewController.swift */,
 				81F793D41ACA2985004A1DD1 /* MyAccountViewController.swift */,
+				81229F051ACCDA1E008874C1 /* TakeQuizViewController.swift */,
 			);
 			path = qwios;
 			sourceTree = "<group>";
@@ -312,8 +318,10 @@
 			files = (
 				815C656B1AC5E0FA00762B1A /* SecondViewController.swift in Sources */,
 				815C65671AC5E0FA00762B1A /* AppDelegate.swift in Sources */,
+				81229F081ACCDB43008874C1 /* SocketSessionInfo.swift in Sources */,
 				813966361AC99DE700DF1950 /* User.swift in Sources */,
 				81F793D51ACA2985004A1DD1 /* MyAccountViewController.swift in Sources */,
+				81229F061ACCDA1E008874C1 /* TakeQuizViewController.swift in Sources */,
 				8108F0481AC8A98A00E4E199 /* InitViewController.swift in Sources */,
 				8108F04A1AC90EC600E4E199 /* LoginViewController.swift in Sources */,
 				815C65691AC5E0FA00762B1A /* FirstViewController.swift in Sources */,
