@@ -21,6 +21,9 @@ public class User {
 
     protected String password;
 
+    @Expose
+    protected String profilePicURI;
+
     public String getPassword() {
         return password;
     }
@@ -67,7 +70,9 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+        this.profilePicURI = GravatarUtility.getGravatarURI(email, false);
     }
+
 
 
     //specials

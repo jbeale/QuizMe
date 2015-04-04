@@ -1,0 +1,6 @@
+framework module Pods_qwios {
+  umbrella header "Pods-qwios-umbrella.h"
+
+  export *
+  module * { export * }
+}
