@@ -127,7 +127,7 @@ public class SessionKeyDialogBox extends DialogFragment{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                
+
                 Intent intent = new Intent(activity, WaitQuiz.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 intent.putExtra("numQuestions", numQuestions);
