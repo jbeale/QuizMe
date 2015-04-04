@@ -31,8 +31,6 @@ public class TakeQuiz extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_quiz);
 
-
-
         btnSubmit = (Button) findViewById(R.id.button_submit);
         textQuestion = (TextView) findViewById(R.id.textViewQuestion);
         options[0] = (TextView) findViewById(R.id.textOption1);
@@ -81,14 +79,12 @@ public class TakeQuiz extends ActionBarActivity {
                 v.setBackgroundColor(0xff4b8cff);
                 answerSelected = true;
                 currentlySelectedAnswer = (TextView) v;
-
             }
             else{
                 resetViews();
                 v.setBackgroundColor(0xff4b8cff);
                 currentlySelectedAnswer = (TextView) v;
             }
-
         }
     }
 

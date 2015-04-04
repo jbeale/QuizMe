@@ -19,6 +19,7 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.whiz.quiz.quizwhiz.activity.WaitQuiz;
+import com.whiz.quiz.quizwhiz.model.server_model.Session;
 
 import java.net.URISyntaxException;
 
@@ -39,7 +40,6 @@ public class SessionKeyDialogBox extends DialogFragment{
         builder.setView(view);
 
         mSocket.on("join result", onJoinResult);
-
         mSocket.connect();
 
         editSessionKey = (EditText) view.findViewById(R.id.editSessionKey);
@@ -49,7 +49,8 @@ public class SessionKeyDialogBox extends DialogFragment{
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 String sessionKey = editSessionKey.getText().toString();
-                //TODO USE attemptSend(sessionKey);
+                attemptSend(sessionKey);
+                /*
                 if(isKeyAuthenticated(sessionKey)){ //TODO change fake authenticator
                     Intent intent = new Intent(getActivity().getApplicationContext(), WaitQuiz.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -58,6 +59,7 @@ public class SessionKeyDialogBox extends DialogFragment{
                 }
                 else
                     Toast.makeText(getActivity().getApplicationContext(), "Key could not be found", Toast.LENGTH_SHORT).show();
+                    */
 
             }
 
@@ -83,30 +85,34 @@ public class SessionKeyDialogBox extends DialogFragment{
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket("quizwhiz.justinbeale.com:3001");
+            mSocket = IO.socket("take.justinbeale.com:3003");
         } catch (URISyntaxException e) {}
     }
 
-    private void attemptSend(String sessionKey) { //TODO in progress
+    private void attemptSend(String sessionKey) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         String authToken = sharedPreferences.getString("authToken", "");
 
         mSocket.emit("join session", authToken, sessionKey);
+        Toast.makeText(getActivity().getApplicationContext(), "Key sent", Toast.LENGTH_SHORT).show();
     }
 
     private Emitter.Listener onJoinResult = new Emitter.Listener() {
         @Override
-        public void call(Object... args) { //TODO ASK "What is a session object?"
+        public void call(Object... args) {
             Boolean success = (Boolean) args[0];
-            int numQuestions = 0; //TODO somehow get this
+            Session session = (Session) args[1];
+            int numQuestions = session.getNumQuestions();
+            Boolean isHost = session.getIsHost();
             if(success){
                 Intent intent = new Intent(getActivity().getApplicationContext(), WaitQuiz.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 intent.putExtra("numQuestions", numQuestions);
+                intent.putExtra("isHost", isHost);
                 startActivity(intent);
             }
             else
-                ;
+                Toast.makeText(getActivity().getApplicationContext(), "Key could not be found", Toast.LENGTH_SHORT).show();
         }
     };
 }
