@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.whiz.quiz.quizwhiz.QuizWhiz;
 import com.whiz.quiz.quizwhiz.R;
 
 import java.net.URISyntaxException;
@@ -19,21 +20,16 @@ import java.net.URISyntaxException;
 public class WaitQuiz extends ActionBarActivity {
     Button testButton = null; //TODO delete
     Button testHost = null; //TODO delete this later too!!
-
-    private Socket mSocket;
-    {
-        try {
-            mSocket = IO.socket("quizwhiz.justinbeale.com:3001");
-        } catch (URISyntaxException e) {}
-    }
+    Socket mSocket = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait_quiz);
 
-        mSocket.on("quiz started", onQuizStarted); //TODO not real name
-        mSocket.connect(); //Connect using SocketIO
+        mSocket = QuizWhiz.mSocket;
+
+        mSocket.on("start session", onQuizStarted); //I think this is the name
 
         testButton = (Button) findViewById(R.id.buttonTest);//TODO Delete
         testButton.setOnClickListener(new View.OnClickListener() {

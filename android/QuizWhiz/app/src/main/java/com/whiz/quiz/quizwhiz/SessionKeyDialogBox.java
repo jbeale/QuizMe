@@ -1,5 +1,6 @@
 package com.whiz.quiz.quizwhiz;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -21,6 +22,9 @@ import com.github.nkzawa.socketio.client.Socket;
 import com.whiz.quiz.quizwhiz.activity.WaitQuiz;
 import com.whiz.quiz.quizwhiz.model.server_model.Session;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.URISyntaxException;
 
 
@@ -32,6 +36,14 @@ import java.net.URISyntaxException;
 public class SessionKeyDialogBox extends DialogFragment{
 
     EditText editSessionKey = null;
+    Activity activity = null;
+
+    private Socket mSocket;
+    {
+        try {
+            mSocket = IO.socket("http://take.justinbeale.com");
+        } catch (URISyntaxException e) {}
+    }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -39,8 +51,11 @@ public class SessionKeyDialogBox extends DialogFragment{
         View view = inflater.inflate(R.layout.session_key_dialog, null);
         builder.setView(view);
 
+        activity = getActivity();
+
         mSocket.on("join result", onJoinResult);
         mSocket.connect();
+        QuizWhiz.mSocket = mSocket;
 
         editSessionKey = (EditText) view.findViewById(R.id.editSessionKey);
         editSessionKey.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -82,12 +97,7 @@ public class SessionKeyDialogBox extends DialogFragment{
         return builder.create();
     }
 
-    private Socket mSocket;
-    {
-        try {
-            mSocket = IO.socket("take.justinbeale.com:3003");
-        } catch (URISyntaxException e) {}
-    }
+
 
     private void attemptSend(String sessionKey) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
@@ -101,19 +111,39 @@ public class SessionKeyDialogBox extends DialogFragment{
         @Override
         public void call(Object... args) {
             Boolean success = (Boolean) args[0];
-            Session session = (Session) args[1];
-            int numQuestions = session.getNumQuestions();
-            Boolean isHost = session.getIsHost();
             if(success){
-                Intent intent = new Intent(getActivity().getApplicationContext(), WaitQuiz.class);
+                JSONObject JSONsession = (JSONObject) args[1];
+                String sessionName = null;
+                int sessionCode = -1;
+                int numQuestions = -1;
+                Boolean isHost = false;
+
+                try {
+                    sessionName =  JSONsession.getString("sessionName");
+                    sessionCode = JSONsession.getInt("sessionCode");
+                    numQuestions = JSONsession.getInt("numQuestions");
+                    isHost = JSONsession.getBoolean("isHost");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                
+                Intent intent = new Intent(activity, WaitQuiz.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 intent.putExtra("numQuestions", numQuestions);
                 intent.putExtra("isHost", isHost);
                 startActivity(intent);
             }
-            else
-                Toast.makeText(getActivity().getApplicationContext(), "Key could not be found", Toast.LENGTH_SHORT).show();
-        }
+            else{
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity.getApplicationContext(), "Key could not be found", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+    }
     };
 }
 
