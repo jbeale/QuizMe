@@ -8,8 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 import com.whiz.quiz.quizwhiz.R;
 import com.whiz.quiz.quizwhiz.SessionKeyDialogBox;
+
+import java.net.URISyntaxException;
 
 
 public class Home extends ActionBarActivity {
@@ -18,7 +22,7 @@ public class Home extends ActionBarActivity {
 
     Button btnJoinSession = null;
 
-
+    //TODO RABIA AND TASMINA what do you want to do about host starting the session? Button?
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

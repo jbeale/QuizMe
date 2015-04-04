@@ -31,6 +31,8 @@ public class TakeQuiz extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_quiz);
 
+
+
         btnSubmit = (Button) findViewById(R.id.button_submit);
         textQuestion = (TextView) findViewById(R.id.textViewQuestion);
         options[0] = (TextView) findViewById(R.id.textOption1);
@@ -47,9 +49,9 @@ public class TakeQuiz extends ActionBarActivity {
                 int tag = Integer.parseInt(currentlySelectedAnswer.getTag().toString());
                 int correctAnswer = questions.get(questionCounter-1).getCorrectAnswerPosition(); //TODO make the questionCounter-1 more readable
 
-                if (tag == correctAnswer) {
+                if (tag == correctAnswer) { //Correct Answer
                     currentlySelectedAnswer.setBackgroundColor(0xFF5CFF58);
-                } else
+                } else //Incorrect answer
                     currentlySelectedAnswer.setBackgroundColor(0xFFFF3B36);
 
                 makeOptionsNotClickable();

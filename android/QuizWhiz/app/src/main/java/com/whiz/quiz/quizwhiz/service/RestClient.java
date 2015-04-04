@@ -16,7 +16,7 @@ import retrofit.client.OkClient;
 public class RestClient {
     private static Api REST_CLIENT;
     private static String ROOT =
-            "http://s-quizme.justinbeale.com/service";
+            "http://s-quizme.justinbeale.com/service"; //TODO UNSECURE
     private Context context;
     private static SharedPreferences sharedPreferences;
 
