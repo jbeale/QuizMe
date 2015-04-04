@@ -46,6 +46,10 @@
             android:name=".activity.Host"
             android:label="Host" >
         </activity>
+        <activity
+            android:name=".activity.TakeQuiz"
+            android:label="Take Quiz">
+        </activity>
     </application>
 
 </manifest>
