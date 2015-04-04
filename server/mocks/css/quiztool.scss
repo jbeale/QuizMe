@@ -1,0 +1,89 @@
+#quizTool {
+  .container {
+    padding-top:10px;
+    .row {
+      #sessionMetaCol {
+        span {display:block;}
+        .sessionName {
+          font-size:17px;
+          font-weight:bold;
+        }
+        .sessionHost {
+
+        }
+        .separator {
+          height:15px;
+        }
+        .status {
+
+        }
+        .instructorInfo {
+          .participants {
+            span {
+              display:inline-block;
+            }
+          }
+        }
+        .currentScore {
+
+        }
+        .classAvg {
+
+        }
+      }
+      #questionArea {
+        .statescreen {
+
+        }
+        #waitingScreen {
+
+        }
+        #waitingScreenInstructor {
+          .sessionKey {
+            font-size:24px;
+            padding: 5px 15px;
+            border:2px solid gray;
+            border-radius:6px;
+          }
+        }
+        #questionDisplay {
+          .questionLabel {
+            font-size:20px;
+            font-weight:bold;
+          }
+          .correctnessLabel {
+            height:20px;
+            &.correct {
+              color:darkgreen;
+            }
+            &.incorrect {
+              color:darkred;
+            }
+          }
+          .question {
+            .prompt {
+
+            }
+            .choice {
+              &.markedCorrect {
+                color:darkgreen;
+              }
+              &.markedIncorrect {
+                color: darkred;
+              }
+              input {
+
+              }
+              label {
+
+              }
+              .progress {
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

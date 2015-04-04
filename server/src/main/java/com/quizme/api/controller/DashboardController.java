@@ -38,7 +38,7 @@ public class DashboardController {
     @RequestMapping("")
     public String dashboard(Model model) {
 
-        model.addAttribute("titlebar", "Temporary User Dashboard");
+        model.addAttribute("titlebar", "Dashboard");
         return "dashboard";
     }
 }

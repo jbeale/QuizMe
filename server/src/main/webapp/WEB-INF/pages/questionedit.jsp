@@ -71,7 +71,7 @@
                         <button type="submit" class="btn btn-info">Save Changes</button>
                     </c:otherwise>
                 </c:choose>
-                <button type="button" class="btn btn-default" onclick="javascript:href='/questions/list'">Cancel</button>
+                <button type="button" class="btn btn-default" onclick="location.href='/questions/list'">Cancel</button>
             </form>
         </div>
         <div class="col-lg-4"></div>

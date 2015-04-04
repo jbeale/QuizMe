@@ -1,0 +1,16 @@
+{
+    "success": true,
+    "status": 200,
+    "body": {
+        "isSessionOwner": true,
+        "user": {
+
+        },
+        "session": {
+            "id": 31,
+            "sessionCode": "310293022",
+            "owner": {},
+            "activityId":342
+        }
+    }
+}
