@@ -65,7 +65,6 @@ public class MultipleChoiceQuestionAdapter extends BaseAdapter {
         RadioButton radioButton3 = (RadioButton) convertView.findViewById(R.id.radioButton7);
         RadioButton radioButton4 = (RadioButton) convertView.findViewById(R.id.radioButton8);
 
-
         MultipleChoiceQuestion multipleChoiceQuestion = (MultipleChoiceQuestion) multipleChoiceQuestions.get(position);
         questionName.setText(multipleChoiceQuestion.getQuestionName());
         question.setText(multipleChoiceQuestion.getQuestion());

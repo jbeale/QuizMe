@@ -44,18 +44,6 @@ public class WaitQuiz extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-
-        testHost = (Button) findViewById(R.id.button_host);
-        testHost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), Host.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-            }
-
-        });
-
     }
 
     private Emitter.Listener onQuizStarted = new Emitter.Listener() {
