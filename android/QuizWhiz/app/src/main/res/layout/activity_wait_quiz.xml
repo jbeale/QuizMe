@@ -26,23 +26,4 @@
 
     </RelativeLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test Button"
-        android:id="@+id/buttonTest"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="76dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I am the Host"
-        android:id="@+id/button_host"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_alignLeft="@+id/buttonTest"
-        android:layout_alignStart="@+id/buttonTest"
-        android:layout_marginTop="77dp" />
-
 </RelativeLayout>

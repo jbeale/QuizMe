@@ -38,16 +38,6 @@ public class WaitQuiz extends ActionBarActivity {
 
 
         mSocket.on("display question", onQuizStarted); //I think this is the name
-
-        testButton = (Button) findViewById(R.id.buttonTest);//TODO Delete
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TakeQuiz.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-            }
-        });
     }
 
     private Emitter.Listener onQuizStarted = new Emitter.Listener() {

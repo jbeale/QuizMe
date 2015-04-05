@@ -10,9 +10,9 @@
             android:text="Join Session"
             android:id="@+id/buttonJoinSession"
             android:textSize="25dp"
+            android:background="@drawable/buttons"
             style="@style/button_text"
             android:layout_weight="5"
-            android:background="#ff4b8cff"
             android:textColor="#ffffffff" />
 
          <Button
@@ -34,7 +34,7 @@
             android:id="@+id/buttonCreateSession"
             android:textSize="25dp"
             style="@style/button_text"
-            android:background="#ff4b8cff"
+            android:background="@drawable/buttons"
             android:layout_weight="5"
             android:textColor="#ffffffff" />
 
