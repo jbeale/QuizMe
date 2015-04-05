@@ -216,7 +216,6 @@ public class TakeQuiz extends ActionBarActivity {
                     }
                 }
             });
-
         }
     };
 

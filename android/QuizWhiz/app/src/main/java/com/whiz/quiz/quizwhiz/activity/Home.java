@@ -22,7 +22,7 @@ public class Home extends ActionBarActivity {
 
     Button btnJoinSession = null;
 
-    //TODO RABIA AND TASMINA what do you want to do about host starting the session? Button?
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +55,7 @@ public class Home extends ActionBarActivity {
                new SessionKeyDialogBox().show(getFragmentManager(), "");
             }
         });
-
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
