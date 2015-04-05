@@ -65,25 +65,6 @@ public class SessionKeyDialogBox extends DialogFragment{
             public void onClick(DialogInterface dialog, int id) {
                 String sessionKey = editSessionKey.getText().toString();
                 attemptSend(sessionKey);
-                /*
-                if(isKeyAuthenticated(sessionKey)){ //TODO change fake authenticator
-                    Intent intent = new Intent(getActivity().getApplicationContext(), WaitQuiz.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    intent.putExtra("sessionKey", sessionKey);
-                    startActivity(intent);
-                }
-                else
-                    Toast.makeText(getActivity().getApplicationContext(), "Key could not be found", Toast.LENGTH_SHORT).show();
-                    */
-
-            }
-
-            private boolean isKeyAuthenticated(String sessionKey) {
-                if (sessionKey.equals("aa")){
-                    return true;
-                }
-                else
-                    return false;
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -132,7 +113,7 @@ public class SessionKeyDialogBox extends DialogFragment{
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 intent.putExtra("numQuestions", numQuestions);
                 intent.putExtra("isHost", isHost);
-                startActivity(intent);
+                activity.startActivity(intent);
             }
             else{
                 activity.runOnUiThread(new Runnable() {

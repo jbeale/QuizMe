@@ -1,13 +1,23 @@
 package com.whiz.quiz.quizwhiz.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.Socket;
+import com.whiz.quiz.quizwhiz.QuizWhiz;
 import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
 import com.whiz.quiz.quizwhiz.R;
+import com.whiz.quiz.quizwhiz.model.server_model.ChoiceDataModel;
+import com.whiz.quiz.quizwhiz.model.server_model.ChoiceModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -19,17 +29,26 @@ import java.util.TimerTask;
 public class TakeQuiz extends ActionBarActivity {
     ArrayList<MultipleChoiceQuestion> questions = new ArrayList<>();
 
+    Activity self;
     Button btnSubmit = null;
     TextView textQuestion = null;
     TextView[] options = new TextView[4];
     int questionCounter = 0;
     Boolean answerSelected = false;
     TextView currentlySelectedAnswer = null;
+    Socket mSocket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_quiz);
+        this.self = this;
+        mSocket = QuizWhiz.mSocket;
+
+        mSocket.on("display question", displayQuestion);
+        mSocket.on("question closed", questionClosed);
+        mSocket.on("reveal correct ans", revealCorrect);
+        mSocket.on("end session", endSession);
 
         btnSubmit = (Button) findViewById(R.id.button_submit);
         textQuestion = (TextView) findViewById(R.id.textViewQuestion);
@@ -38,8 +57,23 @@ public class TakeQuiz extends ActionBarActivity {
         options[2] = (TextView) findViewById(R.id.textOption3);
         options[3] = (TextView) findViewById(R.id.textOption4);
 
-        setupDummyList(); //TODO delete
-        nextQuestion(questions.get(questionCounter));
+        int numQuestions = getIntent().getIntExtra("numQuestions", 0); // Get number of questions from previous intent
+        Boolean isHost = getIntent().getBooleanExtra("isHost", false);
+        int questionIndex = getIntent().getIntExtra("questionIndex", 0);
+        String questionJson = getIntent().getStringExtra("questionJson");
+
+        JSONObject questionData = null;
+        try {
+            questionData = new JSONObject(questionJson);
+        } catch (JSONException exception) {
+            exception.printStackTrace();
+        }
+
+        ChoiceDataModel question = parseQuestion(questionData);
+        showQuestion(question);
+
+        //setupDummyList(); //TODO delete
+        //nextQuestion(questions.get(questionCounter));
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +99,28 @@ public class TakeQuiz extends ActionBarActivity {
         }
     }
 
+    private void showCorrectness(TextView choice, boolean correct) {
+        int color = correct ? 0xFF5CFF58 : 0xFFFF3B36;
+        choice.setBackgroundColor(color);
+    }
+
+    private ChoiceDataModel parseQuestion(JSONObject questionData) {
+        ChoiceDataModel choiceData = new ChoiceDataModel();
+        try {
+            choiceData.setPrompt(questionData.getString("prompt"));
+            JSONArray choices = questionData.getJSONArray("choices");
+            for (int i = 0; i<choices.length(); i++) {
+                JSONObject choicesJSONObject = choices.getJSONObject(i);
+                ChoiceModel choiceModel = new ChoiceModel();
+                choiceModel.setText(choicesJSONObject.getString("text"));
+                choiceData.getChoices().add(choiceModel);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return choiceData;
+    }
+
     private void makeOptionsNotClickable() {
         for (TextView option : options) {
             option.setClickable(false);
@@ -75,6 +131,7 @@ public class TakeQuiz extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
+
             if(answerSelected == false) {
                 v.setBackgroundColor(0xff4b8cff);
                 answerSelected = true;
@@ -85,10 +142,12 @@ public class TakeQuiz extends ActionBarActivity {
                 v.setBackgroundColor(0xff4b8cff);
                 currentlySelectedAnswer = (TextView) v;
             }
+            int currentSelectionIndex = Integer.parseInt((String) v.getTag());
+            mSocket.emit("select answer", currentSelectionIndex);
         }
     }
 
-    private void nextQuestion(MultipleChoiceQuestion question) {
+    /*private void nextQuestion(MultipleChoiceQuestion question) {
         //TODO make this stop when all questions are answered and go to -> home or another screen
         textQuestion.setText(question.getQuestion());
         for (int i = 0; i < question.getPossibleAnswers().length; i++){
@@ -97,6 +156,12 @@ public class TakeQuiz extends ActionBarActivity {
         questionCounter++;
         answerSelected = false;
         resetViews();
+    }*/
+    private void showQuestion(ChoiceDataModel model) {
+        textQuestion.setText(model.getPrompt());
+        for (int i = 0; i < model.getChoices().size(); i++){
+            options[i].setText(model.getChoices().get(i).getText());
+        }
     }
 
     private void resetViews() {
@@ -107,27 +172,60 @@ public class TakeQuiz extends ActionBarActivity {
         btnSubmit.setClickable(true);
     }
 
-    private void setupDummyList() { //TODO delete
-        MultipleChoiceQuestion question1 = new MultipleChoiceQuestion();
-        question1.setCorrectAnswerPosition(1);
-        question1.setPossibleAnswers(new String[]{"Hello", "Goodbye", "Test", "More test"});
-        question1.setQuestionName("I am a question");
-        question1.setQuestion("How are you");
-        questions.add(question1);
+    private Emitter.Listener displayQuestion = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            JSONObject questionData = (JSONObject)args[0];
+            int questionIndex = (Integer)args[1];
 
-        MultipleChoiceQuestion question2 = new MultipleChoiceQuestion();
-        question2.setCorrectAnswerPosition(0);
-        question2.setPossibleAnswers(new String[]{"Hellooooooo", "Gooooooodbye", "Test!!!!!", "More test:)))))"});
-        question2.setQuestionName("I am a");
-        question2.setQuestion("are you good");
-        questions.add(question2);
+            final ChoiceDataModel question = parseQuestion(questionData);
+            self.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    resetViews();
+                    showQuestion(question);
+                }
+            });
+        }
+    };
 
-        MultipleChoiceQuestion question3 = new MultipleChoiceQuestion();
-        question3.setCorrectAnswerPosition(3);
-        question3.setPossibleAnswers(new String[]{"Hellllllllllo", "Goodbyeeeee", "Teeeeest", "Mooooooore test"});
-        question3.setQuestionName("I am");
-        question3.setQuestion("Hows my hair");
-        questions.add(question3);
+    private Emitter.Listener questionClosed = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+        self.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                makeOptionsNotClickable();
+            }
+        });
+        }
+    };
 
-    }
+    private Emitter.Listener revealCorrect = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+
+            final int correctAnswerIndex = (Integer) args[0];
+            self.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    int currentSelectionIndex = Integer.parseInt((String) currentlySelectedAnswer.getTag());
+                    showCorrectness(options[correctAnswerIndex], true);
+                    if (currentSelectionIndex != correctAnswerIndex) {
+                        showCorrectness(currentlySelectedAnswer, false);
+                    }
+                }
+            });
+
+        }
+    };
+
+    private Emitter.Listener endSession = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            Double score = (Double) args[0];
+
+            //TODO show the score and maybe "Session Complete!!!111one!" or something
+        }
+    };
 }
