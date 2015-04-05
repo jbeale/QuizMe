@@ -33,6 +33,7 @@ public class Main extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         editUsername = (EditText) findViewById(R.id.editUsername);
         editPassword = (EditText) findViewById(R.id.editPasswordReg);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
@@ -92,14 +93,6 @@ public class Main extends ActionBarActivity {
         editor.commit();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -113,13 +106,5 @@ public class Main extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void goToHome(String username, String password) {
-        Intent intent = new Intent(this, Home.class);
-        intent.putExtra("com.whiz.quiz.quizwhiz.USERNAME", username);
-        intent.putExtra("com.whiz.quiz.quizwhiz.PASSWORD", password);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
     }
 }
