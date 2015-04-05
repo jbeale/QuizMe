@@ -15,6 +15,17 @@
             android:layout_weight="5"
             android:textColor="#ffffffff" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="Create Session"
+            android:id="@+id/buttonCreateSession"
+            android:textSize="25dp"
+            style="@style/button_text"
+            android:background="@drawable/buttons"
+            android:layout_weight="5"
+            android:textColor="#ffffffff" />
+
          <Button
             android:layout_width="wrap_content"
             android:layout_height="60dp"
@@ -27,16 +38,6 @@
             android:textColor="#ffffffff"
             android:clickable="false" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="Create Session"
-            android:id="@+id/buttonCreateSession"
-            android:textSize="25dp"
-            style="@style/button_text"
-            android:background="@drawable/buttons"
-            android:layout_weight="5"
-            android:textColor="#ffffffff" />
 
          <Button
             android:layout_width="match_parent"
