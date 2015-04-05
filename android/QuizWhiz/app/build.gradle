@@ -27,4 +27,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.squareup.okio:okio:1.0.1'
+    compile 'com.github.nkzawa:socket.io-client:0.4.2'
 }
