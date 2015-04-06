@@ -1,5 +1,6 @@
 package com.whiz.quiz.quizwhiz.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ import com.whiz.quiz.quizwhiz.SessionKeyDialogBox;
 import java.net.URISyntaxException;
 
 
-public class Home extends ActionBarActivity {
+public class Home extends Activity {
     Button btnMakeQuestions = null;
     Button btnMakeQuiz = null;
 

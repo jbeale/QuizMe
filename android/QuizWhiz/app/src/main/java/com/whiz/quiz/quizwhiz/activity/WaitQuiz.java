@@ -1,5 +1,6 @@
 package com.whiz.quiz.quizwhiz.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -23,7 +24,7 @@ import java.net.URISyntaxException;
 /**
  * Created by JohnMain on 3/21/2015.
  */
-public class WaitQuiz extends ActionBarActivity {
+public class WaitQuiz extends Activity {
     Button testButton = null; //TODO delete
     Button testHost = null; //TODO delete this later too!!
     Socket mSocket = null;

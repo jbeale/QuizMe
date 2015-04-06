@@ -1,5 +1,6 @@
 package com.whiz.quiz.quizwhiz.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class MakeQuestions extends ActionBarActivity {
+public class MakeQuestions extends Activity {
     Button btnAddQuestion = null;
     ListView listViewQuestions = null;
     MultipleChoiceQuestionAdapter questionAdapter = null;

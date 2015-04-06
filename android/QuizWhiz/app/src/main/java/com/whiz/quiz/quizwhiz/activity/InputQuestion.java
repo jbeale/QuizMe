@@ -15,7 +15,7 @@ import android.widget.RadioGroup;
 import com.whiz.quiz.quizwhiz.R;
 
 
-public class InputQuestion extends ActionBarActivity {
+public class InputQuestion extends Activity {
     EditText editQuestionName = null;
     EditText editQuestion = null;
     EditText[] editOptions = new EditText[4];

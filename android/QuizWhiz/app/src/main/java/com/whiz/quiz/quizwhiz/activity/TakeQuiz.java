@@ -26,7 +26,7 @@ import java.util.TimerTask;
 /**
  * Created by JohnMain on 3/22/2015.
  */
-public class TakeQuiz extends ActionBarActivity {
+public class TakeQuiz extends Activity {
     ArrayList<MultipleChoiceQuestion> questions = new ArrayList<>();
 
     Activity self;
