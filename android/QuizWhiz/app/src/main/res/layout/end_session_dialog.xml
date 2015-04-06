@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:id="@+id/relativeLayout4">
 
     <TextView
-        android:text="Enter Session key"
-        android:id="@+id/textTitle"
+        android:text="Session Complete"
+        android:id="@+id/textSessionComplete"
         android:textSize = "35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,23 +18,18 @@
         android:layout_weight="0.04" />
 
 
-    <EditText
-        android:id="@+id/editSessionKey"
-        android:inputType="textPassword"
+    <TextView
+        android:text="Your grade is:"
+        android:id="@+id/textGrade"
+        android:textSize="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        />
-
-
-
-
-
-
-
+        android:scaleType="center"
+        android:background="#ff4b8cff"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_weight="0.04"
+        android:layout_gravity="center_horizontal" />
 
 
 </LinearLayout>

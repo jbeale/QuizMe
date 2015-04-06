@@ -5,7 +5,7 @@
     android:weightSum="1">
 
     <TextView
-        android:text="Enter Session key"
+        android:text="Enter Session Key"
         android:id="@+id/textTitle"
         android:textSize = "35dp"
         android:layout_width="match_parent"
