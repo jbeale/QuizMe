@@ -24,7 +24,8 @@
             style="@style/button_text"
             android:background="@drawable/buttons"
             android:layout_weight="5"
-            android:textColor="#ffffffff" />
+            android:textColor="#ffffffff"
+            android:clickable="false"/>
 
          <Button
             android:layout_width="wrap_content"
