@@ -1,5 +1,6 @@
 package com.whiz.quiz.quizwhiz.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -23,7 +24,7 @@ import java.net.URISyntaxException;
 /**
  * Created by JohnMain on 3/21/2015.
  */
-public class WaitQuiz extends ActionBarActivity {
+public class WaitQuiz extends Activity {
     Button testButton = null; //TODO delete
     Button testHost = null; //TODO delete this later too!!
     Socket mSocket = null;
@@ -38,16 +39,6 @@ public class WaitQuiz extends ActionBarActivity {
 
 
         mSocket.on("display question", onQuizStarted); //I think this is the name
-
-        testButton = (Button) findViewById(R.id.buttonTest);//TODO Delete
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TakeQuiz.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-            }
-        });
     }
 
     private Emitter.Listener onQuizStarted = new Emitter.Listener() {

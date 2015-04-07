@@ -1,6 +1,8 @@
 package com.whiz.quiz.quizwhiz.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -9,7 +11,9 @@ import android.widget.TextView;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
+import com.whiz.quiz.quizwhiz.EndSessionDialogBox;
 import com.whiz.quiz.quizwhiz.QuizWhiz;
+import com.whiz.quiz.quizwhiz.SessionKeyDialogBox;
 import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
 import com.whiz.quiz.quizwhiz.R;
 import com.whiz.quiz.quizwhiz.model.server_model.ChoiceDataModel;
@@ -26,7 +30,7 @@ import java.util.TimerTask;
 /**
  * Created by JohnMain on 3/22/2015.
  */
-public class TakeQuiz extends ActionBarActivity {
+public class TakeQuiz extends Activity {
     ArrayList<MultipleChoiceQuestion> questions = new ArrayList<>();
 
     Activity self;
@@ -37,6 +41,9 @@ public class TakeQuiz extends ActionBarActivity {
     Boolean answerSelected = false;
     TextView currentlySelectedAnswer = null;
     Socket mSocket;
+    int correctAnswerCount = 0;
+    int numQuestions = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,14 @@ public class TakeQuiz extends ActionBarActivity {
         setContentView(R.layout.activity_take_quiz);
         this.self = this;
         mSocket = QuizWhiz.mSocket;
+
+        if(mSocket == null){
+            Intent intent = new Intent(this, Home.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+            startActivity(intent);
+
+            finish();
+        }
 
         mSocket.on("display question", displayQuestion);
         mSocket.on("question closed", questionClosed);
@@ -57,7 +72,7 @@ public class TakeQuiz extends ActionBarActivity {
         options[2] = (TextView) findViewById(R.id.textOption3);
         options[3] = (TextView) findViewById(R.id.textOption4);
 
-        int numQuestions = getIntent().getIntExtra("numQuestions", 0); // Get number of questions from previous intent
+        numQuestions = getIntent().getIntExtra("numQuestions", 0); // Get number of questions from previous intent
         Boolean isHost = getIntent().getBooleanExtra("isHost", false);
         int questionIndex = getIntent().getIntExtra("questionIndex", 0);
         String questionJson = getIntent().getStringExtra("questionJson");
@@ -101,6 +116,7 @@ public class TakeQuiz extends ActionBarActivity {
 
     private void showCorrectness(TextView choice, boolean correct) {
         int color = correct ? 0xFF5CFF58 : 0xFFFF3B36;
+
         choice.setBackgroundColor(color);
     }
 
@@ -214,16 +230,29 @@ public class TakeQuiz extends ActionBarActivity {
                     if (currentSelectionIndex != correctAnswerIndex) {
                         showCorrectness(currentlySelectedAnswer, false);
                     }
+                    if(currentSelectionIndex == correctAnswerIndex)
+                        correctAnswerCount++;
+
                 }
             });
-
         }
     };
 
     private Emitter.Listener endSession = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            Double score = (Double) args[0];
+
+            self.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    double grade =  ((double)correctAnswerCount)/((double)numQuestions) * 100;
+                    EndSessionDialogBox dialogBox = null;
+                    dialogBox = new EndSessionDialogBox();
+                    dialogBox.setGrade(grade);
+                    dialogBox.show(self.getFragmentManager(), "Session Complete");
+
+                }
+            });
 
             //TODO show the score and maybe "Session Complete!!!111one!" or something
         }
