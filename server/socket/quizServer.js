@@ -45,6 +45,9 @@ io.on('connection', function(socket) {
     var currentSession = null;
     var session = null;
     var roomId = null;
+    var myCurrentSelectedIndex = -1;
+    var myCurrentCorrect = 0;
+    var myCurrentQuestions = 0;
 
     function joinRoom(roomName) {
         socket.join(roomName);
@@ -138,6 +141,10 @@ io.on('connection', function(socket) {
     socket.on('reveal correctness', function() {
         if (!isSessionOwner) return;
         if (session.getState() != State.QUESTION_CLOSED) return;
+        myCurrentQuestions++;
+        if (myCurrentSelectedIndex == getCorrectAnswerIndex(session.getCurrentQuestion().data)) {
+            myCurrentCorrect++;
+        }
 
         io.sockets.in(roomId).emit("reveal correct ans", getCorrectAnswerIndex(session.getCurrentQuestion().data));
 
@@ -153,6 +160,7 @@ io.on('connection', function(socket) {
             io.sockets.in(roomId).emit("display question", session.nextQuestion().data, session.currentQuestionIndex);
         } else {
             session.setState(State.QUIZ_ENDED);
+            endSession();
         }
     });
 
@@ -162,7 +170,16 @@ io.on('connection', function(socket) {
     //3. Sends all necessary data to Java server
     socket.on('end session', function() {
         if (!isSessionOwner) return;
+        session.setState(State.QUIZ_ENDED);
+        endSession();
     });
+
+    function endSession() {
+        session.commitResponses(getCorrectAnswerIndex(session.getCurrentQuestion().data));
+        var percentage = myCurrentQuestions == 0? 100 : (myCurrentCorrect/myCurrentQuestions)*100;
+        var classAvg = session.getScoreAvg();
+        io.sockets.in(roomId).emit('end session', percentage, myCurrentCorrect, myCurrentQuestions, classAvg);
+    }
 
     socket.on('disconnect', function() {
         if (isSessionOwner) {

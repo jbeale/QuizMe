@@ -10,35 +10,47 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="header">
-    <div class="container">
-        <div class="brand"><img src="https://s3.amazonaws.com/quizwhiz/layout/img/quizwhizwhiteh.png" width="187"></div>
-        <c:if test="${not empty layout_currentUser}">
-        <div id="user-nav" class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <img src="${layout_currentUser.getProfilePictureThumbnail()}">
-                ${layout_currentUser.getFullname()}<span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/account">My Account</a></li>
-                <li class="divider"></li>
-                <li><a href="/auth/logout">Sign Out</a></li>
-            </ul>
+<div class="wrap">
+    <div class="header">
+        <div class="container">
+            <div class="brand"><img src="https://s3.amazonaws.com/quizwhiz/layout/img/quizwhizwhiteh.png" width="187"></div>
+            <c:if test="${not empty layout_currentUser}">
+            <div id="user-nav" class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="${layout_currentUser.getProfilePictureThumbnail()}">
+                    ${layout_currentUser.getFullname()}<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/account">My Account</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/auth/logout">Sign Out</a></li>
+                </ul>
+            </div>
+            </c:if>
         </div>
-        </c:if>
+    </div>
+    <c:if test="${empty disableTitlebar}">
+    <div class="titlebar">
+        <div class="container titlebar-text">${titlebar}</div>
+    </div>
+    </c:if>
+    <div class="content">
+        <jsp:include page="/WEB-INF/pages/${view}.jsp"></jsp:include>
     </div>
 </div>
-<c:if test="${empty disableTitlebar}">
-<div class="titlebar">
-    <div class="container titlebar-text">${titlebar}</div>
-</div>
-</c:if>
-<div class="content">
-    <jsp:include page="/WEB-INF/pages/${view}.jsp"></jsp:include>
-</div>
 <div class="footer">
+    <div class="container">
+        <div class="left">
+            <span class="copyright">&copy; 2015 QuizWhiz. All Rights Reserved.</span>
+            <span class="buildnum">Build fdf0c8b</span><br/>
+            <span class="sublinks"><a href="/about/tos">Terms of Service</a> | <a href="/about/credits">Credits</a></span>
+        </div>
+        <div class="right">
 
+        </div>
+    </div>
+</div>
 </div>
 </body>
 </html>

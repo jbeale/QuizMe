@@ -13,18 +13,18 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3" id="sessionMetaCol">
-                <span class="sessionName">Test Session Name</span>
-                <span class="sessionHost">Host: Will Smith</span>
+                <span class="sessionName">Connecting</span>
+                <span class="sessionHost">Please Wait...</span>
                 <span class="separator"></span>
                 <span class="status">Waiting to start</span>
                         <span class="instructorInfo" style="display:none;">
                             <span class="participants"><span class="numParticipants"></span> Participants</span>
                         </span>
                         <span class="actions">
-                            <button class="btn btn-info" type="button" id="action-startSession" onClick="startSession()">Start Session</button>
-                            <button class="btn btn-info" type="button" id="action-endQuestion" onClick="endQuestion()">Close Question</button>
-                            <button class="btn btn-info" type="button" id="action-revealCorrectness" onClick="revealCorrectness()">Reveal Correctness</button>
-                            <button class="btn btn-info" type="button" id="action-nextQuestion" onClick="nextQuestion()">Next Question</button>
+                            <button class="btn btn-info" type="button" id="action-startSession" onClick="startSession()" style="display:none">Start Session</button>
+                            <button class="btn btn-info" type="button" id="action-endQuestion" onClick="endQuestion()" style="display:none">Close Question</button>
+                            <button class="btn btn-info" type="button" id="action-revealCorrectness" onClick="revealCorrectness()" style="display:none">Reveal Correctness</button>
+                            <button class="btn btn-info" type="button" id="action-nextQuestion" onClick="nextQuestion()" style="display:none">Next Question</button>
                         </span>
 
             </div>
@@ -84,6 +84,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="statescreen" id="endOfSession" style="display:none;">
+                    <p>The session has ended.</p>
+                    <span id="finalScore-student" class="finalScore">Your Score: <span class="pctScore"></span>%</span>
+                </div>
+                <div class="statescreen" id="endOfSessionHost" style="display:none;">
+                    <p>The session has ended.</p>
+                    <span class="finalScore">Average Score: <span class="pctScore"></span>%</span>
+                    <p>Additional data about this session will be available on your <a href="/dashboard">dashboard</a> momentarily.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -97,6 +106,8 @@ var currentRoom = null;
 var numQuestions = 0;
 var lastSentSelection = null;
 var isHost = false;
+var tkn = 0;
+var cr = 0;
 socket.connect(serverUri);
 function joinSession(token, sessionKey) {
     socket.emit('join session', token, sessionKey);
@@ -214,6 +225,10 @@ function nextQuestion() {
     if (!isHost) return;
     socket.emit('next question');
 }
+function endSession() {
+    if (!isHost) return;
+    socket.emit('end session');
+}
 
 function setHostButtonVisibility(startSession, endQuestion, revealCorrect, nextQ) {
     if (!isHost) {
@@ -232,9 +247,10 @@ socket.on('join result', function(success, roomInfo) {
     setHostButtonVisibility(true, false, false, false);
     if (!success) {
         alert ("Invalid Session Code. Please Try Again.");
+        location.replace("/");
         return;
     }
-    console.log(roomInfo);
+    //console.log(roomInfo);
     //we are now in waiting room
     setRoom(roomInfo);
 });
@@ -247,7 +263,7 @@ socket.on('start session', function(firstQuestion) {
 
 socket.on('display question', function (question, index) {
     setHostButtonVisibility(false, true, false, false);
-    console.log(question);
+    //console.log(question);
     setStatusText('Question '+(Number(index)+1)+'/'+numQuestions);
     setQuestionLabel('QUESTION '+(Number(index)+1));
     renderQuestion(question);
@@ -256,8 +272,20 @@ socket.on('display question', function (question, index) {
 });
 
 socket.on('question closed', function() {
+    tkn++;
     setHostButtonVisibility(false, false, true, true);
     disableInput();
+});
+
+socket.on('end session', function(pctscore, questionsCorrect, totalQuestions, classAvg) {
+    if (isHost) {
+        $('.pctScore').html(roundToTenth(classAvg));
+        showStatePage('#endOfSessionHost');
+    } else {
+        //$('.pctScore').html(roundToTenth(pctscore));
+        $('.pctScore').html(roundToTenth((cr/tkn)*100));
+        showStatePage('#endOfSession');
+    }
 });
 var respCounts = [0,0,0,0];
 var respTotal = 0;
@@ -265,7 +293,7 @@ socket.on('update response counts', function(countArray, total) {
     for (var i = 0; i<countArray.length; i++) {
         $choice = $('div[data-choiceindex='+i+']');
         $progressBar = $choice.find('.progress-bar');
-        $progressBar.html(roundToTenth((countArray[i]/total) * 100)+'%');
+        $progressBar.html(total == 0? 0: roundToTenth((countArray[i]/total) * 100)+'%');
         $progressBar.css({width:((countArray[i]/total) * 100)+"%"});
     }
     respCounts = countArray;
@@ -286,7 +314,7 @@ socket.on('reveal correct ans', function (answerIndex) {
         $choice.addClass('markedCorrect');
         setCorrectnessLabel(true);
         //if they're host we have to go color their progress bar
-
+        cr++;
     } else {
         //loser lol
         $correct = $('div[data-choiceindex='+answerIndex+']');
@@ -300,7 +328,7 @@ socket.on('reveal correct ans', function (answerIndex) {
     //show progress barz if they're not host
 
     for (var i = 0; i<respCounts.length; i++) {
-        var pct = roundToTenth((respCounts[i]/respTotal) * 100);
+        var pct = respTotal == 0 ? 0 : roundToTenth((respCounts[i]/respTotal) * 100);
         var pbstyle = '';
         if (answerIndex == i) {
             pbstyle = 'progress-bar-success';

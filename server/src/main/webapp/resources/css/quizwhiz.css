@@ -9,6 +9,11 @@
     height: 15px; }
   #quizTool .container .row #sessionMetaCol .instructorInfo .participants span {
     display: inline-block; }
+  #quizTool .container .row #questionArea #endOfSession .finalScore, #quizTool .container .row #questionArea #endOfSessionHost .finalScore {
+    font-size: 24px;
+    padding: 5px 15px;
+    border: 2px solid gray;
+    border-radius: 6px; }
   #quizTool .container .row #questionArea #waitingScreenInstructor .sessionKey {
     font-size: 24px;
     padding: 5px 15px;
@@ -31,7 +36,11 @@
 html, body {
   height: 100%;
   font-family: "Open Sans", sans-serif;
-  font-weight: 300; }
+  font-weight: 300;
+  position: relative; }
+
+.wrap {
+  min-height: 100%; }
 
 .header {
   background-color: #00a6d4;
@@ -156,5 +165,39 @@ html, body {
   display: block;
   font-style: italic;
   font-size: 10px; }
+
+.content {
+  padding-bottom: 80px; }
+
+.footer {
+  position: relative;
+  margin-top: -80px;
+  height: 80px;
+  clear: both;
+  bottom: 0;
+  width: 100%;
+  background-color: #363636;
+  color: #8b8b8b;
+  font-size: 12px;
+  padding: 10px; }
+  .footer .container {
+    position: relative;
+    height: 60px; }
+    .footer .container .left {
+      position: absolute;
+      left: 0;
+      top: 10px; }
+      .footer .container .left .copyright {
+        font-weight: 400; }
+      .footer .container .left .sublinks a:link, .footer .container .left .sublinks a:hover, .footer .container .left .sublinks a:visited {
+        color: #8b8b8b; }
+    .footer .container .right {
+      position: absolute;
+      width: 70px;
+      height: 66px;
+      background-image: url(https://s3.amazonaws.com/quizwhiz/layout/img/footerlogo.png);
+      right: 0;
+      top: 00px;
+      background-size: contain; }
 
 /*# sourceMappingURL=quizwhiz.css.map */
