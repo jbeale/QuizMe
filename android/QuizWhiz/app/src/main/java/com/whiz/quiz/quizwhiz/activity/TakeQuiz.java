@@ -36,6 +36,7 @@ public class TakeQuiz extends Activity {
     Activity self;
     Button btnSubmit = null;
     TextView textQuestion = null;
+    TextView quesNum = null;
     TextView[] options = new TextView[4];
     int questionCounter = 0;
     Boolean answerSelected = false;
@@ -67,6 +68,7 @@ public class TakeQuiz extends Activity {
 
         btnSubmit = (Button) findViewById(R.id.button_submit);
         textQuestion = (TextView) findViewById(R.id.textViewQuestion);
+        quesNum = (TextView) findViewById(R.id.textViewQuesNumber);
         options[0] = (TextView) findViewById(R.id.textOption1);
         options[1] = (TextView) findViewById(R.id.textOption2);
         options[2] = (TextView) findViewById(R.id.textOption3);
@@ -175,6 +177,7 @@ public class TakeQuiz extends Activity {
     }*/
     private void showQuestion(ChoiceDataModel model) {
         textQuestion.setText(model.getPrompt());
+        quesNum.setText(questionCounter+"/"+numQuestions);
         for (int i = 0; i < model.getChoices().size(); i++){
             options[i].setText(model.getChoices().get(i).getText());
         }
