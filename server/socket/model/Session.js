@@ -5,6 +5,8 @@ function Session() {
     this.clientCount = 0;
     this.currentState = null;
     this.responses = {};
+    this.avgCalcNumCommits = 0;
+    this.avgCalcSumCommits = 0;
 }
 
 Session.prototype.getData = function() {
@@ -19,9 +21,13 @@ Session.prototype.getCurrentQuestionIndex = function() {
     return this.currentQuestionIndex;
 };
 Session.prototype.nextQuestion = function() {
+    if (this.currentQuestionIndex != -1) {
+        this.commitResponses(this.getCorrectAnswerIndex(this.getCurrentQuestion().data));
+    }
     if (this.hasNextQuestion())  {
         this.currentQuestionIndex++;
     }
+
     this.responses = {}; //reset responses
     return this.getCurrentQuestion();
 };
@@ -34,6 +40,13 @@ Session.prototype.getCurrentQuestion = function() {
 Session.prototype.getTotalQuestions = function() {
     return this.data.activity.questions.length;
 };
+Session.prototype.getCorrectAnswerIndex = function(questionData) {
+    for (var i = 0; i < questionData.choices.length; i++){
+        if (questionData.choices[i].correct) {
+            return i;
+        }
+    }
+}
 
 Session.prototype.incrementClientCount = function() {
     return ++this.clientCount;
@@ -64,7 +77,7 @@ Session.prototype.getResponseTotal = function() {
         if (this.responses.hasOwnProperty(key)) size++;
     }
     return size;
-}
+};
 Session.prototype.getResponseTallies = function() {
     var tallies = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     /*for (var i = 0; i<this.responses.size; i++) {
@@ -89,6 +102,22 @@ Session.prototype.getResponseTallies = function() {
         }
     }
     return tallies;
+};
+Session.prototype.commitResponses = function(correctIndex) {
+    //what percentage of students got it right?
+    var tallies = this.getResponseTallies();
+    var totalResponses = 0;
+    for (var i = 0; i<tallies.length; i++) {
+        totalResponses += tallies[i];
+    }
+    var correctResponses = tallies[correctIndex];
+    var avg = (correctResponses/totalResponses)*100;
+    this.avgCalcNumCommits++;
+    this.avgCalcSumCommits += avg;
+    console.log("Question responses committed. Total responses: "+totalResponses+", Total correct: "+correctResponses+", Question Avg "+avg+", Session avg "+this.getScoreAvg());
+};
+Session.prototype.getScoreAvg = function() {
+    return this.avgCalcSumCommits/this.avgCalcNumCommits;
 }
 
 module.exports = Session;

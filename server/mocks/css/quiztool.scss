@@ -38,6 +38,15 @@
         #waitingScreen {
 
         }
+        #endOfSession, #endOfSessionHost {
+          .finalScore {
+            font-size:24px;
+            padding: 5px 15px;
+            border:2px solid gray;
+            border-radius:6px;
+          }
+        }
+
         #waitingScreenInstructor {
           .sessionKey {
             font-size:24px;

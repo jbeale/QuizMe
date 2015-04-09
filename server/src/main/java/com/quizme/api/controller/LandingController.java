@@ -49,9 +49,10 @@ public class LandingController {
         model.addAttribute("authToken", authToken);
         model.addAttribute("sessionCode", sessionCode);
        // model.addAttribute("serverUri", "http://take.justinbeale.com");
-        model.addAttribute("serverUri", "http://localhost:3001");
+        model.addAttribute("serverUri", baseUrl);
         model.addAttribute("disableTitlebar", true);
         model.addAttribute("titlebar", "QuizMe Session");
+        System.out.println("ISBASE: "+baseUrl);
         return "quiztool";
     }
 }

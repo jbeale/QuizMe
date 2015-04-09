@@ -4,8 +4,12 @@ html, body {
   height:100%;
   font-family:"Open Sans", sans-serif;
   font-weight:300;
-}
+  position:relative;
 
+}
+.wrap {
+  min-height:100%;
+}
 .header {
   background-color:#00a6d4;
   height:120px;
@@ -184,4 +188,47 @@ html, body {
     }
   }
 }
+.content {
+  padding-bottom:80px;
+}
+.footer {
+  position:relative;
+  margin-top:-80px;
+  height:80px;
+  clear:both;
+  bottom:0;
+  width:100%;
+  background-color: #363636;
+  color:#8b8b8b;
+  font-size:12px;
+  padding:10px;
+  .container {
+    position: relative;
+    height:60px;
+    .left {
+      position: absolute;
+      left:0;
+      top:10px;
+      .copyright{
+        font-weight:400;
+      }
+      .buildnum {
 
+      }
+      .sublinks {
+        a:link, a:hover, a:visited {
+          color:#8b8b8b;
+        }
+      }
+    }
+    .right {
+      position: absolute;
+      width: 70px;
+      height:66px;
+      background-image:url(https://s3.amazonaws.com/quizwhiz/layout/img/footerlogo.png);
+      right:0;
+      top:00px;
+      background-size:contain;
+    }
+  }
+}
