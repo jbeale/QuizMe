@@ -2,6 +2,7 @@ package com.whiz.quiz.quizwhiz.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -18,6 +19,7 @@ import com.whiz.quiz.quizwhiz.model.client_model.MultipleChoiceQuestion;
 import com.whiz.quiz.quizwhiz.R;
 import com.whiz.quiz.quizwhiz.model.server_model.ChoiceDataModel;
 import com.whiz.quiz.quizwhiz.model.server_model.ChoiceModel;
+import com.whiz.quiz.quizwhiz.service.ObjectConverter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +43,7 @@ public class TakeQuiz extends Activity {
     Boolean answerSelected = false;
     TextView currentlySelectedAnswer = null;
     Socket mSocket;
+    ChoiceDataModel question = null;
     int correctAnswerCount = 0;
     int numQuestions = 0;
 
@@ -84,7 +87,7 @@ public class TakeQuiz extends Activity {
             exception.printStackTrace();
         }
 
-        ChoiceDataModel question = parseQuestion(questionData);
+        question = parseQuestion(questionData);
         showQuestion(question);
 
         //setupDummyList(); //TODO delete
@@ -129,6 +132,7 @@ public class TakeQuiz extends Activity {
                 JSONObject choicesJSONObject = choices.getJSONObject(i);
                 ChoiceModel choiceModel = new ChoiceModel();
                 choiceModel.setText(choicesJSONObject.getString("text"));
+                choiceModel.setCorrect(choicesJSONObject.getBoolean("correct"));
                 choiceData.getChoices().add(choiceModel);
             }
         } catch (JSONException e) {
@@ -182,10 +186,11 @@ public class TakeQuiz extends Activity {
 
     private void resetViews() {
         for(int i = 0; i < options.length; i++){
-            options[i].setBackgroundColor(0xffccd4ff);
+            options[i].setBackgroundColor(0xffecf2ec);
             options[i].setClickable(true);
         }
         btnSubmit.setClickable(true);
+        currentlySelectedAnswer = null;
     }
 
     private Emitter.Listener displayQuestion = new Emitter.Listener() {
@@ -194,7 +199,7 @@ public class TakeQuiz extends Activity {
             JSONObject questionData = (JSONObject)args[0];
             int questionIndex = (Integer)args[1];
 
-            final ChoiceDataModel question = parseQuestion(questionData);
+            question = parseQuestion(questionData);
             self.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -208,7 +213,18 @@ public class TakeQuiz extends Activity {
     private Emitter.Listener questionClosed = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-        self.runOnUiThread(new Runnable() {
+            if(currentlySelectedAnswer != null) {
+                int currentSelectionIndex = Integer.parseInt((String) currentlySelectedAnswer.getTag());
+                for (int i = 0; i < question.getChoices().size(); i++) {
+                    Boolean isCorrect = question.getChoices().get(i).getCorrect();
+                    if (isCorrect) {
+                        if (i == currentSelectionIndex) {
+                            correctAnswerCount++;
+                        }
+                    }
+                }
+            }
+            self.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 makeOptionsNotClickable();
@@ -220,18 +236,19 @@ public class TakeQuiz extends Activity {
     private Emitter.Listener revealCorrect = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-
             final int correctAnswerIndex = (Integer) args[0];
             self.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    int currentSelectionIndex = Integer.parseInt((String) currentlySelectedAnswer.getTag());
-                    showCorrectness(options[correctAnswerIndex], true);
-                    if (currentSelectionIndex != correctAnswerIndex) {
-                        showCorrectness(currentlySelectedAnswer, false);
+                    if(currentlySelectedAnswer != null) {
+                        int currentSelectionIndex = Integer.parseInt((String) currentlySelectedAnswer.getTag());
+                        showCorrectness(options[correctAnswerIndex], true);
+                        if (currentSelectionIndex != correctAnswerIndex)
+                            showCorrectness(currentlySelectedAnswer, false);
                     }
-                    if(currentSelectionIndex == correctAnswerIndex)
-                        correctAnswerCount++;
+                    else
+                        showCorrectness(options[correctAnswerIndex], true);
+
 
                 }
             });
@@ -246,15 +263,17 @@ public class TakeQuiz extends Activity {
                 @Override
                 public void run() {
                     double grade =  ((double)correctAnswerCount)/((double)numQuestions) * 100;
+
+                                        
+
                     EndSessionDialogBox dialogBox = null;
                     dialogBox = new EndSessionDialogBox();
                     dialogBox.setGrade(grade);
                     dialogBox.show(self.getFragmentManager(), "Session Complete");
-
                 }
             });
-
-            //TODO show the score and maybe "Session Complete!!!111one!" or something
         }
     };
+
+
 }

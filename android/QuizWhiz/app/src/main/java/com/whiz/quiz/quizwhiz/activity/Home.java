@@ -32,7 +32,7 @@ public class Home extends Activity {
         btnMakeQuestions = (Button) findViewById(R.id.buttonMakeQuestions);
         btnMakeQuiz = (Button) findViewById(R.id.buttonMakeQuiz);
         btnJoinSession = (Button) findViewById(R.id.buttonJoinSession);
-
+/*
         btnMakeQuestions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +49,7 @@ public class Home extends Activity {
                 startActivity(intent);
             }
         });
+        */
 
         btnJoinSession.setOnClickListener(new View.OnClickListener() {
             @Override
