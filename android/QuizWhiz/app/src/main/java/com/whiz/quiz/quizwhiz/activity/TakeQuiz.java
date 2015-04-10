@@ -266,9 +266,7 @@ public class TakeQuiz extends Activity {
                 @Override
                 public void run() {
                     double grade =  ((double)correctAnswerCount)/((double)numQuestions) * 100;
-
-                                        
-
+                    grade = Math.round(grade*10.0)/10.0; //Rounding to 1 decimal place
                     EndSessionDialogBox dialogBox = null;
                     dialogBox = new EndSessionDialogBox();
                     dialogBox.setGrade(grade);
