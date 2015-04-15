@@ -271,7 +271,7 @@ public class TakeQuiz extends Activity {
                     double grade =  ((double)correctAnswerCount)/((double)numQuestions) * 100;
                     grade = Math.round(grade*10.0)/10.0; //Rounding to 1 decimal place
 
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    FragmentTransaction ft = self.getFragmentManager().beginTransaction();
                     EndSessionDialogBox dialogBox = new EndSessionDialogBox();
                     dialogBox.setGrade(grade);
                     ft.add(dialogBox, "End Session");
