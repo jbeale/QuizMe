@@ -81,4 +81,16 @@
             android:layout_alignStart="@+id/relativeLayout4"/>
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Click here to visit our web application"
+        android:id="@+id/textWebsite"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp"
+        android:textColor="#ff6877ff"
+        android:clickable="true" />
+
 </RelativeLayout>
