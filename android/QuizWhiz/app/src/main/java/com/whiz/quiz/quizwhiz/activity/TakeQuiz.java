@@ -48,6 +48,7 @@ public class TakeQuiz extends Activity {
     ChoiceDataModel question = null;
     int correctAnswerCount = 0;
     int numQuestions = 0;
+    int questionIndex = 0;
 
 
     @Override
@@ -80,7 +81,7 @@ public class TakeQuiz extends Activity {
 
         numQuestions = getIntent().getIntExtra("numQuestions", 0); // Get number of questions from previous intent
         Boolean isHost = getIntent().getBooleanExtra("isHost", false);
-        int questionIndex = getIntent().getIntExtra("questionIndex", 0);
+        questionIndex = getIntent().getIntExtra("questionIndex", 0);
         String questionJson = getIntent().getStringExtra("questionJson");
 
         JSONObject questionData = null;
@@ -182,7 +183,8 @@ public class TakeQuiz extends Activity {
     }*/
     private void showQuestion(ChoiceDataModel model) {
         textQuestion.setText(model.getPrompt());
-        quesNum.setText(questionCounter+"/"+numQuestions);
+        int questionNum = questionIndex+1;
+        quesNum.setText(questionNum+"/"+numQuestions);
         for (int i = 0; i < model.getChoices().size(); i++){
             options[i].setText(model.getChoices().get(i).getText());
         }
@@ -201,7 +203,7 @@ public class TakeQuiz extends Activity {
         @Override
         public void call(Object... args) {
             JSONObject questionData = (JSONObject)args[0];
-            int questionIndex = (Integer)args[1];
+            questionIndex = (Integer)args[1];
 
             question = parseQuestion(questionData);
             self.runOnUiThread(new Runnable() {

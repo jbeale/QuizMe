@@ -43,7 +43,6 @@ public class EndSessionDialogBox extends DialogFragment {
                 intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 activity.startActivity(intent);
 
-                dismissAllowingStateLoss();
             }
         });
 

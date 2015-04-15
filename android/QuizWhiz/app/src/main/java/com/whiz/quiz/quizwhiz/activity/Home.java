@@ -1,6 +1,9 @@
 package com.whiz.quiz.quizwhiz.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,14 +23,17 @@ import java.net.URISyntaxException;
 public class Home extends Activity {
     Button btnMakeQuestions = null;
     Button btnMakeQuiz = null;
-
     Button btnJoinSession = null;
+
+    Activity activity = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        activity = this;
 
         btnMakeQuestions = (Button) findViewById(R.id.buttonMakeQuestions);
         btnMakeQuiz = (Button) findViewById(R.id.buttonMakeQuiz);
@@ -79,5 +85,32 @@ public class Home extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Log out?");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(getApplicationContext(), Main.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+                activity.finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+
     }
 }
