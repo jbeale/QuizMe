@@ -3,6 +3,7 @@ package com.whiz.quiz.quizwhiz.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -267,10 +268,19 @@ public class TakeQuiz extends Activity {
                 public void run() {
                     double grade =  ((double)correctAnswerCount)/((double)numQuestions) * 100;
                     grade = Math.round(grade*10.0)/10.0; //Rounding to 1 decimal place
+
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    EndSessionDialogBox dialogBox = new EndSessionDialogBox();
+                    dialogBox.setGrade(grade);
+                    ft.add(dialogBox, "End Session");
+                    ft.commitAllowingStateLoss();
+
+                    /*
                     EndSessionDialogBox dialogBox = null;
                     dialogBox = new EndSessionDialogBox();
                     dialogBox.setGrade(grade);
                     dialogBox.show(self.getFragmentManager(), "Session Complete");
+                    */
                 }
             });
         }
