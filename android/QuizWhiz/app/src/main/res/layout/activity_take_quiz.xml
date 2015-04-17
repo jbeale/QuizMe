@@ -41,7 +41,8 @@
         android:background="#ffecf2ec"
         android:textColor="#ff000000"
         android:clickable="true"
-        android:tag="0"/>
+        android:tag="0"
+        android:alpha="51" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,7 +66,8 @@
         android:background="#FFECF2EC"
         android:textColor="#ff000000"
         android:clickable="true"
-        android:tag="1"/>
+        android:tag="1"
+        android:alpha="51" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -89,7 +91,8 @@
         android:background="#FFECF2EC"
         android:textColor="#ff000000"
         android:clickable="true"
-        android:tag="2"/>
+        android:tag="2"
+        android:alpha="51" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -113,7 +116,8 @@
         android:background="#FFECF2EC"
         android:textColor="#ff000000"
         android:clickable="true"
-        android:tag="3"/>
+        android:tag="3"
+        android:alpha="51" />
 
     <RelativeLayout
         android:layout_width="match_parent"

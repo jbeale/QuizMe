@@ -65,8 +65,6 @@
             android:background="@drawable/buttons"
             style="@style/button_text"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/relativeLayout4"
-            android:layout_alignStart="@+id/relativeLayout4"
             android:layout_marginBottom="97dp" />
 
         <Button
@@ -76,9 +74,7 @@
             android:id="@+id/buttonLogin"
             android:background="@drawable/buttons"
             style="@style/button_text"
-            android:layout_above="@+id/buttonSignUp"
-            android:layout_alignLeft="@+id/relativeLayout4"
-            android:layout_alignStart="@+id/relativeLayout4"/>
+            android:layout_above="@+id/buttonSignUp"/>
     </RelativeLayout>
 
     <TextView
